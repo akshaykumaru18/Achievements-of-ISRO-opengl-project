@@ -30,36 +30,18 @@ static void resize(int width, int height)
 
 
 static void displayIntroWindow(void){
-   /* glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3f(1.0,0.0,0.0);
-    glBegin(GL_POLYGON);
-    glVertex3f(10,40,0);
-    glVertex3f(60,40,0);
-    glVertex3f(40,60,0);
-    glEnd();
-    glFlush();
-    glutSwapBuffers(); */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     glBindTexture(GL_TEXTURE_2D, introBG);
-    /*
-     glBegin(GL_POLYGON);
-    glVertex3f(10,40,0);
-    glTexCoord2f(0, 0);
+    glBegin(GL_QUADS);
     glVertex3f(100,100,0);
-    glTexCoord2f(0, 1);
-    glVertex3f(100,100,0);
-    glTexCoord2f(1, 1);
-    glEnd(); */
-      glBegin(GL_QUADS);
-    glVertex3f(20,20,0);
     glTexCoord2f(0, 0);
-    glVertex3f(80,20,0);
+    glVertex3f(-100,100,0);
     glTexCoord2f(0, 1);
-    glVertex3f(80,300,0);
+    glVertex3f(-100,-100,0);
     glTexCoord2f(1, 1);
-    glVertex3f(20,300,0);
+    glVertex3f(100,-100,0);
     glTexCoord2f(1, 0);
     glEnd();
     glFlush();
@@ -67,28 +49,85 @@ static void displayIntroWindow(void){
     glutSwapBuffers();
 
 }
-
-
-static void key(unsigned char key, int x, int y)
+void displayIntro()
 {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_TEXTURE_2D);
+    glColor3f(1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, introBG);
+    glBegin(GL_QUADS);
+    glVertex3f(0, 0, 10);
+    glTexCoord2f(0, 0);
+    glVertex3f(0, 5000, 10);
+    glTexCoord2f(0, 1);
+    glVertex3f(5000, 5000, 10);
+    glTexCoord2f(1, 1);
+    glVertex3f(5000, 0, 10);
+    glTexCoord2f(1, 0);
+    glEnd();
+    glFlush();
+
+    glDisable(GL_TEXTURE_2D);
+glutSwapBuffers();
+}
+
+void displayMenuWindow(){
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glColor3f(1, 0, 0);;
+    glBegin(GL_QUADS);
+    glVertex3f(0, 0, 10);
+
+    glVertex3f(0, 5000, 10);
+
+    glVertex3f(5000, 5000, 10);
+
+    glVertex3f(5000, 0, 10);
+
+    glEnd();
+    glFlush();
+}
+
+void milestoneRocketLaunch()
+{
+     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glColor3f(0, 1, 0);;
+    glBegin(GL_QUADS);
+    glVertex3f(0, 0, 10);
+
+    glVertex3f(0, 5000, 10);
+
+    glVertex3f(5000, 5000, 10);
+
+    glVertex3f(5000, 0, 10);
+
+    glEnd();
+    glFlush();
+}
+
+static void keyboardInput(unsigned char key, int x, int y)
+{
+
     switch (key)
     {
         case 27 :
         case 'q':
             exit(0);
             break;
-
-        case '+':
-            slices++;
-            stacks++;
+        case 'C':
+        case 'c':
+            printf("Key clicked is %c\n",key);
+            //call menu window
+            glutDisplayFunc(displayMenuWindow);
+            glutPostRedisplay();
             break;
-
-        case '-':
-            if (slices>3 && stacks>3)
-            {
-                slices--;
-                stacks--;
-            }
+        case 'S':
+        case 's':
+            printf("Key clicked is %c\n",key);
+            //call milestone 1 First Rocket Launch by ISRO
+            glutDisplayFunc(milestoneRocketLaunch);
+            glutPostRedisplay();
             break;
     }
 
@@ -121,12 +160,12 @@ void loadIntroScene(void){
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     int width, height,channels;
-    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\template.psd", &width, &height, &channels, 0);
+    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data){
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    //glGenerateMipmap(GL_TEXTURE_2D);
+
 
     }else{
         std::cout << "Failed to load intro slide" << std::endl;
@@ -136,35 +175,15 @@ void loadIntroScene(void){
 
 }
 
-void displayIntro2()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_TEXTURE_2D);
-    glColor3f(1, 1, 1);
-    glBindTexture(GL_TEXTURE_2D, introBG);
-    glBegin(GL_QUADS);
-    glVertex3f(0, 0, 10);
-    glTexCoord2f(0, 0);
-    glVertex3f(0, 5000, 10);
-    glTexCoord2f(0, 1);
-    glVertex3f(5000, 5000, 10);
-    glTexCoord2f(1, 1);
-    glVertex3f(5000, 0, 10);
-    glTexCoord2f(1, 0);
-    glEnd();
-    glFlush();
-    glDisable(GL_TEXTURE_2D);
-    glutSwapBuffers();
-}
+
 /* Program entry point */
 void init(void)
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-   // glOrtho(0, 10, 0, 10, 0, -500);
-    glOrtho(100.0f, 00.0f, 0.0f, 300.0f, -1.0, 1.0);
-  //glOrtho(1, 1, 1, 1, -1.0, 1.0);
- // The understanding of this is centered on 0, 0 points, the left side is 300 width, the right side is 0 width, the lower side has 0 height, and the upper side has 300 height
+    //glOrtho(0, 100, 0, 100, 0, -10);
+    glOrtho(100.0f, 100.0f, 100.0f, 100.0f, 0, 100.0);
+
 
     glMatrixMode(GL_MODELVIEW);
     glClearColor(1, 1, 1, 1);
@@ -183,28 +202,20 @@ int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
      glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(1024,768);
-    glutInitWindowPosition(50,20);
+   // glutInitWindowSize(1920,1080);
+    glutInitWindowSize(1500,900);
+    glutInitWindowPosition(20,20);
 
     glutCreateWindow("Achievements of ISRO");
-    glutDisplayFunc(displayIntro2);
-   // glutReshapeFunc(resize);
-    glutKeyboardFunc(key);
+    glutDisplayFunc(displayIntro);
     loadIntroScene();
+    //glutReshapeFunc(resize);
+    glutKeyboardFunc(keyboardInput);
 
-    //glClearColor(0,0,0,1);
-    //glEnable(GL_CULL_FACE);
-   // glCullFace(GL_BACK);
 
     glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LESS);
-
-
-
     init2();
-
     glutMainLoop();
-
     return EXIT_SUCCESS;
 }
 
