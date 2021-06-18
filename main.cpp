@@ -9,7 +9,7 @@
 
 static int slices = 16;
 static int stacks = 16;
-
+bool rebuildIntro = true;
 unsigned int introBG;
 
 /* GLUT callback Handlers */
@@ -29,26 +29,7 @@ static void resize(int width, int height)
 
 
 
-static void displayIntroWindow(void){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_TEXTURE_2D);
-    glColor3f(1, 1, 1);
-    glBindTexture(GL_TEXTURE_2D, introBG);
-    glBegin(GL_QUADS);
-    glVertex3f(100,100,0);
-    glTexCoord2f(0, 0);
-    glVertex3f(-100,100,0);
-    glTexCoord2f(0, 1);
-    glVertex3f(-100,-100,0);
-    glTexCoord2f(1, 1);
-    glVertex3f(100,-100,0);
-    glTexCoord2f(1, 0);
-    glEnd();
-    glFlush();
-    glDisable(GL_TEXTURE_2D);
-    glutSwapBuffers();
 
-}
 void displayIntro()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -68,10 +49,13 @@ void displayIntro()
     glFlush();
 
     glDisable(GL_TEXTURE_2D);
-glutSwapBuffers();
+
+    glutSwapBuffers();
+
 }
 
 void displayMenuWindow(){
+    printf("DisplayMenu function called\n");
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(1, 0, 0);;
@@ -86,10 +70,12 @@ void displayMenuWindow(){
 
     glEnd();
     glFlush();
+    glutSwapBuffers();
 }
 
 void milestoneRocketLaunch()
 {
+    printf("milestoneRocketLaunch function called\n");
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(0, 1, 0);;
@@ -104,6 +90,7 @@ void milestoneRocketLaunch()
 
     glEnd();
     glFlush();
+    glutSwapBuffers();
 }
 
 static void keyboardInput(unsigned char key, int x, int y)
@@ -132,11 +119,19 @@ static void keyboardInput(unsigned char key, int x, int y)
     }
 
     glutPostRedisplay();
+
 }
 
 static void idle(void)
 {
-    glutPostRedisplay();
+
+    if(rebuildIntro == true)
+    {
+         printf("Called glutPostRedisplay %d",rebuildIntro);
+         glutPostRedisplay();
+         rebuildIntro = false;
+    }
+
 }
 
 const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -172,22 +167,12 @@ void loadIntroScene(void){
     }
     stbi_image_free(data);
     std::cout << "done" << std::endl;
+    glutIdleFunc(idle);
 
 }
 
 
-/* Program entry point */
-void init(void)
-{
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    //glOrtho(0, 100, 0, 100, 0, -10);
-    glOrtho(100.0f, 100.0f, 100.0f, 100.0f, 0, 100.0);
 
-
-    glMatrixMode(GL_MODELVIEW);
-    glClearColor(1, 1, 1, 1);
-}
 
 void init2(void)
 {
@@ -211,6 +196,7 @@ int main(int argc, char *argv[])
     loadIntroScene();
     //glutReshapeFunc(resize);
     glutKeyboardFunc(keyboardInput);
+    glutIdleFunc(idle);
 
 
     glEnable(GL_DEPTH_TEST);
