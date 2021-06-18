@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1624001977 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1624002336 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
