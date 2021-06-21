@@ -270,7 +270,7 @@
 1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
 	<stddef.h>
 
-1624280803 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
+1624286253 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
@@ -278,7 +278,7 @@
 	<string>
 	"stb_image/stb_image.h"
 
-1624034279 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
+1624286231 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
 	"stb_image.h"
 	<stdio.h>
 	<stdlib.h>
