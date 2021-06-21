@@ -25,6 +25,14 @@ const GLfloat mat_diffuse[]    = { 0.8f, 0.8f, 0.8f, 1.0f };
 const GLfloat mat_specular[]   = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat high_shininess[] = { 100.0f };
 
+char  introWindowPsd[];
+bool isAK = false;
+if(true){
+    introWindowPsd = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
+}else{
+   introWindowPsd = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
+}
+
 /* GLUT callback Handlers */
 
 static void resize(int width, int height)
@@ -296,7 +304,7 @@ void loadIntroScene(void)
 
     int width, height,channels;
     //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
-    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+    unsigned char *data = stbi_load(introWindowPsd, &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
