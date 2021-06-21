@@ -155,7 +155,7 @@ void loadIntroScene(void){
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     int width, height,channels;
-    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+    unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data){
