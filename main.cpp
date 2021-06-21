@@ -41,15 +41,17 @@ static void resize(int width, int height)
 }
 
 
-void displayText(int x,int y,float r,float g,float b,int font,char *string){
-  glColor3f( r, g, b );
-  glRasterPos2f(x, y);
-  int len, i;
-  len = (int)strlen(string);
-  for (i = 0; i < len; i++) {
-    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, string[i]);
-  }
-  return;
+void displayText(int x,int y,float r,float g,float b,int font,char *string)
+{
+    glColor3f( r, g, b );
+    glRasterPos2f(x, y);
+    int len, i;
+    len = (int)strlen(string);
+    for (i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, string[i]);
+    }
+    return;
 }
 
 void displayIntro()
@@ -76,10 +78,12 @@ void displayIntro()
 
 }
 
-void displayMenuWindow(){
-   //printf("DisplayMenu function called\n");
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void displayMenuWindow()
+{
+    //printf("DisplayMenu function called\n");
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    //glClearColor(0, 0, 0,0);
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
     glVertex3f(0, 0, 10);
@@ -87,10 +91,7 @@ void displayMenuWindow(){
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
-
-    displayText(2500,2500,1.0,1.0,0.0,1,"Menu Screen");
+    displayText(2500,2500,1.0,0.0,0.0,1,"Menu Screen");
 
     glFlush();
     glutSwapBuffers();
@@ -98,9 +99,8 @@ void displayMenuWindow(){
 
 void msFirstRocketLaunch()
 {
-  //  printf("milestoneRocketLaunch function called\n");
+    //  printf("milestoneRocketLaunch function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
     glVertex3f(0, 0, 10);
@@ -108,18 +108,14 @@ void msFirstRocketLaunch()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
-
-    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 1 : First Rocket Launch");
-
+    displayText(2500,2500,1.0,0.0,0.0,1,"Milestone 1 : First Rocket Launch");
     glFlush();
     glutSwapBuffers();
 }
 
 void msAryabattaSatellite()
 {
-   // printf("msAryabattaSatellite function called\n");
+    // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(0, 0, 0);
@@ -129,9 +125,6 @@ void msAryabattaSatellite()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
-
     displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : Aryabatta Rocket Launch");
 
     glFlush();
@@ -140,7 +133,7 @@ void msAryabattaSatellite()
 
 void msMangalyan()
 {
-   // printf("msAryabattaSatellite function called\n");
+    // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(0, 0, 0);
@@ -150,8 +143,6 @@ void msMangalyan()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
 
     displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 3 : Mission Mangalyan");
 
@@ -161,7 +152,7 @@ void msMangalyan()
 
 void ms104SatelliteLaunch()
 {
-   // printf("msAryabattaSatellite function called\n");
+    // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(0, 0, 0);
@@ -171,8 +162,6 @@ void ms104SatelliteLaunch()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
 
     displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 4 : Mission 104 Satellite Launch");
 
@@ -182,7 +171,7 @@ void ms104SatelliteLaunch()
 
 void ms5()
 {
-   // printf("msAryabattaSatellite function called\n");
+    // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glColor3f(0, 0, 0);
@@ -192,8 +181,6 @@ void ms5()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    glFlush();
-    glutSwapBuffers();
 
     displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 5 : Decide");
 
@@ -201,77 +188,81 @@ void ms5()
     glutSwapBuffers();
 }
 
-void changeWindow(bool next){
+void changeWindow(bool next)
+{
 
- switch(activeWindow){
-        case 1:
-            break;
-        case 2:
-            glutDisplayFunc(displayMenuWindow);
+    switch(activeWindow)
+    {
+    case 1:
+        break;
+    case 2:
+        glutDisplayFunc(displayMenuWindow);
 
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
     }
-    if(next){
-                activeWindow++;
-            }
-            else{
-                activeWindow--;
-            }
-
+    if(next)
+    {
+        activeWindow++;
     }
+    else
+    {
+        activeWindow--;
+    }
+
+}
 static void keyboardInput(unsigned char key, int x, int y)
 {
 
     switch (key)
     {
-        case 27 :
-        case 'q':
-            exit(0);
-            break;
-        case 'C':
-        case 'c':
-            printf("Key clicked is %c\n",key);
-            //call menu window
-            glutDisplayFunc(displayMenuWindow);
-            glutPostRedisplay();
-            break;
-        case 'S':
-        case 's':
-            printf("Key clicked is %c\n",key);
-            //call milestone 1 First Rocket Launch by ISRO
-            glutDisplayFunc(msFirstRocketLaunch);
-            glutPostRedisplay();
-            break;
-        case '1':
-            glutDisplayFunc(msFirstRocketLaunch);
-            glutPostRedisplay();
-            break;
-        case '2':
-            glutDisplayFunc(msAryabattaSatellite);
-            glutPostRedisplay();
-            break;
-        case '3':
-            glutDisplayFunc(msMangalyan);
-            glutPostRedisplay();
-            break;
-        case '4':
-            glutDisplayFunc(ms104SatelliteLaunch);
-            glutPostRedisplay();
-            break;
-        case '5':
-            glutDisplayFunc(ms5);
-            glutPostRedisplay();
-            break;
+    case 27 :
+    case 'q':
+        exit(0);
+        break;
+    case 'C':
+    case 'c':
+        printf("Key clicked is %c\n",key);
+        //call menu window
+        glutDisplayFunc(displayMenuWindow);
+        glutPostRedisplay();
+        break;
+    case 'S':
+    case 's':
+        printf("Key clicked is %c\n",key);
+        //call milestone 1 First Rocket Launch by ISRO
+        glutDisplayFunc(msFirstRocketLaunch);
+        glutPostRedisplay();
+        break;
+    case '1':
+        glutDisplayFunc(msFirstRocketLaunch);
+        glutPostRedisplay();
+        break;
+    case '2':
+        glutDisplayFunc(msAryabattaSatellite);
+        glutPostRedisplay();
+        break;
+    case '3':
+        glutDisplayFunc(msMangalyan);
+        glutPostRedisplay();
+        break;
+    case '4':
+        glutDisplayFunc(ms104SatelliteLaunch);
+        glutPostRedisplay();
+        break;
+    case '5':
+        glutDisplayFunc(ms5);
+        glutPostRedisplay();
+        break;
     }
 
     glutPostRedisplay();
@@ -283,9 +274,9 @@ static void idle(void)
 
     if(rebuildIntro == true)
     {
-         printf("Called glutPostRedisplay %d",rebuildIntro);
-         glutPostRedisplay();
-         rebuildIntro = false;
+        printf("Called glutPostRedisplay %d",rebuildIntro);
+        glutPostRedisplay();
+        rebuildIntro = false;
     }
 
 }
@@ -293,7 +284,8 @@ static void idle(void)
 
 
 
-void loadIntroScene(void){
+void loadIntroScene(void)
+{
     glGenTextures(1,&introBG);
     glBindTexture(GL_TEXTURE_2D,introBG);
 
@@ -306,11 +298,14 @@ void loadIntroScene(void){
     unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
-    if(data){
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 
-    }else{
+    }
+    else
+    {
         std::cout << "Failed to load intro slide" << std::endl;
     }
     stbi_image_free(data);
@@ -334,19 +329,26 @@ void init(void)
 }
 
 
-void menu(int n){
-    if(n==0){
+void menu(int n)
+{
+    if(n==0)
+    {
         glutDestroyMenu(window);
         exit(0);
     }
-    else{
+    else
+    {
         value = n;
-        if(value == 1){
-
-        }else if(value == 2)
+        if(value == 1)
         {
 
-        }else if(value == 3){
+        }
+        else if(value == 2)
+        {
+
+        }
+        else if(value == 3)
+        {
 
         }
     }
@@ -354,7 +356,8 @@ void menu(int n){
 
     glutPostRedisplay();
 }
-void createMenu(){
+void createMenu()
+{
     returnMenu = glutCreateMenu(menu);
     glutAddMenuEntry("Exit",0);
     glutAddMenuEntry("Previous",1);
@@ -367,7 +370,7 @@ void createMenu(){
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     glutInitWindowSize(1500,800);
     glutInitWindowPosition(0,0);
