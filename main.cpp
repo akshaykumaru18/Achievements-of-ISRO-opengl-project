@@ -7,13 +7,18 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
 
-
+void loadABMissionImages();
 bool rebuildIntro = true;
+bool rebuildM1 = true;
 static int window, returnMenu,value=0;
 
 static int activeWindow = 1;
 
 unsigned int introBG;
+
+//Aryabhata Mission
+unsigned int abimg1;
+unsigned int abimg2;
 
 const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
 const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -25,13 +30,13 @@ const GLfloat mat_diffuse[]    = { 0.8f, 0.8f, 0.8f, 1.0f };
 const GLfloat mat_specular[]   = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat high_shininess[] = { 100.0f };
 
-char  introWindowPsd[];
-bool isAK = false;
-if(true){
-    introWindowPsd = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
-}else{
-   introWindowPsd = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
-}
+//char introWindowPsd= "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
+//bool isAK = false;
+//if(isAK){
+ //   introWindowPsd = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
+//}else{
+  // introWindowPsd = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
+//}
 
 /* GLUT callback Handlers */
 
@@ -51,13 +56,15 @@ static void resize(int width, int height)
 
 void displayText(int x,int y,float r,float g,float b,int font,char *string)
 {
+    //void *f = (int *)font;
     glColor3f( r, g, b );
     glRasterPos2f(x, y);
     int len, i;
     len = (int)strlen(string);
     for (i = 0; i < len; i++)
     {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, string[i]);
+
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, string[i]);
     }
     return;
 }
@@ -105,23 +112,113 @@ void displayMenuWindow()
     glutSwapBuffers();
 }
 
-void msFirstRocketLaunch()
+void msAryabattaSatellite()
 {
     //  printf("milestoneRocketLaunch function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+     /* Title Start */
+    glColor3f(1, 1, 1);
+    glLineWidth(3.0);
+    glBegin(GL_LINES);
+        glVertex3f(2100, 4700, 10);
+        glVertex3f(3400, 4700, 10);
+    glEnd();
+    glBegin(GL_LINES);
+        glVertex3f(2100, 4650, 10);
+        glVertex3f(3400, 4650, 10);
+    glEnd();
+    glFlush();
+ /* Title End */
+
+
+
+/* Visual Part start */
+    /* Display Image 2 */
+    glEnable(GL_TEXTURE_2D);
+    glColor3f(1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, abimg1);
+    glBegin(GL_QUADS);
+        //first vertex (bottom, left)
+        glVertex3f(200, 2800, 10);
+        glTexCoord2f(0, 0);
+
+        //second vertex (top,left)
+        glVertex3f(200, 4400, 10);
+        glTexCoord2f(0, 1);
+
+        //third vertex (top,right)
+        glVertex3f(2500, 4400, 10);
+        glTexCoord2f(1, 1);
+
+        //four vertex (bottom,right)
+        glVertex3f(2500, 2800, 10);
+        glTexCoord2f(1, 0);
+    glEnd();
+    glFlush();
+    glDisable(GL_TEXTURE_2D);
+
+
+    /* Display Image 2 */
+    glEnable(GL_TEXTURE_2D);
+    glColor3f(1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, abimg2);
+    glBegin(GL_QUADS);
+        //first vertex (bottom, left)
+        glVertex3f(2800, 1800, 10);
+        glTexCoord2f(0, 0);
+
+        //second vertex (top,left)
+        glVertex3f(2800, 3200, 10);
+        glTexCoord2f(0, 1);
+
+        //third vertex (top,right)
+        glVertex3f(3800, 3200, 10);
+        glTexCoord2f(1, 1);
+
+        //four vertex (bottom,right)
+        glVertex3f(3800, 1800, 10);
+        glTexCoord2f(1, 0);
+    glEnd();
+    glFlush();
+    glDisable(GL_TEXTURE_2D);
+
+
+    /* glColor3f(1, 1, 0);
+    glBegin(GL_POLYGON);
+        glVertex3f(200, 200, 10);
+        glVertex3f(200, 4500, 10);
+        glVertex3f(2500, 4500, 10);
+        glVertex3f(2500, 200, 10);
+    glEnd(); */
+/* Visual Part end */
+
+
+    /* Content Part*/
+    displayText(2200,4800,1.0,1.0,1.0,1,"Milestone 1 : First Rocket Launch");
+    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : April 19, 1975");
+    displayText(2800,4000,1.0,1.0,1.0,1,"Weight : 360 kg");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Mission Life : 6 months(nominal), Spacecraft mainframe");
+    displayText(2800,3400,1.0,1.0,1.0,1,"                       active till March,1981");
+
+
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
-    glVertex3f(0, 0, 10);
-    glVertex3f(0, 5000, 10);
-    glVertex3f(5000, 5000, 10);
-    glVertex3f(5000, 0, 10);
+        glVertex3f(0, 0, 10);
+        glVertex3f(0, 5000, 10);
+        glVertex3f(5000, 5000, 10);
+        glVertex3f(5000, 0, 10);
     glEnd();
-    displayText(2500,2500,1.0,0.0,0.0,1,"Milestone 1 : First Rocket Launch");
     glFlush();
     glutSwapBuffers();
+    if(rebuildM1){
+        glutPostRedisplay();
+        rebuildM1 = false;
+    }
+
 }
 
-void msAryabattaSatellite()
+void msFirstRocketLaunch()
 {
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -133,7 +230,7 @@ void msAryabattaSatellite()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : Aryabatta Rocket Launch");
+    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
 
     glFlush();
     glutSwapBuffers();
@@ -248,10 +345,11 @@ static void keyboardInput(unsigned char key, int x, int y)
     case 's':
         printf("Key clicked is %c\n",key);
         //call milestone 1 First Rocket Launch by ISRO
-        glutDisplayFunc(msFirstRocketLaunch);
+        glutDisplayFunc(msAryabattaSatellite);
         glutPostRedisplay();
         break;
     case '1':
+        loadABMissionImages();
         glutDisplayFunc(msFirstRocketLaunch);
         glutPostRedisplay();
         break;
@@ -287,6 +385,13 @@ static void idle(void)
         rebuildIntro = false;
     }
 
+     if(rebuildM1 == true)
+    {
+        printf("Called glutPostRedisplay %d",rebuildM1);
+        glutPostRedisplay();
+        rebuildM1 = false;
+    }
+
 }
 
 
@@ -304,7 +409,7 @@ void loadIntroScene(void)
 
     int width, height,channels;
     //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
-    unsigned char *data = stbi_load(introWindowPsd, &width, &height, &channels, STBI_rgb_alpha);
+    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
@@ -320,6 +425,64 @@ void loadIntroScene(void)
     stbi_image_free(data);
     std::cout << "done" << std::endl;
     glutIdleFunc(idle);
+
+}
+
+void loadABMissionImages(void)
+{
+     /* Image 1 */
+    glGenTextures(1,&abimg1);
+    glBindTexture(GL_TEXTURE_2D,abimg1);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    int width, height,channels;
+    unsigned char *data;
+    //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+    data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\images\\psds\\aryabatta-img1.psd", &width, &height, &channels, STBI_rgb_alpha);
+   // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading aryabhata image 1" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load aryabhata image 1" << std::endl;
+    }
+    stbi_image_free(data);
+
+
+    /* Image 2 */
+     glGenTextures(1,&abimg2);
+    glBindTexture(GL_TEXTURE_2D,abimg2);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    //int width, height,channels;
+    //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+    data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\images\\psds\\aryabatta-img2.psd", &width, &height, &channels, STBI_rgb_alpha);
+   // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading aryabhata image 2" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load aryabhata image 2" << std::endl;
+    }
+    stbi_image_free(data);
+
+    //glutIdleFunc(idle);
 
 }
 
@@ -389,6 +552,7 @@ int main(int argc, char *argv[])
     glutDisplayFunc(displayIntro);
     //glutDisplayFunc(displayMenuWindow);
     loadIntroScene();
+
     glutKeyboardFunc(keyboardInput);
     glutIdleFunc(idle);
 
