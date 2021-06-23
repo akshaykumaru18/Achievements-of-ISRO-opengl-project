@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1624382615 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1624420608 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
 	<iostream>
-	<string>
+	<string.h>
 	"stb_image/stb_image.h"
 
 1426329928 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h

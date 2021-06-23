@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include <iostream>
-#include <string>
+#include <string.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
@@ -20,6 +20,11 @@ unsigned int introBG;
 unsigned int abimg1;
 unsigned int abimg2;
 
+
+
+
+
+
 const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
 const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -30,16 +35,36 @@ const GLfloat mat_diffuse[]    = { 0.8f, 0.8f, 0.8f, 1.0f };
 const GLfloat mat_specular[]   = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat high_shininess[] = { 100.0f };
 
-//char introWindowPsd= "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
-//bool isAK = false;
-//if(isAK){
- //   introWindowPsd = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
-//}else{
-  // introWindowPsd = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd";
-//}
 
 /* GLUT callback Handlers */
 
+char* getPath(char **path,bool isAk)
+{
+    printf("Given path is %s",*path);
+    char akPath[] = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project";
+    char pkPath[] = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project";
+    char finalPath[10000];
+    if(isAk == true)
+    {
+        strcpy(finalPath,akPath);
+        strcat(finalPath,*path);
+        *path = finalPath;
+        printf("final path is %s",*path);
+        return *path;
+    }
+
+    else
+    {
+
+        strcpy(finalPath,pkPath);
+        strcat(finalPath,*path);
+        *path = finalPath;
+        printf("final path is %s",*path);
+        return *path;
+    }
+    //  return;
+
+}
 static void resize(int width, int height)
 {
     const float ar = (float) width / (float) height;
@@ -117,43 +142,43 @@ void msAryabattaSatellite()
     //  printf("milestoneRocketLaunch function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-     /* Title Start */
+    /* Title Start */
     glColor3f(1, 1, 1);
     glLineWidth(3.0);
     glBegin(GL_LINES);
-        glVertex3f(2100, 4700, 10);
-        glVertex3f(3400, 4700, 10);
+    glVertex3f(2100, 4700, 10);
+    glVertex3f(3400, 4700, 10);
     glEnd();
     glBegin(GL_LINES);
-        glVertex3f(2100, 4650, 10);
-        glVertex3f(3400, 4650, 10);
+    glVertex3f(2100, 4650, 10);
+    glVertex3f(3400, 4650, 10);
     glEnd();
     glFlush();
- /* Title End */
+    /* Title End */
 
 
 
-/* Visual Part start */
+    /* Visual Part start */
     /* Display Image 2 */
     glEnable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     glBindTexture(GL_TEXTURE_2D, abimg1);
     glBegin(GL_QUADS);
-        //first vertex (bottom, left)
-        glVertex3f(200, 2800, 10);
-        glTexCoord2f(0, 0);
+    //first vertex (bottom, left)
+    glVertex3f(200, 2800, 10);
+    glTexCoord2f(0, 0);
 
-        //second vertex (top,left)
-        glVertex3f(200, 4400, 10);
-        glTexCoord2f(0, 1);
+    //second vertex (top,left)
+    glVertex3f(200, 4400, 10);
+    glTexCoord2f(0, 1);
 
-        //third vertex (top,right)
-        glVertex3f(2500, 4400, 10);
-        glTexCoord2f(1, 1);
+    //third vertex (top,right)
+    glVertex3f(2500, 4400, 10);
+    glTexCoord2f(1, 1);
 
-        //four vertex (bottom,right)
-        glVertex3f(2500, 2800, 10);
-        glTexCoord2f(1, 0);
+    //four vertex (bottom,right)
+    glVertex3f(2500, 2800, 10);
+    glTexCoord2f(1, 0);
     glEnd();
     glFlush();
     glDisable(GL_TEXTURE_2D);
@@ -164,21 +189,21 @@ void msAryabattaSatellite()
     glColor3f(1, 1, 1);
     glBindTexture(GL_TEXTURE_2D, abimg2);
     glBegin(GL_QUADS);
-        //first vertex (bottom, left)
-        glVertex3f(2800, 1800, 10);
-        glTexCoord2f(0, 0);
+    //first vertex (bottom, left)
+    glVertex3f(2800, 1800, 10);
+    glTexCoord2f(0, 0);
 
-        //second vertex (top,left)
-        glVertex3f(2800, 3200, 10);
-        glTexCoord2f(0, 1);
+    //second vertex (top,left)
+    glVertex3f(2800, 3200, 10);
+    glTexCoord2f(0, 1);
 
-        //third vertex (top,right)
-        glVertex3f(3800, 3200, 10);
-        glTexCoord2f(1, 1);
+    //third vertex (top,right)
+    glVertex3f(3800, 3200, 10);
+    glTexCoord2f(1, 1);
 
-        //four vertex (bottom,right)
-        glVertex3f(3800, 1800, 10);
-        glTexCoord2f(1, 0);
+    //four vertex (bottom,right)
+    glVertex3f(3800, 1800, 10);
+    glTexCoord2f(1, 0);
     glEnd();
     glFlush();
     glDisable(GL_TEXTURE_2D);
@@ -191,7 +216,7 @@ void msAryabattaSatellite()
         glVertex3f(2500, 4500, 10);
         glVertex3f(2500, 200, 10);
     glEnd(); */
-/* Visual Part end */
+    /* Visual Part end */
 
 
     /* Content Part*/
@@ -204,14 +229,15 @@ void msAryabattaSatellite()
 
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
-        glVertex3f(0, 0, 10);
-        glVertex3f(0, 5000, 10);
-        glVertex3f(5000, 5000, 10);
-        glVertex3f(5000, 0, 10);
+    glVertex3f(0, 0, 10);
+    glVertex3f(0, 5000, 10);
+    glVertex3f(5000, 5000, 10);
+    glVertex3f(5000, 0, 10);
     glEnd();
     glFlush();
     glutSwapBuffers();
-    if(rebuildM1){
+    if(rebuildM1)
+    {
         glutPostRedisplay();
         rebuildM1 = false;
     }
@@ -350,11 +376,11 @@ static void keyboardInput(unsigned char key, int x, int y)
         break;
     case '1':
         loadABMissionImages();
-        glutDisplayFunc(msFirstRocketLaunch);
+        glutDisplayFunc(msAryabattaSatellite);
         glutPostRedisplay();
         break;
     case '2':
-        glutDisplayFunc(msAryabattaSatellite);
+        glutDisplayFunc(msFirstRocketLaunch);
         glutPostRedisplay();
         break;
     case '3':
@@ -385,7 +411,7 @@ static void idle(void)
         rebuildIntro = false;
     }
 
-     if(rebuildM1 == true)
+    if(rebuildM1 == true)
     {
         printf("Called glutPostRedisplay %d",rebuildM1);
         glutPostRedisplay();
@@ -399,6 +425,8 @@ static void idle(void)
 
 void loadIntroScene(void)
 {
+
+
     glGenTextures(1,&introBG);
     glBindTexture(GL_TEXTURE_2D,introBG);
 
@@ -408,8 +436,12 @@ void loadIntroScene(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     int width, height,channels;
-    //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
-    unsigned char *data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+
+
+    char *path = "\\final-intro.psd";
+    path = getPath(&path,true);
+    printf("\nPath is %s\n",path);
+    unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
@@ -430,7 +462,7 @@ void loadIntroScene(void)
 
 void loadABMissionImages(void)
 {
-     /* Image 1 */
+    /* Image 1 */
     glGenTextures(1,&abimg1);
     glBindTexture(GL_TEXTURE_2D,abimg1);
 
@@ -441,9 +473,11 @@ void loadABMissionImages(void)
 
     int width, height,channels;
     unsigned char *data;
-    //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
-    data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\images\\psds\\aryabatta-img1.psd", &width, &height, &channels, STBI_rgb_alpha);
-   // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+    char *path = "\\images\\psds\\aryabatta-img1.psd";
+    path = getPath(&path,true);
+    printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
     {
@@ -458,7 +492,7 @@ void loadABMissionImages(void)
 
 
     /* Image 2 */
-     glGenTextures(1,&abimg2);
+    glGenTextures(1,&abimg2);
     glBindTexture(GL_TEXTURE_2D,abimg2);
 
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
@@ -466,10 +500,11 @@ void loadABMissionImages(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-    //int width, height,channels;
-    //unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
-    data = stbi_load("C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project\\images\\psds\\aryabatta-img2.psd", &width, &height, &channels, STBI_rgb_alpha);
-   // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+    path = "\\images\\psds\\aryabatta-img2.psd";
+    path = getPath(&path,true);
+    printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
     {
@@ -551,6 +586,7 @@ int main(int argc, char *argv[])
     createMenu();
     glutDisplayFunc(displayIntro);
     //glutDisplayFunc(displayMenuWindow);
+
     loadIntroScene();
 
     glutKeyboardFunc(keyboardInput);
