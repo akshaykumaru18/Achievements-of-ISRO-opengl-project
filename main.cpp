@@ -8,6 +8,7 @@
 #include "stb_image/stb_image.h"
 
 void loadABMissionImages();
+void abSatellitePremetive();
 bool rebuildIntro = true;
 bool rebuildM1 = true;
 static int window, returnMenu,value=0;
@@ -20,6 +21,8 @@ unsigned int introBG;
 unsigned int abimg1;
 unsigned int abimg2;
 
+static GLfloat theta[] = {0.0,0.0,0.0};
+static GLint axis = 0;
 
 
 
@@ -49,7 +52,7 @@ char* getPath(char **path,bool isAk)
         strcpy(finalPath,akPath);
         strcat(finalPath,*path);
         *path = finalPath;
-        printf("final path is %s",*path);
+        //printf("final path is %s",*path);
         return *path;
     }
 
@@ -59,7 +62,7 @@ char* getPath(char **path,bool isAk)
         strcpy(finalPath,pkPath);
         strcat(finalPath,*path);
         *path = finalPath;
-        printf("final path is %s",*path);
+        //printf("final path is %s",*path);
         return *path;
     }
     //  return;
@@ -136,9 +139,19 @@ void displayMenuWindow()
     glFlush();
     glutSwapBuffers();
 }
+void spinSatellite()
+{
+   // printf("\nspinning in %d",theta[axis]);
+    theta[axis] += 0.75;
+    if(theta[axis] > 360.0)
+            theta[axis] -= 360.0;
 
+    glutPostRedisplay();
+
+}
 void msAryabattaSatellite()
 {
+
     //  printf("milestoneRocketLaunch function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -159,71 +172,75 @@ void msAryabattaSatellite()
 
 
     /* Visual Part start */
-    /* Display Image 2 */
-    glEnable(GL_TEXTURE_2D);
-    glColor3f(1, 1, 1);
-    glBindTexture(GL_TEXTURE_2D, abimg1);
-    glBegin(GL_QUADS);
-    //first vertex (bottom, left)
-    glVertex3f(200, 2800, 10);
-    glTexCoord2f(0, 0);
 
-    //second vertex (top,left)
-    glVertex3f(200, 4400, 10);
-    glTexCoord2f(0, 1);
 
-    //third vertex (top,right)
-    glVertex3f(2500, 4400, 10);
-    glTexCoord2f(1, 1);
 
-    //four vertex (bottom,right)
-    glVertex3f(2500, 2800, 10);
-    glTexCoord2f(1, 0);
-    glEnd();
-    glFlush();
-    glDisable(GL_TEXTURE_2D);
-
+    abSatellitePremetive();
 
     /* Display Image 2 */
+
     glEnable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     glBindTexture(GL_TEXTURE_2D, abimg2);
     glBegin(GL_QUADS);
     //first vertex (bottom, left)
-    glVertex3f(2800, 1800, 10);
+    glVertex3f(2800, 1200, 10);
     glTexCoord2f(0, 0);
 
     //second vertex (top,left)
-    glVertex3f(2800, 3200, 10);
+    glVertex3f(2800, 2800, 10);
     glTexCoord2f(0, 1);
 
     //third vertex (top,right)
-    glVertex3f(3800, 3200, 10);
+    glVertex3f(3400, 2800, 10);
     glTexCoord2f(1, 1);
 
     //four vertex (bottom,right)
-    glVertex3f(3800, 1800, 10);
+    glVertex3f(3400, 1200, 10);
+    glTexCoord2f(1, 0);
+    glEnd();
+    glFlush();
+    glDisable(GL_TEXTURE_2D);
+
+    /* Display Image 1 */
+
+    glEnable(GL_TEXTURE_2D);
+    glColor3f(1, 1, 1);
+    glBindTexture(GL_TEXTURE_2D, abimg1);
+    glBegin(GL_QUADS);
+    //first vertex (bottom, left)
+    glVertex3f(3500, 1200, 10);
+    glTexCoord2f(0, 0);
+
+    //second vertex (top,left)
+    glVertex3f(3500, 2800, 10);
+    glTexCoord2f(0, 1);
+
+    //third vertex (top,right)
+    glVertex3f(4900, 2800, 10);
+    glTexCoord2f(1, 1);
+
+    //four vertex (bottom,right)
+    glVertex3f(4900, 1200, 10);
     glTexCoord2f(1, 0);
     glEnd();
     glFlush();
     glDisable(GL_TEXTURE_2D);
 
 
-    /* glColor3f(1, 1, 0);
-    glBegin(GL_POLYGON);
-        glVertex3f(200, 200, 10);
-        glVertex3f(200, 4500, 10);
-        glVertex3f(2500, 4500, 10);
-        glVertex3f(2500, 200, 10);
-    glEnd(); */
+
+
+
     /* Visual Part end */
 
 
     /* Content Part*/
     displayText(2200,4800,1.0,1.0,1.0,1,"Milestone 1 : First Rocket Launch");
     displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : April 19, 1975");
-    displayText(2800,4000,1.0,1.0,1.0,1,"Weight : 360 kg");
-    displayText(2800,3600,1.0,1.0,1.0,1,"Mission Life : 6 months(nominal), Spacecraft mainframe");
+    displayText(2800,4200,1.0,1.0,1.0,1,"Weight : 360 kg");
+    displayText(2800,4000,1.0,1.0,1.0,1,"Mission Life : 6 months(nominal), Spacecraft mainframe");
+    displayText(2800,3800,1.0,1.0,1.0,1,"                       active till March,1981");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Description : 6 months(nominal), Spacecraft mainframe");
     displayText(2800,3400,1.0,1.0,1.0,1,"                       active till March,1981");
 
 
@@ -241,6 +258,157 @@ void msAryabattaSatellite()
         glutPostRedisplay();
         rebuildM1 = false;
     }
+
+}
+
+void abSatellitePremetive()
+{
+
+
+    // printf("Theta value is %f of x \n",theta[0]);
+    // printf("Theta value is %f of y \n",theta[1]);
+    // printf("Theta value is %f of z \n",theta[2]);
+    glPushMatrix();
+    glLoadIdentity();
+
+
+    glRotatef(theta[0], 0.0, 1.0, 0.0);
+
+
+
+
+
+
+    /*FRONT FACE START */
+    glColor3f(1, 1, 1);
+    glBegin(GL_POLYGON);
+    //first vertex (bottom, left)
+    glVertex3f(500, 1200, 500);
+
+
+    //second vertex (top,left)
+    glVertex3f(500, 3500, 500);
+
+
+    //third vertex (top,right)
+    glVertex3f(2000, 3500, 500);
+
+
+    //four vertex (bottom,right)
+    glVertex3f(2000, 1200, 500);
+    glEnd();
+    /*FRONT FACE END*/
+
+    /*BACK FACE START */
+    glColor3f(1, 0, 0);
+    glBegin(GL_POLYGON);
+    //first vertex (bottom, left)
+    glVertex3f(500, 1200, -500);
+
+
+    //second vertex (top,left)
+    glVertex3f(500, 3500, -500);
+
+
+    //third vertex (top,right)
+    glVertex3f(2000, 3500, -500);
+
+
+    //four vertex (bottom,right)
+    glVertex3f(2000, 1200, -500);
+    glEnd();
+    /*BACK FACE END*/
+
+    /*RIGHT FACE START */
+    glColor3f(0, 1, 0);
+    glBegin(GL_POLYGON);
+    //first vertex (bottom, left)
+    glVertex3f(2000, 1200, 500);
+
+
+    //second vertex (top,left)
+    glVertex3f(2000, 3500, 500);
+
+
+    //third vertex (top,right)
+    glVertex3f(2000, 3500, -500);
+
+
+    //four vertex (bottom,right)
+    glVertex3f(2000, 1200, -500);
+    glEnd();
+    /*RIGHT FACE END*/
+
+    /*LEFT FACE START */
+    glColor3f(0, 0, 1);
+    glBegin(GL_POLYGON);
+    //four vertex (bottom,right)
+    glVertex3f(500, 1200, 500);
+
+
+    //third vertex (top,right)
+    glVertex3f(500, 3500, 500);
+
+
+
+    //second vertex (top,left)
+    glVertex3f(500, 3500, -500);
+
+//first vertex (bottom, left)
+    glVertex3f(500, 1200, -500);
+
+
+
+    glEnd();
+    /*LEFT FACE END*/
+
+    /*TOP FACE START */
+    glColor3f(1, 1, 0);
+    glBegin(GL_POLYGON);
+    //first vertex (bottom, left)
+    glVertex3f(500, 3500, 500);
+
+
+    //second vertex (top,left)
+    glVertex3f(500, 3500, -500);
+
+
+    //third vertex (top,right)
+    glVertex3f(2000, 3500, -500);
+
+
+    //four vertex (bottom,right)
+    glVertex3f(2000, 3500, 500);
+    glEnd();
+    /*TOP FACE END*/
+
+
+    /*BOTTOM FACE START */
+    glColor3f(0, 1, 1);
+    glBegin(GL_POLYGON);
+    //first vertex (bottom, left)
+    glVertex3f(500, 1200, 500);
+
+
+    //second vertex (top,left)
+    glVertex3f(500, 1200, -500);
+
+
+    //third vertex (top,right)
+    glVertex3f(2000, 1200, -500);
+
+
+    //four vertex (bottom,right)
+    glVertex3f(2000, 1200, 500);
+    glEnd();
+    /*BOTTOM FACE END*/
+
+    glFlush();
+
+    glPopMatrix();
+    glFlush();
+    glutSwapBuffers();
+
 
 }
 
@@ -365,39 +533,41 @@ static void keyboardInput(unsigned char key, int x, int y)
         printf("Key clicked is %c\n",key);
         //call menu window
         glutDisplayFunc(displayMenuWindow);
-        glutPostRedisplay();
+        //glutPostRedisplay();
         break;
     case 'S':
     case 's':
         printf("Key clicked is %c\n",key);
         //call milestone 1 First Rocket Launch by ISRO
+
         glutDisplayFunc(msAryabattaSatellite);
-        glutPostRedisplay();
+        //glutPostRedisplay();
         break;
     case '1':
         loadABMissionImages();
+         glutIdleFunc(spinSatellite);
         glutDisplayFunc(msAryabattaSatellite);
-        glutPostRedisplay();
+       // glutPostRedisplay();
         break;
     case '2':
         glutDisplayFunc(msFirstRocketLaunch);
-        glutPostRedisplay();
+       // glutPostRedisplay();
         break;
     case '3':
         glutDisplayFunc(msMangalyan);
-        glutPostRedisplay();
+       // glutPostRedisplay();
         break;
     case '4':
         glutDisplayFunc(ms104SatelliteLaunch);
-        glutPostRedisplay();
+        //glutPostRedisplay();
         break;
     case '5':
         glutDisplayFunc(ms5);
-        glutPostRedisplay();
+       // glutPostRedisplay();
         break;
     }
 
-    glutPostRedisplay();
+    //glutPostRedisplay();
 
 }
 
@@ -406,14 +576,14 @@ static void idle(void)
 
     if(rebuildIntro == true)
     {
-        printf("Called glutPostRedisplay %d",rebuildIntro);
+        //printf("Called glutPostRedisplay %d",rebuildIntro);
         glutPostRedisplay();
         rebuildIntro = false;
     }
 
     if(rebuildM1 == true)
     {
-        printf("Called glutPostRedisplay %d",rebuildM1);
+        //printf("Called glutPostRedisplay %d",rebuildM1);
         glutPostRedisplay();
         rebuildM1 = false;
     }
@@ -475,7 +645,7 @@ void loadABMissionImages(void)
     unsigned char *data;
     char *path = "\\images\\psds\\aryabatta-img1.psd";
     path = getPath(&path,true);
-    printf("\nAB image 1 Path is %s\n",path);
+    //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
@@ -502,7 +672,7 @@ void loadABMissionImages(void)
 
     path = "\\images\\psds\\aryabatta-img2.psd";
     path = getPath(&path,true);
-    printf("\nAB image 1 Path is %s\n",path);
+    //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
@@ -522,16 +692,37 @@ void loadABMissionImages(void)
 }
 
 
+void  mouse(int btn, int state, int x, int y)
+{
+/* mouse callback, selects an axis about which to rotate */
+if(btn==GLUT_LEFT_BUTTON && state == GLUT_DOWN) axis = 0;
+if(btn==GLUT_MIDDLE_BUTTON && state == GLUT_DOWN) axis = 1;
+if(btn==GLUT_RIGHT_BUTTON && state == GLUT_DOWN) axis = 2;
+}
 
 
-void init(void)
+void init(int w, int h)
 {
 
+    printf("Width and Hight : \t %d \t %d\n",w,h);
+    glViewport(0,0,w,h);
+
     glMatrixMode(GL_PROJECTION);
+    printf("top %f",(h/w));
+    /*
     glLoadIdentity();
-    glOrtho(0, 5000, 0, 5000, 0, -500);
+    if(w<=h)
+    {
+
+        glOrtho(0, 5000, 0, 5000.0 * (GLfloat) h / (GLfloat) w, -500.0, 500.0);
+    }
+    else{
+        glOrtho(0, 5000.0 * (GLfloat) w / (GLfloat) h, 0, 5000.0, -500.0, 500.0);
+    }
+    */
+    glOrtho(0, 5000, 0, 5000, 500, -500);
     glMatrixMode(GL_MODELVIEW);
-    glClearColor(1, 1, 1, 1);
+    glClearColor(0, 0, 0, 0);
 
 }
 
@@ -583,18 +774,22 @@ int main(int argc, char *argv[])
     glutInitWindowPosition(0,0);
 
     window  = glutCreateWindow("Achievements of ISRO");
-    createMenu();
-    glutDisplayFunc(displayIntro);
+    glutReshapeFunc(init);
+    //createMenu();
+    //glutDisplayFunc(displayIntro);
+    glutDisplayFunc(msAryabattaSatellite);
     //glutDisplayFunc(displayMenuWindow);
 
     loadIntroScene();
 
     glutKeyboardFunc(keyboardInput);
+    glutMouseFunc(mouse);
     glutIdleFunc(idle);
+    glutIdleFunc(spinSatellite);
 
 
     glEnable(GL_DEPTH_TEST);
-    init();
+    //init();
     glutMainLoop();
     return EXIT_SUCCESS;
 }
