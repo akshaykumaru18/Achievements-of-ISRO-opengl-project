@@ -272,7 +272,11 @@
 1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
 	<stddef.h>
 
+<<<<<<< Updated upstream
 1624286976 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
+=======
+1624285833 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
+>>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
@@ -280,7 +284,11 @@
 	<string>
 	"stb_image/stb_image.h"
 
+<<<<<<< Updated upstream
 1624286231 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
+=======
+1624285229 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
+>>>>>>> Stashed changes
 	"stb_image.h"
 	<stdio.h>
 	<stdlib.h>

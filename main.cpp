@@ -845,12 +845,16 @@ void loadIntroScene(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     int width, height,channels;
+<<<<<<< Updated upstream
 
     GetImagePath getImagePath;
     char *path = "\\final-intro.psd";
     path = getImagePath.getPath(&path,true);
     printf("\nPath is %s\n",path);
     unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+=======
+    unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+>>>>>>> Stashed changes
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
