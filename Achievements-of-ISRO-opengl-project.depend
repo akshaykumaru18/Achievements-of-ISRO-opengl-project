@@ -274,10 +274,11 @@
 
 1624285833 ated upstream
 
-1624476247 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
+1624730582 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
+	<math.h>
 	<iostream>
 	<string.h>
 	"stb_image/stb_image.h"
