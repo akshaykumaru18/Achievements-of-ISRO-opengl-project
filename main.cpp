@@ -3,7 +3,8 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <string.h>
-
+#include "GetImagePath.h"
+#include "AryabattaMission.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
 
@@ -16,13 +17,26 @@ static int window, returnMenu,value=0;
 static int activeWindow = 1;
 
 unsigned int introBG;
+unsigned int nightBG;
 
 //Aryabhata Mission
 unsigned int abimg1;
 unsigned int abimg2;
 
+void drawSatellitePremitive();
+void drawLines(int x1,int y1,int x2,int y2);
+void abSatelliteEntry();
+
+float ab_entry_translate_x = 0;
+float ab_entry_translate_y = 0;
+
+float ab_entry_scale_x = 0.0;
+float ab_entry_scale_y = 0.0;
+
+float ab_entry_rotation_theta = 0;
+
 static GLfloat theta[] = {0.0,0.0,0.0};
-static GLint axis = 0;
+static GLint axis = 1;
 
 
 
@@ -41,33 +55,6 @@ const GLfloat high_shininess[] = { 100.0f };
 
 /* GLUT callback Handlers */
 
-char* getPath(char **path,bool isAk)
-{
-    printf("Given path is %s",*path);
-    char akPath[] = "C:\\Users\\Akshay Kumar U\\cgv project\\Achievements-of-ISRO-opengl-project";
-    char pkPath[] = "C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project";
-    char finalPath[10000];
-    if(isAk == true)
-    {
-        strcpy(finalPath,akPath);
-        strcat(finalPath,*path);
-        *path = finalPath;
-        //printf("final path is %s",*path);
-        return *path;
-    }
-
-    else
-    {
-
-        strcpy(finalPath,pkPath);
-        strcat(finalPath,*path);
-        *path = finalPath;
-        //printf("final path is %s",*path);
-        return *path;
-    }
-    //  return;
-
-}
 static void resize(int width, int height)
 {
     const float ar = (float) width / (float) height;
@@ -139,21 +126,15 @@ void displayMenuWindow()
     glFlush();
     glutSwapBuffers();
 }
-void spinSatellite()
-{
-   // printf("\nspinning in %d",theta[axis]);
-    theta[axis] += 0.75;
-    if(theta[axis] > 360.0)
-            theta[axis] -= 360.0;
 
-    glutPostRedisplay();
-
-}
 void msAryabattaSatellite()
 {
 
     //  printf("milestoneRocketLaunch function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    AryabhataMission abMission;
+
+    drawSatellitePremitive();
 
     /* Title Start */
     glColor3f(1, 1, 1);
@@ -169,13 +150,9 @@ void msAryabattaSatellite()
     glFlush();
     /* Title End */
 
-
-
     /* Visual Part start */
 
 
-
-    abSatellitePremetive();
 
     /* Display Image 2 */
 
@@ -184,19 +161,19 @@ void msAryabattaSatellite()
     glBindTexture(GL_TEXTURE_2D, abimg2);
     glBegin(GL_QUADS);
     //first vertex (bottom, left)
-    glVertex3f(2800, 1200, 10);
+    glVertex3f(3000, 1600, 10);
     glTexCoord2f(0, 0);
 
     //second vertex (top,left)
-    glVertex3f(2800, 2800, 10);
+    glVertex3f(3000, 3000, 10);
     glTexCoord2f(0, 1);
 
     //third vertex (top,right)
-    glVertex3f(3400, 2800, 10);
+    glVertex3f(3700, 3000, 10);
     glTexCoord2f(1, 1);
 
     //four vertex (bottom,right)
-    glVertex3f(3400, 1200, 10);
+    glVertex3f(3700, 1600, 10);
     glTexCoord2f(1, 0);
     glEnd();
     glFlush();
@@ -209,24 +186,23 @@ void msAryabattaSatellite()
     glBindTexture(GL_TEXTURE_2D, abimg1);
     glBegin(GL_QUADS);
     //first vertex (bottom, left)
-    glVertex3f(3500, 1200, 10);
+    glVertex3f(3800, 1600, 10);
     glTexCoord2f(0, 0);
 
     //second vertex (top,left)
-    glVertex3f(3500, 2800, 10);
+    glVertex3f(3800, 3000, 10);
     glTexCoord2f(0, 1);
 
     //third vertex (top,right)
-    glVertex3f(4900, 2800, 10);
+    glVertex3f(4900, 3000, 10);
     glTexCoord2f(1, 1);
 
     //four vertex (bottom,right)
-    glVertex3f(4900, 1200, 10);
+    glVertex3f(4900, 1600, 10);
     glTexCoord2f(1, 0);
     glEnd();
     glFlush();
     glDisable(GL_TEXTURE_2D);
-
 
 
 
@@ -244,6 +220,19 @@ void msAryabattaSatellite()
     displayText(2800,3400,1.0,1.0,1.0,1,"                       active till March,1981");
 
 
+
+   //Quix section
+    displayText(2800,1300,1.0,1.0,1.0,1,"Question : 1");
+    displayText(2800,1000,1.0,1.0,1.0,1,"Option A");
+    displayText(2800,800,1.0,1.0,1.0,1,"Option B");
+    displayText(2800,600,1.0,1.0,1.0,1,"Option C");
+    displayText(2800,400,1.0,1.0,1.0,1,"Option D");
+
+
+
+    abMission.drawBGTexture(nightBG);
+
+
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
     glVertex3f(0, 0, 10);
@@ -252,6 +241,11 @@ void msAryabattaSatellite()
     glVertex3f(5000, 0, 10);
     glEnd();
     glFlush();
+
+
+
+
+
     glutSwapBuffers();
     if(rebuildM1)
     {
@@ -261,156 +255,402 @@ void msAryabattaSatellite()
 
 }
 
-void abSatellitePremetive()
+
+
+void drawSatellitePremitive()
 {
-
-
-    // printf("Theta value is %f of x \n",theta[0]);
-    // printf("Theta value is %f of y \n",theta[1]);
-    // printf("Theta value is %f of z \n",theta[2]);
     glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
 
-    glRotatef(theta[0], 0.0, 1.0, 0.0);
+    // glRotatef(ab_entry_rotation_theta,0,1,0);
+    //glRotatef(ab_entry_rotation_theta,1,0,0);
+    // glRotatef(ab_entry_rotation_theta,0,0,1);
+    // glRotatef(100,1,0,0);
+    glScalef(ab_entry_scale_x, ab_entry_scale_y,1);
+    glTranslated(ab_entry_translate_x, ab_entry_translate_y,0);
+
+    // glRotated(ab_entry_rotation_theta,0,1,0);
+    // glRotated(ab_entry_rotation_theta,0,0,1);
+    //glRotated(ab_entry_rotation_theta,1,0,0);
 
 
+    //Satellite drawing start
 
-
-
-
-    /*FRONT FACE START */
-    glColor3f(1, 1, 1);
-    glBegin(GL_POLYGON);
-    //first vertex (bottom, left)
-    glVertex3f(500, 1200, 500);
-
-
-    //second vertex (top,left)
-    glVertex3f(500, 3500, 500);
-
-
-    //third vertex (top,right)
-    glVertex3f(2000, 3500, 500);
-
-
-    //four vertex (bottom,right)
-    glVertex3f(2000, 1200, 500);
+    //Antenna 1
+    glColor4f(1.0, 1, 0.0,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1800,1900,10);  //bottom left
+    glVertex3f(2500,4400,10); //top left
+    glVertex3f(1850,1900,10); //top right
+    glVertex3f(2500,4400,10); //bottom right
     glEnd();
-    /*FRONT FACE END*/
 
-    /*BACK FACE START */
-    glColor3f(1, 0, 0);
-    glBegin(GL_POLYGON);
-    //first vertex (bottom, left)
-    glVertex3f(500, 1200, -500);
-
-
-    //second vertex (top,left)
-    glVertex3f(500, 3500, -500);
-
-
-    //third vertex (top,right)
-    glVertex3f(2000, 3500, -500);
-
-
-    //four vertex (bottom,right)
-    glVertex3f(2000, 1200, -500);
+    //Antenna 2
+    glColor4f(1.0, 1, 0.0,1);
+    glBegin(GL_QUADS);
+    glVertex3f(850,1900,10);  //bottom left
+    glVertex3f(100,4400,10); //top left
+    glVertex3f(900,1850,10); //top right
+    glVertex3f(100,4400,10); //bottom right
     glEnd();
-    /*BACK FACE END*/
 
-    /*RIGHT FACE START */
-    glColor3f(0, 1, 0);
-    glBegin(GL_POLYGON);
-    //first vertex (bottom, left)
-    glVertex3f(2000, 1200, 500);
+    drawLines(800,3800,1900,3800);
 
 
-    //second vertex (top,left)
-    glVertex3f(2000, 3500, 500);
 
-
-    //third vertex (top,right)
-    glVertex3f(2000, 3500, -500);
-
-
-    //four vertex (bottom,right)
-    glVertex3f(2000, 1200, -500);
+    //satellite top
+    /* left Part Start*/
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(200,2700,10);  //bottom left
+    glVertex3f(800,3800,10); //top left
+    glVertex3f(1000,3800,10); //top right
+    glVertex3f(800,2700,10); //bottom right
     glEnd();
-    /*RIGHT FACE END*/
 
-    /*LEFT FACE START */
-    glColor3f(0, 0, 1);
-    glBegin(GL_POLYGON);
-    //four vertex (bottom,right)
-    glVertex3f(500, 1200, 500);
+    //Solar panel lines
+    //vertical lines
+    drawLines(200,2700,800,3800);
+    drawLines(300,2700,840,3800);
+    drawLines(400,2700,880,3800);
+    drawLines(500,2700,920,3800);
+    drawLines(600,2700,960,3800);
+    drawLines(700,2700,1000,3800);
+    drawLines(800,2700,1000,3800);
 
+    //horizontal lines
+    drawLines(200,2700,800,2700);
+    drawLines(250,2800,820,2800);
+    drawLines(350,3000,850,3000);
+    drawLines(460,3200,900,3200);
+    drawLines(570,3400,930,3400);
+    drawLines(700,3600,960,3600);
+    drawLines(800,3800,1000,3800);
 
-    //third vertex (top,right)
-    glVertex3f(500, 3500, 500);
-
-
-
-    //second vertex (top,left)
-    glVertex3f(500, 3500, -500);
-
-//first vertex (bottom, left)
-    glVertex3f(500, 1200, -500);
-
-
-
+    /* left Part End*/
+    /* Middle Part Start*/
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(900,2700,10);  //bottom left
+    glVertex3f(1100,3800,10); //top left
+    glVertex3f(1600,3800,10); //top right
+    glVertex3f(1800,2700,10); //bottom right
     glEnd();
-    /*LEFT FACE END*/
 
-    /*TOP FACE START */
-    glColor3f(1, 1, 0);
-    glBegin(GL_POLYGON);
-    //first vertex (bottom, left)
-    glVertex3f(500, 3500, 500);
+    //Solar panel lines
+    //Vertical lines
+    drawLines(900,2700,1100,3800);
+    drawLines(1020,2700,1200,3800);
+    drawLines(1100,2700,1250,3800);
+    drawLines(1650,2700,1500,3800);
+    drawLines(1550,2700,1450,3800);
+    drawLines(1800,2700,1600,3800);
+
+    //horizontal lines
+    drawLines(1100,3800,1600,3800);
+    drawLines(900,2800,1800,2800);
+    drawLines(950,3000,1750,3000);
+
+    drawLines(1020,3400,1680,3400);
+    drawLines(1060,3600,1640,3600);
+    drawLines(900,2700,1800,2700);
+
+    /* Middle Part End*/
 
 
-    //second vertex (top,left)
-    glVertex3f(500, 3500, -500);
 
-
-    //third vertex (top,right)
-    glVertex3f(2000, 3500, -500);
-
-
-    //four vertex (bottom,right)
-    glVertex3f(2000, 3500, 500);
+    /* Right Part Start*/
+    //right
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1900,2700,10);  //bottom left
+    glVertex3f(1700,3800,10); //top left
+    glVertex3f(1900,3800,10); //top right
+    glVertex3f(2600,2700,10); //bottom right
     glEnd();
-    /*TOP FACE END*/
+
+    //Solar panel lines
+    //Vertical lines
+    drawLines(1900,2700,1700,3800);
+    drawLines(1980,2700,1700,3800);
+    drawLines(2180,2700,1750,3800);
+    drawLines(2380,2700,1800,3800);
+    drawLines(2480,2700,1850,3800);
+    drawLines(2600,2700,1900,3800);
+
+    //horizontal lines
+    drawLines(1900,2700,2600,2700);
+    drawLines(1880,2800,2550,2800);
+    drawLines(1860,3000,2400,3000);
+    drawLines(1810,3200,2290,3200);
+    drawLines(1780,3400,2170,3400);
+    drawLines(1740,3600,2050,3600);
+    drawLines(1700,3800,1900,3800);
+
+    /* Right Part End*/
 
 
-    /*BOTTOM FACE START */
-    glColor3f(0, 1, 1);
-    glBegin(GL_POLYGON);
-    //first vertex (bottom, left)
-    glVertex3f(500, 1200, 500);
+    //satellite body
 
-
-    //second vertex (top,left)
-    glVertex3f(500, 1200, -500);
-
-
-    //third vertex (top,right)
-    glVertex3f(2000, 1200, -500);
-
-
-    //four vertex (bottom,right)
-    glVertex3f(2000, 1200, 500);
+    //left
+    /*Left Part Start */
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(200,1600,10);  //bottom left
+    glVertex3f(200,2700,10); //top left
+    glVertex3f(800,2700,10); //top right
+    glVertex3f(800,1600,10); //bottom right
     glEnd();
-    /*BOTTOM FACE END*/
 
-    glFlush();
+    //Solar panel lines
+    //Vertical lines
+    drawLines(200,1600,200,2700);
+    drawLines(300,1600,300,2700);
+    drawLines(400,1600,400,2700);
+    drawLines(500,1600,500,2700);
+    drawLines(600,1600,600,2700);
+    drawLines(700,1600,700,2700);
+    drawLines(800,1600,800,2700);
+
+    //horizontal lines
+    drawLines(200,1750,800,1750);
+    drawLines(200,2000,800,2000);
+    drawLines(200,2250,800,2250);
+    drawLines(200,2500,800,2500);
+
+    /*Left Part End */
+    //middle
+    /*Middle Side Start*/
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(900,1600,10);  //bottom left
+    glVertex3f(900,2700,10); //top left
+    glVertex3f(1800,2700,10); //top right
+    glVertex3f(1800,1600,10); //bottom right
+    glEnd();
+
+    //Solar panel lines
+    //Vertical lines
+    drawLines(900,1600,900,2700);
+    drawLines(1000,1600,1000,2700);
+    drawLines(1100,1600,1100,2700);
+    drawLines(1200,1600,1200,2700);
+    drawLines(1300,1600,1300,2700);
+    drawLines(1400,1600,1400,2700);
+    drawLines(1500,1600,1500,2700);
+    drawLines(1600,1600,1600,2700);
+    drawLines(1700,1600,1700,2700);
+    drawLines(1800,1600,1800,2700);
+
+    //horizontal lines
+    drawLines(900,1750,1800,1750);
+    drawLines(900,2000,1800,2000);
+    drawLines(900,2250,1800,2250);
+    drawLines(900,2500,1800,2500);
+
+    /*Middle Side End*/
+
+    //right
+    /*Right Side Start*/
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1900,1600,10);  //bottom left
+    glVertex3f(1900,2700,10); //top left
+    glVertex3f(2600,2700,10); //top right
+    glVertex3f(2600,1600,10); //bottom right
+    glEnd();
+
+    //Solar panel lines
+    //Vertical lines
+    drawLines(1900,1600,1900,2700);
+    drawLines(2000,1600,2000,2700);
+    drawLines(2100,1600,2100,2700);
+    drawLines(2200,1600,2200,2700);
+    drawLines(2300,1600,2300,2700);
+    drawLines(2400,1600,2400,2700);
+    drawLines(2500,1600,2500,2700);
+    drawLines(2600,1600,2600,2700);
+
+    drawLines(900,1600,900,2700);
+    drawLines(1000,1600,1000,2700);
+    drawLines(1100,1600,1100,2700);
+    drawLines(1200,1600,1200,2700);
+    drawLines(1300,1600,1300,2700);
+    drawLines(1400,1600,1400,2700);
+    drawLines(1500,1600,1500,2700);
+    drawLines(1600,1600,1600,2700);
+    drawLines(1700,1600,1700,2700);
+    drawLines(1800,1600,1800,2700);
+    //horizontal lines
+    drawLines(1900,1750,2600,1750);
+    drawLines(1900,2000,2600,2000);
+    drawLines(1900,2250,2600,2250);
+    drawLines(1900,2500,2600,2500);
+
+    /*Right Side End*/
+
+    //satellite bottom
+
+    //left
+    /*Left part start*/
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(800,600,10);  //bottom left
+    glVertex3f(200,1600,10); //top left
+    glVertex3f(800,1600,10); //top right
+    glVertex3f(1000,600,10); //bottom right
+    glEnd();
+
+    //Solar panel lines
+    //vertical lines
+    drawLines(200,1600,800,600);
+    drawLines(300,1600,840,600);
+    drawLines(400,1600,880,600);
+    drawLines(500,1600,920,600);
+    drawLines(600,1600,960,600);
+    drawLines(700,1600,980,600);
+    drawLines(800,1600,1000,600);
+
+
+    drawLines(200,1600,820,1600);
+    drawLines(310,1400,840,1400);
+    drawLines(440,1200,880,1200);
+    drawLines(550,1000,930,1000);
+    drawLines(660,800,960,800);
+    drawLines(790,600,1000,600);
+
+
+    /*Left part end*/
+
+    //middle
+    /*Middle Part Start*/
+
+
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1100,600,10);  //bottom left
+    glVertex3f(900,1600,10); //top left
+    glVertex3f(1800,1600,10); //top right
+    glVertex3f(1600,600,10); //bottom right
+    glEnd();
+
+    //Solar panel lines
+    //Vertical lines
+    drawLines(1100,600,900,1600);
+    drawLines(1200,600,1000,1600);
+    drawLines(1250,600,1100,1600);
+    drawLines(1450,600,1550,1600);
+    drawLines(1500,600,1650,1600);
+    drawLines(1600,600,1800,1600);
+
+    //horizontal lines
+    drawLines(900,1600,1800,1600);
+    drawLines(930,1500,1780,1500);
+    drawLines(960,1250,1750,1250);
+    drawLines(1030,900,1680,900);
+    drawLines(1070,750,1630,750);
+    drawLines(1090,600,1600,600);
+
+    /*Middle Part End*/
+    //right
+    /*Right Part Start*/
+
+
+    glColor4f(0.0, 0, 0.6,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1700,600,10);  //bottom left
+    glVertex3f(1900,1600,10); //top left
+    glVertex3f(2600,1600,10); //top right
+    glVertex3f(1900,600,10); //bottom right
+    glEnd();
+
+    //Solar panel lines
+    //Vertical lines
+    drawLines(1900,1600,1700,600);
+    drawLines(1980,1600,1700,600);
+    drawLines(2180,1600,1750,600);
+    drawLines(2380,1600,1800,600);
+    drawLines(2480,1600,1850,600);
+    drawLines(2600,1600,1900,600);
+
+    //horizontal lines
+    drawLines(1900,1600,2600,1600);
+    drawLines(1850,1400,2450,1400);
+    drawLines(1830,1200,2330,1200);
+    drawLines(1790,1000,2200,1000);
+    drawLines(1730,800,2030,800);
+    drawLines(1700,600,1900,600);
+
+
+    /*Right Part End*/
+    //Satellite drawing end
+    drawLines(800,600,1900,600);
+
+
+    //Antenna
+    glColor4f(1.0, 1, 0.0,1);
+    glBegin(GL_QUADS);
+    glVertex3f(1800,1900,10);  //bottom left
+    glVertex3f(2500,4400,10); //top left
+    glVertex3f(1850,1900,10); //top right
+    glVertex3f(2500,4400,10); //bottom right
+    glEnd();
 
     glPopMatrix();
-    glFlush();
-    glutSwapBuffers();
+    glutPostRedisplay();
 
 
 }
+void drawLines(int x1,int y1,int x2,int y2)
+{
+    glColor4f(1, 1, 0,1);
+    glBegin(GL_LINES);
+    glVertex2f(x1,y1);
+    glVertex2f(x2,y2);
+    glEnd();
+    glFlush();
+}
+
+void abSatelliteEntry(void)
+{
+
+
+    if(ab_entry_translate_x < 900.0 && ab_entry_scale_y < 1600)
+    {
+        printf("Hello translate %f \t %f\n",ab_entry_translate_x,ab_entry_translate_y);
+        int i = 0;
+
+        ab_entry_translate_x += 20;
+        ab_entry_translate_y += 20;
+        glutPostRedisplay();
+
+    }
+    //Scaling
+    if(ab_entry_scale_x < 0.7)
+    {
+        printf("Hello scale %f \t %f\n",ab_entry_scale_x,ab_entry_scale_y);
+        int i = 0;
+
+        ab_entry_scale_x += 0.005;
+        ab_entry_scale_y += 0.005;
+        glutPostRedisplay();
+
+    }
+
+
+    //ab_entry_rotation_theta += 0.5;
+
+    //Translating
+
+
+
+}
+
+
+
+
 
 void msFirstRocketLaunch()
 {
@@ -537,33 +777,32 @@ static void keyboardInput(unsigned char key, int x, int y)
         break;
     case 'S':
     case 's':
-        printf("Key clicked is %c\n",key);
-        //call milestone 1 First Rocket Launch by ISRO
-
-        glutDisplayFunc(msAryabattaSatellite);
-        //glutPostRedisplay();
-        break;
     case '1':
+        ab_entry_translate_x = 0;
+        ab_entry_translate_y = 0;
+        ab_entry_scale_x = 0.0;
+        ab_entry_scale_y = 0.0;
         loadABMissionImages();
-         glutIdleFunc(spinSatellite);
+        glutIdleFunc(abSatelliteEntry);
         glutDisplayFunc(msAryabattaSatellite);
-       // glutPostRedisplay();
+
+        glutPostRedisplay();
         break;
     case '2':
         glutDisplayFunc(msFirstRocketLaunch);
-       // glutPostRedisplay();
+        glutPostRedisplay();
         break;
     case '3':
         glutDisplayFunc(msMangalyan);
-       // glutPostRedisplay();
+        glutPostRedisplay();
         break;
     case '4':
         glutDisplayFunc(ms104SatelliteLaunch);
-        //glutPostRedisplay();
+        glutPostRedisplay();
         break;
     case '5':
         glutDisplayFunc(ms5);
-       // glutPostRedisplay();
+        glutPostRedisplay();
         break;
     }
 
@@ -607,9 +846,9 @@ void loadIntroScene(void)
 
     int width, height,channels;
 
-
+    GetImagePath getImagePath;
     char *path = "\\final-intro.psd";
-    path = getPath(&path,true);
+    path = getImagePath.getPath(&path,true);
     printf("\nPath is %s\n",path);
     unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
@@ -632,6 +871,10 @@ void loadIntroScene(void)
 
 void loadABMissionImages(void)
 {
+    GetImagePath getImagePath;
+
+
+
     /* Image 1 */
     glGenTextures(1,&abimg1);
     glBindTexture(GL_TEXTURE_2D,abimg1);
@@ -644,7 +887,7 @@ void loadABMissionImages(void)
     int width, height,channels;
     unsigned char *data;
     char *path = "\\images\\psds\\aryabatta-img1.psd";
-    path = getPath(&path,true);
+    path = getImagePath.getPath(&path,true);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
@@ -671,7 +914,7 @@ void loadABMissionImages(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     path = "\\images\\psds\\aryabatta-img2.psd";
-    path = getPath(&path,true);
+    path = getImagePath.getPath(&path,true);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
@@ -687,6 +930,33 @@ void loadABMissionImages(void)
     }
     stbi_image_free(data);
 
+
+    /* Night background loading */
+    glGenTextures(1,&nightBG);
+    glBindTexture(GL_TEXTURE_2D,nightBG);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\nightBG.psd";
+    path = getImagePath.getPath(&path,true);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading NIGHT BG" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load NIGHT BG" << std::endl;
+    }
+    stbi_image_free(data);
+
     //glutIdleFunc(idle);
 
 }
@@ -694,10 +964,13 @@ void loadABMissionImages(void)
 
 void  mouse(int btn, int state, int x, int y)
 {
-/* mouse callback, selects an axis about which to rotate */
-if(btn==GLUT_LEFT_BUTTON && state == GLUT_DOWN) axis = 0;
-if(btn==GLUT_MIDDLE_BUTTON && state == GLUT_DOWN) axis = 1;
-if(btn==GLUT_RIGHT_BUTTON && state == GLUT_DOWN) axis = 2;
+    /* mouse callback, selects an axis about which to rotate */
+    if(btn==GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        axis = 0;
+    if(btn==GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
+        axis = 1;
+    if(btn==GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+        axis = 2;
 }
 
 
@@ -709,17 +982,18 @@ void init(int w, int h)
 
     glMatrixMode(GL_PROJECTION);
     printf("top %f",(h/w));
-    /*
-    glLoadIdentity();
-    if(w<=h)
-    {
 
-        glOrtho(0, 5000, 0, 5000.0 * (GLfloat) h / (GLfloat) w, -500.0, 500.0);
-    }
-    else{
-        glOrtho(0, 5000.0 * (GLfloat) w / (GLfloat) h, 0, 5000.0, -500.0, 500.0);
-    }
-    */
+    glLoadIdentity();
+    /* if(w<=h)
+     {
+
+         glOrtho(0, 5000, 0, 5000.0 * (GLfloat) h / (GLfloat) w, -500.0, 500.0);
+     }
+     else{
+         glOrtho(0, 5000.0 * (GLfloat) w / (GLfloat) h, 0, 5000.0, -500.0, 500.0);
+     }
+     */
+
     glOrtho(0, 5000, 0, 5000, 500, -500);
     glMatrixMode(GL_MODELVIEW);
     glClearColor(0, 0, 0, 0);
@@ -774,10 +1048,10 @@ int main(int argc, char *argv[])
     glutInitWindowPosition(0,0);
 
     window  = glutCreateWindow("Achievements of ISRO");
-    glutReshapeFunc(init);
-    //createMenu();
-    //glutDisplayFunc(displayIntro);
-    glutDisplayFunc(msAryabattaSatellite);
+
+    createMenu();
+    glutDisplayFunc(displayIntro);
+
     //glutDisplayFunc(displayMenuWindow);
 
     loadIntroScene();
@@ -785,7 +1059,7 @@ int main(int argc, char *argv[])
     glutKeyboardFunc(keyboardInput);
     glutMouseFunc(mouse);
     glutIdleFunc(idle);
-    glutIdleFunc(spinSatellite);
+    glutReshapeFunc(init);
 
 
     glEnable(GL_DEPTH_TEST);

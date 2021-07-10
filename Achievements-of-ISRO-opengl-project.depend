@@ -1,10 +1,12 @@
 # depslib dependency file v1.0
-1624475892 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1625945287 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
 	<iostream>
 	<string.h>
+	"GetImagePath.h"
+	"AryabattaMission.h"
 	"stb_image/stb_image.h"
 
 1426329928 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h
@@ -294,4 +296,22 @@
 	<emmintrin.h>
 	<intrin.h>
 	<arm_neon.h>
+
+1625848669 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
+	<GL/glut.h>
+
+1625941159 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
+	"GetImagePath.h"
+	<GL/glut.h>
+	<stdio.h>
+
+1625849811 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\basic_transformation.cpp
+	<stdio.h>
+	<math.h>
+	<time.h>
+	<GL/glut.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\time.h
+	<_mingw.h>
+	<stddef.h>
 
