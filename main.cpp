@@ -4,20 +4,22 @@
 #include <iostream>
 #include <string.h>
 #include "GetImagePath.h"
+#include "elipse.h"
 #include "AryabattaMission.h"
+#include "Quiz.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
-
+AryabhataMission arbMission;
 void loadABMissionImages();
 void abSatellitePremetive();
-bool rebuildIntro = true;
-bool rebuildM1 = true;
+
 static int window, returnMenu,value=0;
 
 static int activeWindow = 1;
 
 unsigned int introBG;
 unsigned int nightBG;
+unsigned int earthT;
 
 //Aryabhata Mission
 unsigned int abimg1;
@@ -27,6 +29,7 @@ void drawSatellitePremitive();
 void drawLines(int x1,int y1,int x2,int y2);
 void abSatelliteEntry();
 
+int scale_out_timer = 10;
 float ab_entry_translate_x = 0;
 float ab_entry_translate_y = 0;
 
@@ -39,7 +42,8 @@ static GLfloat theta[] = {0.0,0.0,0.0};
 static GLint axis = 1;
 
 
-
+bool rebuildIntro = false;
+bool rebuildM1 = false;
 
 
 const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -54,6 +58,8 @@ const GLfloat high_shininess[] = { 100.0f };
 
 
 /* GLUT callback Handlers */
+
+
 
 static void resize(int width, int height)
 {
@@ -105,6 +111,12 @@ void displayIntro()
     glDisable(GL_TEXTURE_2D);
 
     glutSwapBuffers();
+    if(!rebuildIntro)
+    {
+        rebuildIntro = true;
+        glutPostRedisplay();
+    }
+
 
 }
 
@@ -130,9 +142,9 @@ void displayMenuWindow()
 void msAryabattaSatellite()
 {
 
-    //  printf("milestoneRocketLaunch function called\n");
+    //printf("milestoneRocketLaunch function called \n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    AryabhataMission abMission;
+    //AryabhataMission abMission;
 
     drawSatellitePremitive();
 
@@ -221,7 +233,7 @@ void msAryabattaSatellite()
 
 
 
-   //Quix section
+    //Quix section
     displayText(2800,1300,1.0,1.0,1.0,1,"Question : 1");
     displayText(2800,1000,1.0,1.0,1.0,1,"Option A");
     displayText(2800,800,1.0,1.0,1.0,1,"Option B");
@@ -229,8 +241,8 @@ void msAryabattaSatellite()
     displayText(2800,400,1.0,1.0,1.0,1,"Option D");
 
 
-
-    abMission.drawBGTexture(nightBG);
+    arbMission.drawEarth(earthT);
+    arbMission.drawBGTexture(nightBG);
 
 
     glColor3f(0, 0, 0);
@@ -247,11 +259,13 @@ void msAryabattaSatellite()
 
 
     glutSwapBuffers();
-    if(rebuildM1)
+    if(!rebuildM1)
     {
+        rebuildM1 = true;
         glutPostRedisplay();
-        rebuildM1 = false;
     }
+
+
 
 }
 
@@ -259,6 +273,8 @@ void msAryabattaSatellite()
 
 void drawSatellitePremitive()
 {
+
+
     glPushMatrix();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -267,10 +283,16 @@ void drawSatellitePremitive()
     // glRotatef(ab_entry_rotation_theta,0,1,0);
     //glRotatef(ab_entry_rotation_theta,1,0,0);
     // glRotatef(ab_entry_rotation_theta,0,0,1);
-    // glRotatef(100,1,0,0);
-    glScalef(ab_entry_scale_x, ab_entry_scale_y,1);
-    glTranslated(ab_entry_translate_x, ab_entry_translate_y,0);
 
+
+
+
+    glScalef(arbMission.ab_entry_scale_x, arbMission.ab_entry_scale_y,1);
+    glTranslated(arbMission.ab_entry_translate_x, arbMission.ab_entry_translate_y,0);
+    Elipse elipse;
+    elipse.setColor(1,1,1);
+   // elipse.draw(1350,3200,90,110,10,false,0,360);
+   // elipse.draw(1350,1100,90,110,10,false,0,360);
     // glRotated(ab_entry_rotation_theta,0,1,0);
     // glRotated(ab_entry_rotation_theta,0,0,1);
     //glRotated(ab_entry_rotation_theta,1,0,0);
@@ -603,6 +625,8 @@ void drawSatellitePremitive()
 
 
 }
+
+
 void drawLines(int x1,int y1,int x2,int y2)
 {
     glColor4f(1, 1, 0,1);
@@ -617,24 +641,24 @@ void abSatelliteEntry(void)
 {
 
 
-    if(ab_entry_translate_x < 900.0 && ab_entry_scale_y < 1600)
+    if(arbMission.ab_entry_translate_x < 900.0 && arbMission.ab_entry_translate_y < 1600)
     {
-        printf("Hello translate %f \t %f\n",ab_entry_translate_x,ab_entry_translate_y);
+        printf("Hello translate %f \t %f\n",arbMission.ab_entry_translate_x,arbMission.ab_entry_translate_y);
         int i = 0;
 
-        ab_entry_translate_x += 20;
-        ab_entry_translate_y += 20;
+        arbMission.ab_entry_translate_x += 20;
+        arbMission.ab_entry_translate_y += 40;
         glutPostRedisplay();
 
     }
     //Scaling
-    if(ab_entry_scale_x < 0.7)
+    if(arbMission.ab_entry_scale_x < 0.6)
     {
         printf("Hello scale %f \t %f\n",ab_entry_scale_x,ab_entry_scale_y);
         int i = 0;
 
-        ab_entry_scale_x += 0.005;
-        ab_entry_scale_y += 0.005;
+        arbMission.ab_entry_scale_x += 0.005;
+        arbMission.ab_entry_scale_y += 0.005;
         glutPostRedisplay();
 
     }
@@ -759,6 +783,7 @@ void changeWindow(bool next)
     }
 
 }
+
 static void keyboardInput(unsigned char key, int x, int y)
 {
 
@@ -810,25 +835,6 @@ static void keyboardInput(unsigned char key, int x, int y)
 
 }
 
-static void idle(void)
-{
-
-    if(rebuildIntro == true)
-    {
-        //printf("Called glutPostRedisplay %d",rebuildIntro);
-        glutPostRedisplay();
-        rebuildIntro = false;
-    }
-
-    if(rebuildM1 == true)
-    {
-        //printf("Called glutPostRedisplay %d",rebuildM1);
-        glutPostRedisplay();
-        rebuildM1 = false;
-    }
-
-}
-
 
 
 
@@ -865,7 +871,7 @@ void loadIntroScene(void)
     }
     stbi_image_free(data);
     std::cout << "done" << std::endl;
-    glutIdleFunc(idle);
+
 
 }
 
@@ -957,6 +963,32 @@ void loadABMissionImages(void)
     }
     stbi_image_free(data);
 
+    /* Earth loading */
+    glGenTextures(1,&earthT);
+    glBindTexture(GL_TEXTURE_2D,earthT);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\earth.psd";
+    path = getImagePath.getPath(&path,true);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading Earth" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load Earth" << std::endl;
+    }
+    stbi_image_free(data);
+
     //glutIdleFunc(idle);
 
 }
@@ -997,6 +1029,9 @@ void init(int w, int h)
     glOrtho(0, 5000, 0, 5000, 500, -500);
     glMatrixMode(GL_MODELVIEW);
     glClearColor(0, 0, 0, 0);
+
+    Quiz quiz;
+    quiz.loadQuiz();
 
 }
 
@@ -1058,7 +1093,7 @@ int main(int argc, char *argv[])
 
     glutKeyboardFunc(keyboardInput);
     glutMouseFunc(mouse);
-    glutIdleFunc(idle);
+
     glutReshapeFunc(init);
 
 
