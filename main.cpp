@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <GL/glut.h>
 #include <iostream>
@@ -13,6 +14,7 @@ AryabhataMission arbMission;
 Quiz quiz;
 void loadABMissionImages();
 void abSatellitePremetive();
+void showQuizResult(bool result);
 
 static int window, returnMenu,value=0;
 
@@ -146,7 +148,8 @@ void msAryabattaSatellite()
     //printf("milestoneRocketLaunch function called \n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //AryabhataMission abMission;
-
+    if(quiz.showAnswer)
+        showQuizResult(quiz.result);
     drawSatellitePremitive();
 
     /* Title Start */
@@ -242,6 +245,7 @@ void msAryabattaSatellite()
     displayText(2800,800,1.0,1.0,1.0,1,q.choices[1]);
     displayText(2800,600,1.0,1.0,1.0,1,q.choices[2]);
     displayText(2800,400,1.0,1.0,1.0,1,q.choices[3]);
+
 
 
 
@@ -820,20 +824,95 @@ void changeWindow(bool next)
 
 }
 
+void showQuizResult(bool qr)
+{
+    if(qr)
+    {
+
+        glColor3f(0, 1, 0);
+        glBegin(GL_QUADS);
+        glVertex3f(4300, 500, 10);
+        glVertex3f(4000, 800, 10);
+        glVertex3f(4050, 800, 10);
+        glVertex3f(4370, 500, 10);
+        glEnd();
+
+        glBegin(GL_QUADS);
+        glVertex3f(4300, 500, 10);
+        glVertex3f(4700, 1300, 10);
+        glVertex3f(4750, 1300, 10);
+        glVertex3f(4370, 500, 10);
+        glEnd();
+
+        char res[10000];
+        strcpy(res,"correct");
+        strcat(res," : ");
+        char *ch = &quiz.crctChoice;
+        strcat(res,ch);
+        displayText(4200,300,0,1,0,1,res);
+        glColor3f(1, 1, 1);
+        glBegin(GL_QUADS);
+        glVertex3f(3900, 100, 10);
+        glVertex3f(3900, 1500, 10);
+        glVertex3f(4900, 1500, 10);
+        glVertex3f(4900, 100, 10);
+        glEnd();
+
+        glFlush();
+    }
+    else
+    {
+        glColor3f(1,0, 0);
+        glBegin(GL_QUADS);
+        glVertex3f(4600, 500, 10);
+        glVertex3f(4150, 1300, 10);
+        glVertex3f(4200, 1300, 10);
+        glVertex3f(4650, 500, 10);
+        glEnd();
+
+        glBegin(GL_QUADS);
+        glVertex3f(4150, 500, 10);
+        glVertex3f(4600, 1300, 10);
+        glVertex3f(4650, 1300, 10);
+        glVertex3f(4200, 500, 10);
+        glEnd();
+
+                char res[10000];
+        strcpy(res,"Correct");
+        strcat(res," : ");
+        char *ch = &quiz.crctChoice;
+        strcat(res,ch);
+        displayText(4200,300,1,0,0,1,res);
+
+        glColor3f(1, 1, 1);
+        glBegin(GL_QUADS);
+        glVertex3f(3900, 100, 10);
+        glVertex3f(3900, 1500, 10);
+        glVertex3f(4900, 1500, 10);
+        glVertex3f(4900, 100, 10);
+        glEnd();
+
+        glFlush();
+    }
+
+
+
+
+}
 static void keyboardInput(unsigned char key, int x, int y)
 {
-
+    bool result;
     switch (key)
     {
     case 27 :
     case 'q':
         exit(0);
         break;
-    case 'C':
-    case 'c':
-        printf("Key clicked is %c\n",key);
+        //case 'C':
+        //case 'c':
+        //  printf("Key clicked is %c\n",key);
         //call menu window
-        glutDisplayFunc(displayMenuWindow);
+        // glutDisplayFunc(displayMenuWindow);
         //glutPostRedisplay();
         break;
     case 'S':
@@ -847,6 +926,7 @@ static void keyboardInput(unsigned char key, int x, int y)
         activeWindow = 1;
         loadABMissionImages();
         glutIdleFunc(abSatelliteEntry);
+
         glutDisplayFunc(msAryabattaSatellite);
 
         glutPostRedisplay();
@@ -866,6 +946,37 @@ static void keyboardInput(unsigned char key, int x, int y)
     case '5':
         glutDisplayFunc(ms5);
         glutPostRedisplay();
+        break;
+
+    case 'a':
+    case 'A':
+
+        result = quiz.validateQuiz(activeWindow,'a');
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+        break;
+
+    case 'b':
+    case 'B':
+
+        result = quiz.validateQuiz(activeWindow,'b');
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+        break;
+    case 'c':
+    case 'C':
+
+        result = quiz.validateQuiz(activeWindow,'c');
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+        break;
+
+    case 'd':
+    case 'D':
+
+        result = quiz.validateQuiz(activeWindow,'d');
+        printf("Result is %d\n", result);
+        showQuizResult(result);
         break;
     }
 
