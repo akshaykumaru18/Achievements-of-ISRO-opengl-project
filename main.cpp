@@ -664,8 +664,18 @@ void msFirstRocketLaunch()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
-
+   // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
+   displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
+    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 18 July 1980, 08:01:00 IST");
+    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 35 kg");
+    displayText(2800,4000,1.0,1.0,1.0,1,"Power:16 W");
+    displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 1.2 years");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Description : Used for measuring in-flight performance of ");
+   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    displayText(2800,3400,1.0,1.0,1.0,1,"second experimental launch of SLV-3. This was India's first ");
+    displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
+    displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:SLV-3-E2");
+    displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
     glFlush();
     glutSwapBuffers();
 }
@@ -683,7 +693,18 @@ void msMangalyan()
     glVertex3f(5000, 0, 10);
     glEnd();
 
-    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 3 : Mission Mangalyan");
+
+    displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 3 :MARS ORBITER MISSION(MOM)-MANGALYAAN-1");
+    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 5 November 2013, 14:38:00 IST");
+    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 340 kg and 488 kg");
+    displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
+    displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 6 months(But currently its still running)");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Description : The Mars Orbiter Mission (MOM), informally ");
+   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    displayText(2800,3400,1.0,1.0,1.0,1,"called Mangalyaan is India's first Mars orbiter  ");
+    //displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
+    displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
+    displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
 
     glFlush();
     glutSwapBuffers();
@@ -702,7 +723,18 @@ void ms104SatelliteLaunch()
     glVertex3f(5000, 0, 10);
     glEnd();
 
-    displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 4 : Mission 104 Satellite Launch");
+    displayText(2500,4600,1.0,1.0,0.0,1,"MILESTONE 4 : PSLV-C37 (104 satellites Launch)");
+
+    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 15 February 2017, 9:28:00 IST[");
+    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 714 kg,8.4 kg and 9.7 kg");
+    //displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
+    displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : Over 5 years");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Description : Its mission is identical to its predecessors (Resourcesat-1 and Resourcesat-2) ");
+   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    displayText(2800,3400,1.0,1.0,1.0,1,"ISRO holds the world record for launching the highest number of satellites ");
+    displayText(2800,3200,1.0,1.0,1.0,1,"by a single launch vehicle (104 satellites, including the CartoSat-2D and 2 indigenously designed nano-satellites, INS-1A and INS-1B)");
+    displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
+    displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
 
     glFlush();
     glutSwapBuffers();
@@ -846,17 +878,20 @@ void loadIntroScene(void)
 
     int width, height,channels;
 
+
     GetImagePath getImagePath;
     char *path = "\\final-intro.psd";
-    path = getImagePath.getPath(&path,true);
+    path = getImagePath.getPath(&path,false);
     printf("\nPath is %s\n",path);
     unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+
+   // unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     if(data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
 
     }
     else
@@ -887,7 +922,7 @@ void loadABMissionImages(void)
     int width, height,channels;
     unsigned char *data;
     char *path = "\\images\\psds\\aryabatta-img1.psd";
-    path = getImagePath.getPath(&path,true);
+    path = getImagePath.getPath(&path,false);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
@@ -914,7 +949,7 @@ void loadABMissionImages(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     path = "\\images\\psds\\aryabatta-img2.psd";
-    path = getImagePath.getPath(&path,true);
+    path = getImagePath.getPath(&path,false);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
@@ -941,7 +976,7 @@ void loadABMissionImages(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
     path = "\\images\\psds\\nightBG.psd";
-    path = getImagePath.getPath(&path,true);
+    path = getImagePath.getPath(&path,false);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);

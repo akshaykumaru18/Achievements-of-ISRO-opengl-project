@@ -477,45 +477,7 @@ for(i=0;i<=200;i++)
             glVertex2f(250.5,210.0+i);
         glEnd();
         //Previous Outer Projection-
-     /*
-	glColor3f(1.0,0.0,0.0);
-	glBegin(GL_POLYGON);//left_side_top
-	glVertex2f(237.5,120.0+i);
-	glVertex2f(217.5,95.0+i);
-	glVertex2f(237.5,95.0+i);
-	glEnd();
-		glBegin(GL_POLYGON);//left_side_bottom
-	glVertex2f(237.5,20.0+i);
-	glVertex2f(217.5,20.0+i);
-	glVertex2f(237.5,70.0+i);
-	glEnd();
-		glBegin(GL_POLYGON);//right_side_bottom
-	glVertex2f(262.5,20.0+i);
-	glVertex2f(282.5,20.0+i);
-	glVertex2f(262.5,70.0+i);
-	glEnd();
-		glBegin(GL_POLYGON);//right_side_top
-	glVertex2f(262.5,120.0+i);
-	glVertex2f(262.5,95.0+i);
-	glVertex2f(282.5,95.0+i);
-	glEnd();
-	glColor3f(0.556863 ,0.137255  ,0.419608);
-		glBegin(GL_POLYGON);//bottom_1_exhaust
-	glVertex2f(237.5,20.0+i);
-	glVertex2f(244.5,20.0+i);
-	glVertex2f(241,0.0+i);
-	glEnd();
-		glBegin(GL_POLYGON);//bottom_2_exhaust
-	glVertex2f(246.5,20.0+i);
-	glVertex2f(253.5,20.0+i);
-	glVertex2f(249.5,0.0+i);
-	glEnd();
-		glBegin(GL_POLYGON);//bottom_3_exhaust
-	glVertex2f(262.5,20.0+i);
-	glVertex2f(255.5,20.0+i);
-	glVertex2f(258.5,0.0+i);
-	glEnd();
-*/
+
 glColor3f(1,1,1);//left body
 glBegin(GL_POLYGON);
     glVertex2f(235.5,20.0+i);
@@ -657,13 +619,17 @@ for(i=195;i<=200;i++)
 	 if(count>=100)
 	 mars(20.0);
 
-	 if(count<=130){
-	glColor3f(0.8,0.498039 ,0.196078);
+	 if(count<=130){//screen_2  Rocket
+	glColor3f(1,1,1);
 	glBegin(GL_POLYGON);//core
-		glVertex2f(237.5,20.0+i);
-		glVertex2f(262.5,20.0+i);
-		glVertex2f(262.5,120.0+i);
-		glVertex2f(237.5,120.0+i);
+		//glVertex2f(237.5,20.0+i);
+		//glVertex2f(262.5,20.0+i);
+		//glVertex2f(262.5,120.0+i);
+		//glVertex2f(237.5,120.0+i);
+		glVertex2f(235.5,20.0+i); //left bottom point
+		glVertex2f(264.5,20.0+i); //right bottom point
+		glVertex2f(264.5,220.0+i);//top right point
+		glVertex2f(235.5,220.0+i);
 	glEnd();
 	}
 
@@ -688,38 +654,105 @@ for(i=195;i<=200;i++)
 		glVertex2f(227.5,130.0+k);
 		glVertex2f(262.5,130.0+k);
 	glEnd();
+
 	}
 
 	else{
 	glColor3f(1.0,1.0,1.0);//bonnet
 	glBegin(GL_POLYGON);//front
-	glVertex2f(237.5,120.0+i);
-	glVertex2f(262.5,120.0+i);
-	glVertex2f(250,170.0+i);
+	//glVertex2f(237.5,120.0+i);
+	//glVertex2f(262.5,120.0+i);
+	//glVertex2f(250,170.0+i);
+	glVertex2f(264.5,220.0+i);
+	glVertex2f(250,250.0+i);
+	glVertex2f(235.5,220.0+i); //Traingle Bottom
+
+	 //Tri Bottom n
+
 	glEnd();
 	}
 
 	if(count<=120){
 	glColor3f(1.0,0.0,0.0);
-	glBegin(GL_POLYGON);//left_side_top
-	glVertex2f(237.5,120.0+i);
-	glVertex2f(217.5,95.0+i);
-	glVertex2f(237.5,95.0+i);
+
+		glColor3f(1,1,1);
+	glBegin(GL_POLYGON);//bulged-flag
+        glVertex2f(232.5,180.0+i);//bottom left
+        glVertex2f(232.5,220.0+i);//top left
+		glVertex2f(267.5,220.0+i);//top right
+		glVertex2f(267.5,180.0+i);//bottom right
 	glEnd();
-		glBegin(GL_POLYGON);//left_side_bottom
-	glVertex2f(237.5,20.0+i);
-	glVertex2f(217.5,20.0+i);
-	glVertex2f(237.5,70.0+i);
+
+	glColor3f(1.0,1.0,1.0);//bonnet
+	glBegin(GL_POLYGON);//front
+	glVertex2f(232.5,180.0+i); //Traingle Bottom
+	glVertex2f(267.5,180.0+i); //Tri Bottom n
+	glVertex2f(250,160.0+i); //Tri Top
 	glEnd();
-		glBegin(GL_POLYGON);//right_side_bottom
-	glVertex2f(262.5,20.0+i);
-	glVertex2f(282.5,20.0+i);
-	glVertex2f(262.5,70.0+i);
+
+	glColor3f(1.0,1.0,1.0);//downward tri
+	glBegin(GL_POLYGON);//front
+	glVertex2f(232.5,220.0+i); //Traingle Bottom
+	glVertex2f(267.5,220.0+i); //Tri Bottom n
+	glVertex2f(250,250.0+i); //Tri Top
 	glEnd();
-		glBegin(GL_POLYGON);//right_side_top
-	glVertex2f(262.5,120.0+i);
-	glVertex2f(262.5,95.0+i);
-	glVertex2f(282.5,95.0+i);
+	glColor3f(1.0,0.5,0.0);
+		glColor3f(1.0,0.5,0.0);
+	glBegin(GL_LINES);
+        glVertex2f(240.5,215.0+i); //flag saffrom
+        glVertex2f(260.5,215.0+i);
+        glEnd();
+        glColor3f(1.0,1.0,1.0);
+	glBegin(GL_LINES);
+        glVertex2f(240.5,210.0+i); //flag white
+        glVertex2f(260.5,210.0+i);
+        glEnd();
+        glColor3f(0.0,1.0,0.0);
+	glBegin(GL_LINES);
+        glVertex2f(240.5,205.0+i); //flag green
+        glVertex2f(260.5,205.0+i);
+        glEnd();
+        glColor3f(0.0,0.0,1.0);
+    glBegin(GL_POINTS);
+        //glEnable(GL_PROGRAM_POINT_SIZE_EXT); //not working
+                glPointSize(10000);//not working
+            glVertex2f(250.5,210.0+i);
+        glEnd();
+        glColor3f(1,1,1);//left body
+glBegin(GL_POLYGON);
+    glVertex2f(235.5,20.0+i);
+    glVertex2f(235.5,120.0+i);
+	glVertex2f(220.5,120.0+i);
+	glVertex2f(220.5,20.0+i);
+glEnd();
+glColor3f(0.2,0.2,0.2);
+glBegin(GL_LINES);
+    glVertex2f(235.5,20.0+i);
+    glVertex2f(235.5,120.0+i);
+glEnd();
+glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+	glVertex2f(235.5,120.0+i);
+	glVertex2f(220.5,120.0+i);
+	glVertex2f(228,140.0+i);
+	glEnd();
+glColor3f(1,1,1);
+glBegin(GL_POLYGON);//right body
+    glVertex2f(264.5,20.0+i);
+    glVertex2f(264.5,120.0+i);
+	glVertex2f(280.5,120.0+i);
+	glVertex2f(280.5,20.0+i);
+glEnd();
+glColor3f(0.2,0.2,0.2);
+glBegin(GL_LINES);
+    glVertex2f(264.5,20.0+i);
+    glVertex2f(264.5,120.0+i);
+glEnd();
+glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+	glVertex2f(264.5,120.0+i);
+	glVertex2f(280.5,120.0+i);
+	glVertex2f(270,140.0+i);
 	glEnd();
 	}
 
@@ -798,26 +831,15 @@ void page()
 	glBegin(GL_LINE_LOOP);
 	glVertex2d(75, 425);
 	glVertex2d(375, 425);
-	glVertex2d(375, 325);
-	glVertex2d(75, 325);
+	glVertex2d(375, 390);
+	glVertex2d(75, 390);
 	glEnd();
 
-	drawstring(100, 400, "ROCKET LAUNCHING SIMULATION");
-	drawstring(100, 380, "NAME : DEBJYOTI GUHA");
-	drawstring(100, 360, "USN : 1MJ16CS041");
-	drawstring(100, 340, "SEM : VI");
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2d(75, 75);
-	glVertex2d(375, 75);
-	glVertex2d(375, 225);
-	glVertex2d(75, 225);
-	glEnd();
-
-	drawstring(100, 200, "INSTRUCTIONS");
-	drawstring(100, 180, "Press S to START");
-	drawstring(100, 160, "Press L to Launch Pad");
-	drawstring(100, 100, "Press Q to quit");
+	drawstring(100, 400, "ISRO SATELLITE LAUNCHING");
+	drawstring(100, 300, "INSTRUCTIONS");
+	drawstring(100, 280, "Press S to START");
+	drawstring(100, 260, "Press L to Launch Pad");
+	drawstring(100, 240, "Press Q to quit");
 	glFlush();
 }
 
@@ -863,3 +885,4 @@ int main(int argc,char*argv[])
    glutMainLoop();
    return 0;
 }
+
