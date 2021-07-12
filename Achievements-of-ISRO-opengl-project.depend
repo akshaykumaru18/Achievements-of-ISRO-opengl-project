@@ -1,12 +1,14 @@
 # depslib dependency file v1.0
-1625945287 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626110711 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
 	<iostream>
 	<string.h>
 	"GetImagePath.h"
+	"elipse.h"
 	"AryabattaMission.h"
+	"Quiz.h"
 	"stb_image/stb_image.h"
 
 1426329928 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h
@@ -272,25 +274,15 @@
 1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
 	<stddef.h>
 
-1624285833 ated upstream
-
-1626097819 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
-	<stdio.h>
-	<stdlib.h>
-	<GL/glut.h>
-	<iostream>
-	<string.h>
-	"GetImagePath.h"
-	"AryabattaMission.h"
-	"stb_image/stb_image.h"
-
-1624285229 shed changes
+1624286976 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<GL/glut.h>
 	<iostream>
 	<string>
 	"stb_image/stb_image.h"
+
+1624286231 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
 	"stb_image.h"
 	<stdio.h>
 	<stdlib.h>
@@ -307,27 +299,10 @@
 	<intrin.h>
 	<arm_neon.h>
 
-1625989120 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
-	"stb_image.h"
-	<stdio.h>
-	<stdlib.h>
-	<stdarg.h>
-	<stddef.h>
-	<stdlib.h>
-	<string.h>
-	<limits.h>
-	<math.h>
-	<stdio.h>
-	<assert.h>
-	<stdint.h>
-	<emmintrin.h>
-	<intrin.h>
-	<arm_neon.h>
-
-1625848669 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
+1626106115 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
 
-1625941159 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
+1626095763 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
 	"GetImagePath.h"
 	<GL/glut.h>
 	<stdio.h>
@@ -342,11 +317,10 @@
 	<_mingw.h>
 	<stddef.h>
 
-1625989729 c:\users\hp\cgv\achievements-of-isro-opengl-project\getimagepath.h
+1626070758 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\elipse.h
 	<GL/glut.h>
+	<math.h>
 
-1625989729 c:\users\hp\cgv\achievements-of-isro-opengl-project\aryabattamission.h
-	"GetImagePath.h"
-	<GL/glut.h>
+1626109490 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
