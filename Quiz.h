@@ -8,16 +8,24 @@ struct QuizFormat
     char question[10000];
     int crctChoice;
     char choices[4][1000];
-} q1,q2,q3,q4;
+};
 class Quiz
 {
 public:
+    struct QuizFormat questions[5];
+public:
     void loadQuiz()
     {
-        struct QuizFormat qes1 = {"Quiz fuck you",1,{"Choice a","Choice b","Choice c","Choice d"}};
-        q1 = qes1;
+        struct QuizFormat q1 = {"Where did rocket launched?",1,{"a) INDIA","b) Australia","C) RUSSIA","D) SRI LANKA"}};
+        questions[0] = q1;
 
-        printf("\nQestion1 is %s",qes1.question);
+
+
+    }
+    struct QuizFormat readQuiz(int activeWindow)
+    {
+       // printf("\nQestion1 is %d %s",activeWindow,questions[activeWindow-1].question);
+        return  questions[activeWindow-1];
     }
 };
 

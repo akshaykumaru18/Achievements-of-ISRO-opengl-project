@@ -10,6 +10,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
 AryabhataMission arbMission;
+Quiz quiz;
 void loadABMissionImages();
 void abSatellitePremetive();
 
@@ -233,12 +234,15 @@ void msAryabattaSatellite()
 
 
 
+    struct QuizFormat q = quiz.readQuiz(activeWindow);
+    // printf("Active question is %s",q.question);
     //Quix section
-    displayText(2800,1300,1.0,1.0,1.0,1,"Question : 1");
-    displayText(2800,1000,1.0,1.0,1.0,1,"Option A");
-    displayText(2800,800,1.0,1.0,1.0,1,"Option B");
-    displayText(2800,600,1.0,1.0,1.0,1,"Option C");
-    displayText(2800,400,1.0,1.0,1.0,1,"Option D");
+    displayText(2800,1300,1.0,1.0,1.0,1, q.question);
+    displayText(2800,1000,1.0,1.0,1.0,1,q.choices[0]);
+    displayText(2800,800,1.0,1.0,1.0,1,q.choices[1]);
+    displayText(2800,600,1.0,1.0,1.0,1,q.choices[2]);
+    displayText(2800,400,1.0,1.0,1.0,1,q.choices[3]);
+
 
 
     arbMission.drawEarth(earthT);
@@ -291,8 +295,8 @@ void drawSatellitePremitive()
     glTranslated(arbMission.ab_entry_translate_x, arbMission.ab_entry_translate_y,0);
     Elipse elipse;
     elipse.setColor(1,1,1);
-   // elipse.draw(1350,3200,90,110,10,false,0,360);
-   // elipse.draw(1350,1100,90,110,10,false,0,360);
+    // elipse.draw(1350,3200,90,110,10,false,0,360);
+    // elipse.draw(1350,1100,90,110,10,false,0,360);
     // glRotated(ab_entry_rotation_theta,0,1,0);
     // glRotated(ab_entry_rotation_theta,0,0,1);
     //glRotated(ab_entry_rotation_theta,1,0,0);
@@ -317,7 +321,7 @@ void drawSatellitePremitive()
     glVertex3f(900,1850,10); //top right
     glVertex3f(100,4400,10); //bottom right
     glEnd();
-
+    glFlush();
     drawLines(800,3800,1900,3800);
 
 
@@ -641,9 +645,9 @@ void abSatelliteEntry(void)
 {
 
 
-    if(arbMission.ab_entry_translate_x < 900.0 && arbMission.ab_entry_translate_y < 1600)
+    if(!arbMission.entry_anm_completed && arbMission.ab_entry_translate_x < 900.0 && arbMission.ab_entry_translate_y < 1600)
     {
-        printf("Hello translate %f \t %f\n",arbMission.ab_entry_translate_x,arbMission.ab_entry_translate_y);
+        // printf("Hello translate %f \t %f\n",arbMission.ab_entry_translate_x,arbMission.ab_entry_translate_y);
         int i = 0;
 
         arbMission.ab_entry_translate_x += 20;
@@ -652,9 +656,9 @@ void abSatelliteEntry(void)
 
     }
     //Scaling
-    if(arbMission.ab_entry_scale_x < 0.6)
+    if(!arbMission.entry_anm_completed && arbMission.ab_entry_scale_x < 0.6)
     {
-        printf("Hello scale %f \t %f\n",ab_entry_scale_x,ab_entry_scale_y);
+        // printf("Hello scale %f \t %f\n",ab_entry_scale_x,ab_entry_scale_y);
         int i = 0;
 
         arbMission.ab_entry_scale_x += 0.005;
@@ -688,14 +692,14 @@ void msFirstRocketLaunch()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-   // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
-   displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
+    // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
+    displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
     displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 18 July 1980, 08:01:00 IST");
     displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 35 kg");
     displayText(2800,4000,1.0,1.0,1.0,1,"Power:16 W");
     displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 1.2 years");
     displayText(2800,3600,1.0,1.0,1.0,1,"Description : Used for measuring in-flight performance of ");
-   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    // displayText(2800,3400,1.0,1.0,1.0,1,"
     displayText(2800,3400,1.0,1.0,1.0,1,"second experimental launch of SLV-3. This was India's first ");
     displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
     displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:SLV-3-E2");
@@ -724,7 +728,7 @@ void msMangalyan()
     displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
     displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 6 months(But currently its still running)");
     displayText(2800,3600,1.0,1.0,1.0,1,"Description : The Mars Orbiter Mission (MOM), informally ");
-   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    // displayText(2800,3400,1.0,1.0,1.0,1,"
     displayText(2800,3400,1.0,1.0,1.0,1,"called Mangalyaan is India's first Mars orbiter  ");
     //displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
     displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
@@ -754,7 +758,7 @@ void ms104SatelliteLaunch()
     //displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
     displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : Over 5 years");
     displayText(2800,3600,1.0,1.0,1.0,1,"Description : Its mission is identical to its predecessors (Resourcesat-1 and Resourcesat-2) ");
-   // displayText(2800,3400,1.0,1.0,1.0,1,"
+    // displayText(2800,3400,1.0,1.0,1.0,1,"
     displayText(2800,3400,1.0,1.0,1.0,1,"ISRO holds the world record for launching the highest number of satellites ");
     displayText(2800,3200,1.0,1.0,1.0,1,"by a single launch vehicle (104 satellites, including the CartoSat-2D and 2 indigenously designed nano-satellites, INS-1A and INS-1B)");
     displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
@@ -835,10 +839,12 @@ static void keyboardInput(unsigned char key, int x, int y)
     case 'S':
     case 's':
     case '1':
-        ab_entry_translate_x = 0;
-        ab_entry_translate_y = 0;
-        ab_entry_scale_x = 0.0;
-        ab_entry_scale_y = 0.0;
+        arbMission.ab_entry_translate_x = 0;
+        arbMission.ab_entry_translate_y = 0;
+        arbMission.ab_entry_scale_x = 0.0;
+        arbMission.ab_entry_scale_y = 0.0;
+        arbMission.entry_anm_completed = false;
+        activeWindow = 1;
         loadABMissionImages();
         glutIdleFunc(abSatelliteEntry);
         glutDisplayFunc(msAryabattaSatellite);
@@ -891,7 +897,7 @@ void loadIntroScene(void)
     printf("\nPath is %s\n",path);
     unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
 
-   // unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
+    // unsigned char *data = stbi_load("C:\\Users\\Hp\\CGV\\Achievements-of-ISRO-opengl-project\\final-intro.psd", &width, &height, &channels, STBI_rgb_alpha);
 
     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
@@ -1062,11 +1068,14 @@ void init(int w, int h)
      */
 
     glOrtho(0, 5000, 0, 5000, 500, -500);
+    //glFrustum(0, 5000, 0, 5000, 500, -500);
     glMatrixMode(GL_MODELVIEW);
     glClearColor(0, 0, 0, 0);
 
-    Quiz quiz;
+
+
     quiz.loadQuiz();
+
 
 }
 
