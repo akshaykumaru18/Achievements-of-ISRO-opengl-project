@@ -760,8 +760,10 @@ void msFirstRocketLaunch()
     glPushMatrix();
 
      glScalef(5.0,11.0,0.0);
-     glTranslated(100,100,0);
+     glTranslated(40,-50,0);
+     glRotated(210,1,1,0);
      slvMission.rocket_to_cam_pos();
+
     glPopMatrix();
     // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
     displayText(2000,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
@@ -790,6 +792,8 @@ void msFirstRocketLaunch()
 
     glutSwapBuffers();
 }
+
+void
 
 void msMangalyan()
 {

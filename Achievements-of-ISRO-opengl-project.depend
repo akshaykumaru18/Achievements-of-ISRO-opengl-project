@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626254017 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626280110 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -326,5 +326,12 @@
 1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
-1626254440 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+1626280062 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
+
+1626113467 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
+	<stdio.h>
+
+1626280062 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
 

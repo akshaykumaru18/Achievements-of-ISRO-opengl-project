@@ -53,6 +53,7 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Quiz.h" />
+		<Unit filename="SLVMission.h" />
 		<Unit filename="basic_transformation.cpp">
 			<Option compile="0" />
 			<Option link="0" />
