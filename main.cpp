@@ -7,11 +7,18 @@
 #include "GetImagePath.h"
 #include "elipse.h"
 #include "AryabattaMission.h"
+#include "SLVMission.h"
 #include "Quiz.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
+
+
 AryabhataMission arbMission;
+SlvMission slvMission;
 Quiz quiz;
+
+
+
 void loadABMissionImages();
 void abSatellitePremetive();
 void showQuizResult(bool result);
@@ -150,7 +157,22 @@ void msAryabattaSatellite()
     //AryabhataMission abMission;
     if(quiz.showAnswer)
         showQuizResult(quiz.result);
+
+
+    glPushMatrix();
+    glLoadIdentity();
+    glRotatef(30,1,1,1);
+    //glRotatef(30,0,5,0);
     drawSatellitePremitive();
+    // glRotatef(30,0,0,1);
+    glPopMatrix();
+
+
+
+
+
+
+
 
     /* Title Start */
     glColor3f(1, 1, 1);
@@ -264,8 +286,6 @@ void msAryabattaSatellite()
 
 
 
-
-
     glutSwapBuffers();
     if(!rebuildM1)
     {
@@ -283,8 +303,11 @@ void drawSatellitePremitive()
 {
 
 
+
+
     glPushMatrix();
     glMatrixMode(GL_MODELVIEW);
+
     glLoadIdentity();
 
 
@@ -297,6 +320,15 @@ void drawSatellitePremitive()
 
     glScalef(arbMission.ab_entry_scale_x, arbMission.ab_entry_scale_y,1);
     glTranslated(arbMission.ab_entry_translate_x, arbMission.ab_entry_translate_y,0);
+
+
+    //drawLines(1700,2400,1200,2000);
+    //drawLines(1700,2400,1500,2000);
+
+
+
+    // drawLines(1200,1300,1400,1650);
+    // drawLines(900,1700,1100,1900);
     Elipse elipse;
     elipse.setColor(1,1,1);
     // elipse.draw(1350,3200,90,110,10,false,0,360);
@@ -645,22 +677,28 @@ void drawLines(int x1,int y1,int x2,int y2)
     glFlush();
 }
 
-void abSatelliteEntry(void)
+void abSatelliteAnimation(void)
 {
 
 
-    if(!arbMission.entry_anm_completed && arbMission.ab_entry_translate_x < 900.0 && arbMission.ab_entry_translate_y < 1600)
+    if(!arbMission.entry_anm_completed && arbMission.ab_entry_translate_x < 2500.0)
     {
-        // printf("Hello translate %f \t %f\n",arbMission.ab_entry_translate_x,arbMission.ab_entry_translate_y);
-        int i = 0;
 
         arbMission.ab_entry_translate_x += 20;
+        //arbMission.ab_entry_translate_y += 40;
+        glutPostRedisplay();
+
+    }
+
+    if(!arbMission.entry_anm_completed &&  arbMission.ab_entry_translate_y < 3900)
+    {
+
         arbMission.ab_entry_translate_y += 40;
         glutPostRedisplay();
 
     }
     //Scaling
-    if(!arbMission.entry_anm_completed && arbMission.ab_entry_scale_x < 0.6)
+    if(!arbMission.entry_anm_completed && arbMission.ab_entry_scale_x < 0.5)
     {
         // printf("Hello scale %f \t %f\n",ab_entry_scale_x,ab_entry_scale_y);
         int i = 0;
@@ -669,6 +707,21 @@ void abSatelliteEntry(void)
         arbMission.ab_entry_scale_y += 0.005;
         glutPostRedisplay();
 
+    }
+
+
+    if(arbMission.entry_anm_completed && arbMission.scale_out_timer == 0)
+    {
+        if(arbMission.ab_entry_scale_x > 0.4)
+        {
+            arbMission.ab_entry_scale_x -= 0.005;
+            arbMission.ab_entry_scale_y -= 0.005;
+
+            arbMission.ab_entry_translate_x += 20;
+            arbMission.ab_entry_translate_y += 40;
+
+            glutPostRedisplay();
+        }
     }
 
 
@@ -689,6 +742,43 @@ void msFirstRocketLaunch()
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
+    /* Title Start */
+    glColor3f(1, 1, 1);
+    glLineWidth(3.0);
+    glBegin(GL_LINES);
+    glVertex3f(2000, 4750, 10);
+    glVertex3f(3500, 4750, 10);
+    glEnd();
+    glBegin(GL_LINES);
+    glVertex3f(2000, 4700, 10);
+    glVertex3f(3500, 4700, 10);
+    glEnd();
+    glFlush();
+    /* Title End */
+    glPushMatrix();
+
+     glScalef(5.0,11.0,0.0);
+     glTranslated(100,100,0);
+     slvMission.rocket_to_cam_pos();
+    glPopMatrix();
+    // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
+    displayText(2000,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
+    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 18 July 1980, 08:01:00 IST");
+    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 35 kg");
+    displayText(2800,4000,1.0,1.0,1.0,1,"Mission Life : 1.2 years");
+    //displayText(2600,3600,1.0,1.0,1.0,1,"Description : Used for measuring in-flight performance of ");
+    // displayText(2800,3400,1.0,1.0,1.0,1,"
+    //displayText(2800,3400,1.0,1.0,1.0,1,"second experimental launch of SLV-3. This was India's first ");
+    displayText(2800,3800,1.0,1.0,1.0,1,"Description : This was India's first indigenous satellite launch,");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Making it the Seventh Nation to possess the capability to launch its own satellites on its own rockets.");
+    displayText(2800,3400,1.0,1.0,1.0,1,"its own Satellites on its own Rockets.");
+    displayText(2800,3200,1.0,1.0,1.0,1,"Launch Vehicle : \t SLV-3-E2");
+    displayText(2800,3000,1.0,1.0,1.0,1,"Launch site : \t Satish Dhawan Space centre, Sriharikota");
+    glFlush();
+    arbMission.drawBGTexture(nightBG);
+
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
     glVertex3f(0, 0, 10);
@@ -696,19 +786,8 @@ void msFirstRocketLaunch()
     glVertex3f(5000, 5000, 10);
     glVertex3f(5000, 0, 10);
     glEnd();
-    // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
-    displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
-    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 18 July 1980, 08:01:00 IST");
-    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 35 kg");
-    displayText(2800,4000,1.0,1.0,1.0,1,"Power:16 W");
-    displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 1.2 years");
-    displayText(2800,3600,1.0,1.0,1.0,1,"Description : Used for measuring in-flight performance of ");
-    // displayText(2800,3400,1.0,1.0,1.0,1,"
-    displayText(2800,3400,1.0,1.0,1.0,1,"second experimental launch of SLV-3. This was India's first ");
-    displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
-    displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:SLV-3-E2");
-    displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
     glFlush();
+
     glutSwapBuffers();
 }
 
@@ -877,7 +956,7 @@ void showQuizResult(bool qr)
         glVertex3f(4200, 500, 10);
         glEnd();
 
-                char res[10000];
+        char res[10000];
         strcpy(res,"Correct");
         strcat(res," : ");
         char *ch = &quiz.crctChoice;
@@ -925,7 +1004,7 @@ static void keyboardInput(unsigned char key, int x, int y)
         arbMission.entry_anm_completed = false;
         activeWindow = 1;
         loadABMissionImages();
-        glutIdleFunc(abSatelliteEntry);
+        glutIdleFunc(abSatelliteAnimation);
 
         glutDisplayFunc(msAryabattaSatellite);
 
@@ -1025,6 +1104,31 @@ void loadIntroScene(void)
     std::cout << "done" << std::endl;
 
 
+      /* Night background loading */
+    glGenTextures(1,&nightBG);
+    glBindTexture(GL_TEXTURE_2D,nightBG);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\nightBG.psd";
+    path = getImagePath.getPath(&path,false);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading NIGHT BG" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load NIGHT BG" << std::endl;
+    }
+    stbi_image_free(data);
 }
 
 void loadABMissionImages(void)
@@ -1089,31 +1193,7 @@ void loadABMissionImages(void)
     stbi_image_free(data);
 
 
-    /* Night background loading */
-    glGenTextures(1,&nightBG);
-    glBindTexture(GL_TEXTURE_2D,nightBG);
 
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-
-    path = "\\images\\psds\\nightBG.psd";
-    path = getImagePath.getPath(&path,false);
-    //printf("\nAB image 1 Path is %s\n",path);
-    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
-    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
-
-    if(data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        std::cout << "done loading NIGHT BG" << std::endl;
-    }
-    else
-    {
-        std::cout << "Failed to load NIGHT BG" << std::endl;
-    }
-    stbi_image_free(data);
 
     /* Earth loading */
     glGenTextures(1,&earthT);
@@ -1178,8 +1258,8 @@ void init(int w, int h)
      }
      */
 
-    glOrtho(0, 5000, 0, 5000, 500, -500);
-    //glFrustum(0, 5000, 0, 5000, 500, -500);
+    glOrtho(0, 5000, 0, 5000, 400, -500);
+
     glMatrixMode(GL_MODELVIEW);
     glClearColor(0, 0, 0, 0);
 
@@ -1203,15 +1283,23 @@ void menu(int n)
         value = n;
         if(value == 1)
         {
-
+            glutDisplayFunc(msAryabattaSatellite);
         }
         else if(value == 2)
         {
-
+            glutDisplayFunc(msFirstRocketLaunch);
         }
         else if(value == 3)
         {
-
+            glutDisplayFunc(msMangalyan);
+        }
+        else if(value == 4)
+        {
+            glutDisplayFunc(msMangalyan);
+        }
+        else if(value == 5)
+        {
+            glutDisplayFunc(ms104SatelliteLaunch);
         }
     }
 
