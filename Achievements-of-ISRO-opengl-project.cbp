@@ -52,10 +52,12 @@
 			<Option link="1" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Quiz.h" />
 		<Unit filename="basic_transformation.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
+		<Unit filename="elipse.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
