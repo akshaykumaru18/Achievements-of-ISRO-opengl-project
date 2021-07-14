@@ -262,7 +262,7 @@ public:
                 p=p+1;
                 for(j=0; j<=1000000; j++);
                 glutPostRedisplay();
-               // glutSwapBuffers();
+                //glutSwapBuffers();
                 glFlush();
             }
         }

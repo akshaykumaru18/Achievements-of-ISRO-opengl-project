@@ -8,6 +8,7 @@
 #include "elipse.h"
 #include "AryabattaMission.h"
 #include "SLVMission.h"
+#include "MomMission.h"
 #include "Quiz.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image/stb_image.h"
@@ -15,6 +16,7 @@
 
 AryabhataMission arbMission;
 SlvMission slvMission;
+MomMission momMission;
 Quiz quiz;
 
 
@@ -296,7 +298,6 @@ void msAryabattaSatellite()
 
 
 }
-
 
 
 void drawSatellitePremitive()
@@ -735,7 +736,39 @@ void abSatelliteAnimation(void)
 
 
 
+float slvTranslate_y = -50;
+float slvTranslate_x = 100;
+float slvrotate_y = 0;
+int rotate_sleep_cnt = 0;
+void slvAnimation(void)
+{
 
+
+    if(slvTranslate_y < 200)
+    {
+
+        slvTranslate_y +=1;
+        //arbMission.ab_entry_translate_y += 40;
+        glutPostRedisplay();
+
+    }
+    if(rotate_sleep_cnt <20)
+    {
+        rotate_sleep_cnt++;
+    }
+    if(rotate_sleep_cnt == 20)
+    {
+
+        if(slvrotate_y <= 140)
+        {
+            slvrotate_y +=10;
+            slvTranslate_x +=1;
+        }
+        rotate_sleep_cnt=0;
+    }
+
+
+}
 
 void msFirstRocketLaunch()
 {
@@ -759,12 +792,13 @@ void msFirstRocketLaunch()
     /* Title End */
     glPushMatrix();
 
-     glScalef(5.0,8.0,0.0);
-     glTranslated(100,20,0);
-     //slvMission.rocket_in_motion();
-     slvMission.rocket_to_cam_pos();
-     //glutIdleFunc(abSatelliteAnimation);
-     //drawSatellitePremitive();
+    glScalef(5.0,8.0,0.0);
+    glTranslated(slvTranslate_x,slvTranslate_y,0);
+    glRotated(slvrotate_y,1,1,0);
+    //slvMission.rocket_in_motion();
+    slvMission.rocket_to_cam_pos();
+    //glutIdleFunc(abSatelliteAnimation);
+    //drawSatellitePremitive();
     glPopMatrix();
     // displayText(2500,2500,1.0,1.0,0.0,1,"Milestone 2 : First Rocket by ISRO");
     displayText(2000,4800,1.0,1.0,1.0,1,"MILESTONE 2 : ROHINI SATELLITE RS-1");
@@ -799,13 +833,28 @@ void msMangalyan()
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glColor3f(0, 0, 0);
-    glBegin(GL_QUADS);
-    glVertex3f(0, 0, 10);
-    glVertex3f(0, 5000, 10);
-    glVertex3f(5000, 5000, 10);
-    glVertex3f(5000, 0, 10);
+    /* Title Start */
+    glColor3f(1, 1, 1);
+    glLineWidth(3.0);
+    glBegin(GL_LINES);
+    glVertex3f(2000, 4750, 10);
+    glVertex3f(3500, 4750, 10);
     glEnd();
+    glBegin(GL_LINES);
+    glVertex3f(2000, 4700, 10);
+    glVertex3f(3500, 4700, 10);
+    glEnd();
+    glFlush();
+    /* Title End */
+    glPushMatrix();
+
+    glScalef(5.0,10.0,0.0);
+    glTranslated(1,100,0);
+    //glRotated(10,1,1,0);
+
+    momMission.pslv_rocket();
+
+    glPopMatrix();
 
 
     displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 3 :MARS ORBITER MISSION(MOM)-MANGALYAAN-1");
@@ -820,6 +869,16 @@ void msMangalyan()
     displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
     displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
 
+     arbMission.drawBGTexture(nightBG);
+
+    glColor3f(0, 0, 0);
+    glBegin(GL_QUADS);
+    glVertex3f(0, 0, 10);
+    glVertex3f(0, 5000, 10);
+    glVertex3f(5000, 5000, 10);
+    glVertex3f(5000, 0, 10);
+    glEnd();
+    glFlush();
     glFlush();
     glutSwapBuffers();
 }
@@ -1014,6 +1073,7 @@ static void keyboardInput(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case '2':
+        glutIdleFunc(slvAnimation);
         glutDisplayFunc(msFirstRocketLaunch);
         glutPostRedisplay();
         break;
@@ -1107,7 +1167,7 @@ void loadIntroScene(void)
     std::cout << "done" << std::endl;
 
 
-      /* Night background loading */
+    /* Night background loading */
     glGenTextures(1,&nightBG);
     glBindTexture(GL_TEXTURE_2D,nightBG);
 

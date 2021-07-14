@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626281644 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626288549 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -10,6 +10,7 @@
 	"elipse.h"
 	"AryabattaMission.h"
 	"SLVMission.h"
+	"MomMission.h"
 	"Quiz.h"
 	"stb_image/stb_image.h"
 
@@ -332,7 +333,7 @@
 1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
-1626281780 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+1626283037 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
 	<GL/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -383,4 +384,6 @@
 
 1626259498 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
+
+1626289786 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
 
