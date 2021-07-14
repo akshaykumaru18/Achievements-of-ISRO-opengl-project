@@ -276,15 +276,21 @@
 1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
 	<stddef.h>
 
-1624286976 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
+1626277192 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
+	<string.h>
 	<stdlib.h>
 	<GL/glut.h>
 	<iostream>
-	<string>
+	<string.h>
+	"GetImagePath.h"
+	"elipse.h"
+	"AryabattaMission.h"
+	"SLVMission.h"
+	"Quiz.h"
 	"stb_image/stb_image.h"
 
-1624286231 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
+1625989120 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
 	"stb_image.h"
 	<stdio.h>
 	<stdlib.h>
@@ -334,4 +340,42 @@
 
 1626280062 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
 	<GL/glut.h>
+
+1626259717 c:\users\hp\cgv\achievements-of-isro-opengl-project\getimagepath.h
+	<GL/glut.h>
+
+1626259498 c:\users\hp\cgv\achievements-of-isro-opengl-project\elipse.h
+	<GL/glut.h>
+	<math.h>
+
+1626259498 c:\users\hp\cgv\achievements-of-isro-opengl-project\aryabattamission.h
+	"GetImagePath.h"
+	<GL/glut.h>
+	<stdio.h>
+
+1626273220 c:\users\hp\cgv\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+
+1626259498 c:\users\hp\cgv\achievements-of-isro-opengl-project\quiz.h
+	<stdio.h>
+
+1626268345 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+
+1626259498 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\elipse.h
+	<GL/glut.h>
+	<math.h>
+
+1626259498 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\quiz.h
+	<stdio.h>
 
