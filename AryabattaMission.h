@@ -17,6 +17,8 @@ public:
 
     float ab_entry_scale_x = 0.0;
     float ab_entry_scale_y = 0.0;
+
+
 public:
     void drawBGTexture(unsigned int texture)
     {

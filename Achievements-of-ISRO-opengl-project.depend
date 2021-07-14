@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626114197 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626254017 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -9,6 +9,7 @@
 	"GetImagePath.h"
 	"elipse.h"
 	"AryabattaMission.h"
+	"SLVMission.h"
 	"Quiz.h"
 	"stb_image/stb_image.h"
 
@@ -303,7 +304,7 @@
 1626106115 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
 
-1626095763 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
+1626179091 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
 	"GetImagePath.h"
 	<GL/glut.h>
 	<stdio.h>
@@ -324,4 +325,6 @@
 
 1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
+
+1626254440 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
 
