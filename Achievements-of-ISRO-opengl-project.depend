@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626254017 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626355013 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -10,6 +10,7 @@
 	"elipse.h"
 	"AryabattaMission.h"
 	"SLVMission.h"
+	"MomMission.h"
 	"Quiz.h"
 	"stb_image/stb_image.h"
 
@@ -307,10 +308,10 @@
 	<intrin.h>
 	<arm_neon.h>
 
-1626106115 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
+1626281191 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
 
-1626179091 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
+1626331173 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
 	"GetImagePath.h"
 	<GL/glut.h>
 	<stdio.h>
@@ -325,14 +326,26 @@
 	<_mingw.h>
 	<stddef.h>
 
-1626070758 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\elipse.h
+1626355032 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\elipse.h
 	<GL/glut.h>
 	<math.h>
 
 1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
-1626254440 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+1626283037 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+
+1626113467 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
+	<stdio.h>
+
+1626280062 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+	<GL/glut.h>
 
 1626259717 c:\users\hp\cgv\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
@@ -371,4 +384,6 @@
 
 1626259498 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
+
+1626350754 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
 
