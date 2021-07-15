@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626371722 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1626372358 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -271,7 +271,7 @@
 	<math.h>
 	<string.h>
 
-1626372067 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
+1626372111 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
 
 1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>

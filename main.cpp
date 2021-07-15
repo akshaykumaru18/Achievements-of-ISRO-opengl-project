@@ -533,21 +533,24 @@ float rx = 1000;
 float ry = 0;
 void revolveAroundMars(int)
 {
-    if(rv == 360)
+    if(rv == 355)
     {
         rv = 0;
     }
     Elipse elipse;
     struct RevolutionPath  path = elipse.nextPoints(rv);
-    printf("Next X Y is %f \t %f \n",path.x,path.y);
-    printf("Next %d \n",rv);
-    if(path.x != 0 || path.y != 0)
-   {
+   printf("Next X Y is %f \t %f \n",path.x,path.y);
+    //printf("Next %d \n",rv);
+
+    if(path.x != 0.0 && path.y != 0.0)
+    {
         rx = path.x;
         ry = path.y;
-
-
     }
+    if(rx == 0.0 && ry == 0.0)
+        {
+           printf("Next X Y is zero %f \t %f \n",rx,ry);
+        }
     rv++;
     glutPostRedisplay();
    // glutTimerFunc(1000,revolveAroundMars,18);
@@ -566,7 +569,7 @@ void msMangalyan()
 
         glutTimerFunc(100,revolveAroundMars,18);
         glPushMatrix();
-        // glScalef(0.4,0.6,0.0);
+        // glScalef(0.4,0.6,0.0);q
         // glTranslated(momTranslate_x,momTranslate_y,0);
         //glRotated(pslvRotate_y,80,80,0);
 
