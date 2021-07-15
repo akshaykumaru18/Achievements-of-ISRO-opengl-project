@@ -32,6 +32,7 @@ static int activeWindow = 1;
 unsigned int introBG;
 unsigned int nightBG;
 unsigned int earthT;
+unsigned int marsT;
 
 //Aryabhata Mission
 unsigned int abimg1;
@@ -72,7 +73,7 @@ const GLfloat high_shininess[] = { 100.0f };
 /* GLUT callback Handlers */
 
 
-
+float textOpacity = 1.0;
 static void resize(int width, int height)
 {
     const float ar = (float) width / (float) height;
@@ -90,7 +91,9 @@ static void resize(int width, int height)
 void displayText(int x,int y,float r,float g,float b,int font,char *string)
 {
     //void *f = (int *)font;
-    glColor3f( r, g, b );
+
+
+    glColor4f( r * textOpacity, g * textOpacity, b * textOpacity,0.1 );
     glRasterPos2f(x, y);
     int len, i;
     len = (int)strlen(string);
@@ -165,7 +168,7 @@ void msAryabattaSatellite()
     glLoadIdentity();
     glRotatef(30,1,1,1);
     //glRotatef(30,0,5,0);
-    drawSatellitePremitive();
+    arbMission.drawSatellitePremitive();
     // glRotatef(30,0,0,1);
     glPopMatrix();
 
@@ -249,7 +252,7 @@ void msAryabattaSatellite()
 
     /* Visual Part end */
 
-
+    // float color[2] = {1.0,1.0,1.0};
     /* Content Part*/
     displayText(2200,4800,1.0,1.0,1.0,1,"Milestone 1 : First Rocket Launch");
     displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : April 19, 1975");
@@ -300,386 +303,15 @@ void msAryabattaSatellite()
 }
 
 
-void drawSatellitePremitive()
-{
 
 
 
 
-    glPushMatrix();
-    glMatrixMode(GL_MODELVIEW);
-
-    glLoadIdentity();
-
-
-    // glRotatef(ab_entry_rotation_theta,0,1,0);
-    //glRotatef(ab_entry_rotation_theta,1,0,0);
-    // glRotatef(ab_entry_rotation_theta,0,0,1);
-
-
-
-
-    glScalef(arbMission.ab_entry_scale_x, arbMission.ab_entry_scale_y,1);
-    glTranslated(arbMission.ab_entry_translate_x, arbMission.ab_entry_translate_y,0);
-
-
-    //drawLines(1700,2400,1200,2000);
-    //drawLines(1700,2400,1500,2000);
-
-
-
-    // drawLines(1200,1300,1400,1650);
-    // drawLines(900,1700,1100,1900);
-    Elipse elipse;
-    elipse.setColor(1,1,1);
-    // elipse.draw(1350,3200,90,110,10,false,0,360);
-    // elipse.draw(1350,1100,90,110,10,false,0,360);
-    // glRotated(ab_entry_rotation_theta,0,1,0);
-    // glRotated(ab_entry_rotation_theta,0,0,1);
-    //glRotated(ab_entry_rotation_theta,1,0,0);
-
-
-    //Satellite drawing start
-
-    //Antenna 1
-    glColor4f(1.0, 1, 0.0,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1800,1900,10);  //bottom left
-    glVertex3f(2500,4400,10); //top left
-    glVertex3f(1850,1900,10); //top right
-    glVertex3f(2500,4400,10); //bottom right
-    glEnd();
-
-    //Antenna 2
-    glColor4f(1.0, 1, 0.0,1);
-    glBegin(GL_QUADS);
-    glVertex3f(850,1900,10);  //bottom left
-    glVertex3f(100,4400,10); //top left
-    glVertex3f(900,1850,10); //top right
-    glVertex3f(100,4400,10); //bottom right
-    glEnd();
-    glFlush();
-    drawLines(800,3800,1900,3800);
-
-
-
-    //satellite top
-    /* left Part Start*/
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(200,2700,10);  //bottom left
-    glVertex3f(800,3800,10); //top left
-    glVertex3f(1000,3800,10); //top right
-    glVertex3f(800,2700,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //vertical lines
-    drawLines(200,2700,800,3800);
-    drawLines(300,2700,840,3800);
-    drawLines(400,2700,880,3800);
-    drawLines(500,2700,920,3800);
-    drawLines(600,2700,960,3800);
-    drawLines(700,2700,1000,3800);
-    drawLines(800,2700,1000,3800);
-
-    //horizontal lines
-    drawLines(200,2700,800,2700);
-    drawLines(250,2800,820,2800);
-    drawLines(350,3000,850,3000);
-    drawLines(460,3200,900,3200);
-    drawLines(570,3400,930,3400);
-    drawLines(700,3600,960,3600);
-    drawLines(800,3800,1000,3800);
-
-    /* left Part End*/
-    /* Middle Part Start*/
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(900,2700,10);  //bottom left
-    glVertex3f(1100,3800,10); //top left
-    glVertex3f(1600,3800,10); //top right
-    glVertex3f(1800,2700,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(900,2700,1100,3800);
-    drawLines(1020,2700,1200,3800);
-    drawLines(1100,2700,1250,3800);
-    drawLines(1650,2700,1500,3800);
-    drawLines(1550,2700,1450,3800);
-    drawLines(1800,2700,1600,3800);
-
-    //horizontal lines
-    drawLines(1100,3800,1600,3800);
-    drawLines(900,2800,1800,2800);
-    drawLines(950,3000,1750,3000);
-
-    drawLines(1020,3400,1680,3400);
-    drawLines(1060,3600,1640,3600);
-    drawLines(900,2700,1800,2700);
-
-    /* Middle Part End*/
-
-
-
-    /* Right Part Start*/
-    //right
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1900,2700,10);  //bottom left
-    glVertex3f(1700,3800,10); //top left
-    glVertex3f(1900,3800,10); //top right
-    glVertex3f(2600,2700,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(1900,2700,1700,3800);
-    drawLines(1980,2700,1700,3800);
-    drawLines(2180,2700,1750,3800);
-    drawLines(2380,2700,1800,3800);
-    drawLines(2480,2700,1850,3800);
-    drawLines(2600,2700,1900,3800);
-
-    //horizontal lines
-    drawLines(1900,2700,2600,2700);
-    drawLines(1880,2800,2550,2800);
-    drawLines(1860,3000,2400,3000);
-    drawLines(1810,3200,2290,3200);
-    drawLines(1780,3400,2170,3400);
-    drawLines(1740,3600,2050,3600);
-    drawLines(1700,3800,1900,3800);
-
-    /* Right Part End*/
-
-
-    //satellite body
-
-    //left
-    /*Left Part Start */
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(200,1600,10);  //bottom left
-    glVertex3f(200,2700,10); //top left
-    glVertex3f(800,2700,10); //top right
-    glVertex3f(800,1600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(200,1600,200,2700);
-    drawLines(300,1600,300,2700);
-    drawLines(400,1600,400,2700);
-    drawLines(500,1600,500,2700);
-    drawLines(600,1600,600,2700);
-    drawLines(700,1600,700,2700);
-    drawLines(800,1600,800,2700);
-
-    //horizontal lines
-    drawLines(200,1750,800,1750);
-    drawLines(200,2000,800,2000);
-    drawLines(200,2250,800,2250);
-    drawLines(200,2500,800,2500);
-
-    /*Left Part End */
-    //middle
-    /*Middle Side Start*/
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(900,1600,10);  //bottom left
-    glVertex3f(900,2700,10); //top left
-    glVertex3f(1800,2700,10); //top right
-    glVertex3f(1800,1600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(900,1600,900,2700);
-    drawLines(1000,1600,1000,2700);
-    drawLines(1100,1600,1100,2700);
-    drawLines(1200,1600,1200,2700);
-    drawLines(1300,1600,1300,2700);
-    drawLines(1400,1600,1400,2700);
-    drawLines(1500,1600,1500,2700);
-    drawLines(1600,1600,1600,2700);
-    drawLines(1700,1600,1700,2700);
-    drawLines(1800,1600,1800,2700);
-
-    //horizontal lines
-    drawLines(900,1750,1800,1750);
-    drawLines(900,2000,1800,2000);
-    drawLines(900,2250,1800,2250);
-    drawLines(900,2500,1800,2500);
-
-    /*Middle Side End*/
-
-    //right
-    /*Right Side Start*/
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1900,1600,10);  //bottom left
-    glVertex3f(1900,2700,10); //top left
-    glVertex3f(2600,2700,10); //top right
-    glVertex3f(2600,1600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(1900,1600,1900,2700);
-    drawLines(2000,1600,2000,2700);
-    drawLines(2100,1600,2100,2700);
-    drawLines(2200,1600,2200,2700);
-    drawLines(2300,1600,2300,2700);
-    drawLines(2400,1600,2400,2700);
-    drawLines(2500,1600,2500,2700);
-    drawLines(2600,1600,2600,2700);
-
-    drawLines(900,1600,900,2700);
-    drawLines(1000,1600,1000,2700);
-    drawLines(1100,1600,1100,2700);
-    drawLines(1200,1600,1200,2700);
-    drawLines(1300,1600,1300,2700);
-    drawLines(1400,1600,1400,2700);
-    drawLines(1500,1600,1500,2700);
-    drawLines(1600,1600,1600,2700);
-    drawLines(1700,1600,1700,2700);
-    drawLines(1800,1600,1800,2700);
-    //horizontal lines
-    drawLines(1900,1750,2600,1750);
-    drawLines(1900,2000,2600,2000);
-    drawLines(1900,2250,2600,2250);
-    drawLines(1900,2500,2600,2500);
-
-    /*Right Side End*/
-
-    //satellite bottom
-
-    //left
-    /*Left part start*/
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(800,600,10);  //bottom left
-    glVertex3f(200,1600,10); //top left
-    glVertex3f(800,1600,10); //top right
-    glVertex3f(1000,600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //vertical lines
-    drawLines(200,1600,800,600);
-    drawLines(300,1600,840,600);
-    drawLines(400,1600,880,600);
-    drawLines(500,1600,920,600);
-    drawLines(600,1600,960,600);
-    drawLines(700,1600,980,600);
-    drawLines(800,1600,1000,600);
-
-
-    drawLines(200,1600,820,1600);
-    drawLines(310,1400,840,1400);
-    drawLines(440,1200,880,1200);
-    drawLines(550,1000,930,1000);
-    drawLines(660,800,960,800);
-    drawLines(790,600,1000,600);
-
-
-    /*Left part end*/
-
-    //middle
-    /*Middle Part Start*/
-
-
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1100,600,10);  //bottom left
-    glVertex3f(900,1600,10); //top left
-    glVertex3f(1800,1600,10); //top right
-    glVertex3f(1600,600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(1100,600,900,1600);
-    drawLines(1200,600,1000,1600);
-    drawLines(1250,600,1100,1600);
-    drawLines(1450,600,1550,1600);
-    drawLines(1500,600,1650,1600);
-    drawLines(1600,600,1800,1600);
-
-    //horizontal lines
-    drawLines(900,1600,1800,1600);
-    drawLines(930,1500,1780,1500);
-    drawLines(960,1250,1750,1250);
-    drawLines(1030,900,1680,900);
-    drawLines(1070,750,1630,750);
-    drawLines(1090,600,1600,600);
-
-    /*Middle Part End*/
-    //right
-    /*Right Part Start*/
-
-
-    glColor4f(0.0, 0, 0.6,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1700,600,10);  //bottom left
-    glVertex3f(1900,1600,10); //top left
-    glVertex3f(2600,1600,10); //top right
-    glVertex3f(1900,600,10); //bottom right
-    glEnd();
-
-    //Solar panel lines
-    //Vertical lines
-    drawLines(1900,1600,1700,600);
-    drawLines(1980,1600,1700,600);
-    drawLines(2180,1600,1750,600);
-    drawLines(2380,1600,1800,600);
-    drawLines(2480,1600,1850,600);
-    drawLines(2600,1600,1900,600);
-
-    //horizontal lines
-    drawLines(1900,1600,2600,1600);
-    drawLines(1850,1400,2450,1400);
-    drawLines(1830,1200,2330,1200);
-    drawLines(1790,1000,2200,1000);
-    drawLines(1730,800,2030,800);
-    drawLines(1700,600,1900,600);
-
-
-    /*Right Part End*/
-    //Satellite drawing end
-    drawLines(800,600,1900,600);
-
-
-    //Antenna
-    glColor4f(1.0, 1, 0.0,1);
-    glBegin(GL_QUADS);
-    glVertex3f(1800,1900,10);  //bottom left
-    glVertex3f(2500,4400,10); //top left
-    glVertex3f(1850,1900,10); //top right
-    glVertex3f(2500,4400,10); //bottom right
-    glEnd();
-
-    glPopMatrix();
-    glutPostRedisplay();
-
-
-}
-
-
-void drawLines(int x1,int y1,int x2,int y2)
-{
-    glColor4f(1, 1, 0,1);
-    glBegin(GL_LINES);
-    glVertex2f(x1,y1);
-    glVertex2f(x2,y2);
-    glEnd();
-    glFlush();
-}
 
 void abSatelliteAnimation(void)
 {
+
+
 
 
     if(!arbMission.entry_anm_completed && arbMission.ab_entry_translate_x < 2500.0)
@@ -740,6 +372,7 @@ float slvTranslate_y = -50;
 float slvTranslate_x = 100;
 float slvrotate_y = 0;
 int rotate_sleep_cnt = 0;
+
 void slvAnimation(void)
 {
 
@@ -828,48 +461,157 @@ void msFirstRocketLaunch()
     glutSwapBuffers();
 }
 
+
+float pslvRotate_y = 0;
+float momTranslate_y = 0;
+float momTranslate_x = 0;
+
+int mom_rotate_sleep_cnt = 0;
+bool stopRotation = false;
+bool animationStarts = false;
+bool showInfo = true;
+bool showMOM = false;
+void momAnimation(void)
+{
+
+
+    if(animationStarts)
+    {
+        if(momTranslate_y <= 4000)
+        {
+
+            momTranslate_y +=10;
+            //arbMission.ab_entry_translate_y += 40;
+            glutPostRedisplay();
+
+        }
+        if(momTranslate_x == 2400)
+        {
+            animationStarts = false;
+            showMOM = true;
+        }
+        if(momTranslate_x <= 2400)
+        {
+
+            momTranslate_x +=10;
+            //arbMission.ab_entry_translate_y += 40;
+            glutPostRedisplay();
+
+        }
+        if(rotate_sleep_cnt <2)
+        {
+            rotate_sleep_cnt++;
+        }
+        if(!stopRotation && rotate_sleep_cnt == 2)
+        {
+            if(pslvRotate_y < 60)
+            {
+                pslvRotate_y +=1;
+            }
+
+
+            // pslvRotate_y +=10;
+            if(pslvRotate_y >= 60 ||(pslvRotate_y >= 60 && pslvRotate_y < 140))
+            {
+
+                pslvRotate_y = 120;
+                stopRotation = true;
+                printf("rocket animation will stop \n");
+            }
+            rotate_sleep_cnt = 0;
+        }
+    }
+
+
+
+}
+
 void msMangalyan()
 {
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    /* Title Start */
-    glColor3f(1, 1, 1);
-    glLineWidth(3.0);
-    glBegin(GL_LINES);
-    glVertex3f(2000, 4750, 10);
-    glVertex3f(3500, 4750, 10);
-    glEnd();
-    glBegin(GL_LINES);
-    glVertex3f(2000, 4700, 10);
-    glVertex3f(3500, 4700, 10);
-    glEnd();
-    glFlush();
-    /* Title End */
+
+
+
+
+    if(showMOM)
+    {
+        glPushMatrix();
+       // glScalef(0.4,0.6,0.0);
+       // glTranslated(momTranslate_x,momTranslate_y,0);
+        //glRotated(pslvRotate_y,80,80,0);
+
+        Elipse elipse;
+        elipse.setColor(0.5,0.5,0.5);
+        elipse.draw(3100,3100,1000,1500,1,true,0,360);
+        glPopMatrix();
+
+         glPushMatrix();
+       // glScalef(0.4,0.6,0.0);
+       // glTranslated(momTranslate_x,momTranslate_y,0);
+        //glRotated(pslvRotate_y,80,80,0);
+        glTranslated(momTranslate_x,momTranslate_y,0);
+        glColor3f(1.0,0.0,0.0);
+        glBegin(GL_QUADS);
+        glVertex2d(1000,500);
+        glVertex2d(1500,500);
+        glVertex2d(1500,1000);
+        glVertex2d(1000,1000);
+        glEnd();
+        glPopMatrix();
+
+    }
+    else
+    {
+         glPushMatrix();
+        glScalef(0.4,0.6,0.0);
+        glTranslated(momTranslate_x,momTranslate_y,0);
+        glRotated(pslvRotate_y,80,80,0);
+        momMission.pslv_rocket();
+        glPopMatrix();
+    }
+
+
+    if(showInfo)
+    {
+
+        /* Title Start */
+        glColor3f(1, 1, 1);
+        glLineWidth(3.0);
+        glBegin(GL_LINES);
+        glVertex3f(1400, 4750, 10);
+        glVertex3f(3900, 4750, 10);
+        glEnd();
+        glBegin(GL_LINES);
+        glVertex3f(1400, 4700, 10);
+        glVertex3f(3900, 4700, 10);
+        glEnd();
+        glFlush();
+        /* Title End */
+        displayText(1400,4800,1.0,1.0,1.0,1,"MILESTONE 3 :MARS ORBITER MISSION(MOM)-MANGALYAAN-1");
+        displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 5 November 2013, 14:38:00 IST");
+        displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 340 kg and 488 kg");
+        displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
+        displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 6 months(But currently its still running)");
+        displayText(2800,3600,1.0,1.0,1.0,1,"Description : The Mars Orbiter Mission (MOM), informally ");
+        // displayText(2800,3400,1.0,1.0,1.0,1,"
+        displayText(2800,3400,1.0,1.0,1.0,1,"called Mangalyaan is India's first Mars orbiter  ");
+        //displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
+        displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
+        displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
+
+    }
+
+
     glPushMatrix();
 
-    glScalef(5.0,10.0,0.0);
-    glTranslated(1,100,0);
-    //glRotated(10,1,1,0);
+    glScalef(0.9,0.9,0.0);
+    glTranslated(3000,3000,0);
 
-    momMission.pslv_rocket();
-
+    momMission.drawPlanet(marsT,0.5);
     glPopMatrix();
-
-
-    displayText(2200,4800,1.0,1.0,1.0,1,"MILESTONE 3 :MARS ORBITER MISSION(MOM)-MANGALYAAN-1");
-    displayText(2800,4400,1.0,1.0,1.0,1,"Launch Date : 5 November 2013, 14:38:00 IST");
-    displayText(2800,4200,1.0,1.0,1.0,1,"Mass : 340 kg and 488 kg");
-    displayText(2800,4000,1.0,1.0,1.0,1,"Power:840W");
-    displayText(2800,3800,1.0,1.0,1.0,1,"Mission Life : 6 months(But currently its still running)");
-    displayText(2800,3600,1.0,1.0,1.0,1,"Description : The Mars Orbiter Mission (MOM), informally ");
-    // displayText(2800,3400,1.0,1.0,1.0,1,"
-    displayText(2800,3400,1.0,1.0,1.0,1,"called Mangalyaan is India's first Mars orbiter  ");
-    //displayText(2800,3200,1.0,1.0,1.0,1,"indigenous satellite launch, making it the seventh nation to possess the capability to launch its own satellites on its own rockets.  ");
-    displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
-    displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
-
-     arbMission.drawBGTexture(nightBG);
+    arbMission.drawBGTexture(nightBG);
 
     glColor3f(0, 0, 0);
     glBegin(GL_QUADS);
@@ -1040,6 +782,7 @@ void showQuizResult(bool qr)
 
 
 }
+
 static void keyboardInput(unsigned char key, int x, int y)
 {
     bool result;
@@ -1078,6 +821,7 @@ static void keyboardInput(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case '3':
+        glutIdleFunc(momAnimation);
         glutDisplayFunc(msMangalyan);
         glutPostRedisplay();
         break;
@@ -1119,6 +863,11 @@ static void keyboardInput(unsigned char key, int x, int y)
         result = quiz.validateQuiz(activeWindow,'d');
         printf("Result is %d\n", result);
         showQuizResult(result);
+        break;
+
+    case ' ':
+        animationStarts = true;
+        showInfo = false;
         break;
     }
 
@@ -1258,6 +1007,15 @@ void loadABMissionImages(void)
 
 
 
+
+
+    //glutIdleFunc(idle);
+
+}
+
+void loadPlanets(void)
+{
+    GetImagePath getImagePath;
     /* Earth loading */
     glGenTextures(1,&earthT);
     glBindTexture(GL_TEXTURE_2D,earthT);
@@ -1267,7 +1025,9 @@ void loadABMissionImages(void)
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-    path = "\\images\\psds\\earth.psd";
+    int width, height,channels;
+    unsigned char *data;
+    char *path = "\\images\\psds\\earth.psd";
     path = getImagePath.getPath(&path,true);
     //printf("\nAB image 1 Path is %s\n",path);
     data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
@@ -1284,11 +1044,32 @@ void loadABMissionImages(void)
     }
     stbi_image_free(data);
 
-    //glutIdleFunc(idle);
+    /* Mars loading */
+    glGenTextures(1,&marsT);
+    glBindTexture(GL_TEXTURE_2D,marsT);
 
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\mars-wbg.psd";
+    path = getImagePath.getPath(&path,true);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading Mars" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load Mars" << std::endl;
+    }
+    stbi_image_free(data);
 }
-
-
 void  mouse(int btn, int state, int x, int y)
 {
     /* mouse callback, selects an axis about which to rotate */
@@ -1396,6 +1177,7 @@ int main(int argc, char *argv[])
     //glutDisplayFunc(displayMenuWindow);
 
     loadIntroScene();
+    loadPlanets();
 
     glutKeyboardFunc(keyboardInput);
     glutMouseFunc(mouse);

@@ -22,7 +22,406 @@ public:
         }
         return;
     }
+
+
+
     void pslv_rocket()
+    {
+        count++;
+        count3++;
+
+        for(i=0; i<=10; i++)
+        {
+
+        glPushMatrix();
+
+            displayText(1130,2950,0,0,0,0,"P");
+            displayText(1130,2840,0,0,0,0,"S");
+            displayText(1130,2730,0,0,0,0,"L");
+            displayText(1130,2620,0,0,0,0,"V");
+
+
+            displayText(1140,2150,0,0,0,0,"I");
+            displayText(1130,2000,0,0,0,0,"N");
+            displayText(1130,1850,0,0,0,0,"D");
+            displayText(1140,1700,0,0,0,0,"I");
+            displayText(1130,1550,0,0,0,0,"A");
+        glPopMatrix();
+
+            glColor3f(1.0,0.5,0.0);
+            glBegin(GL_QUADS);
+            glVertex2f(1050.5,3600.0+i); //flag green
+            glVertex2f(1050.5,3700.0+i);
+            glVertex2f(1250.5,3700.0+i);
+            glVertex2f(1250.5,3600.0+i);
+            glEnd();
+            /*
+            glColor3f(1.0,1.0,1.0);
+            glBegin(GL_LINES);
+            glVertex2f(240.5,210.0+i); //flag white
+            //glVertex2f(260.5,210.0+i);
+            glEnd();
+            */
+
+            glColor3f(0.0,1.0,0.0);
+            glBegin(GL_QUADS);
+            glVertex2f(1050.5,3400.0+i); //flag green
+            glVertex2f(1050.5,3500.0+i);
+            glVertex2f(1250.5,3500.0+i);
+            glVertex2f(1250.5,3400.0+i);
+            glEnd();
+
+
+            /* payload Start */
+            glColor3f(1,1,1);
+            glBegin(GL_QUADS);
+            glVertex2f(1000,3300);
+            glVertex2f(1000,4000);
+            glVertex2f(1300,4000);
+            glVertex2f(1300,3300);
+            glEnd();
+
+
+            glColor3f(1.0,1.0,1.0);//bonnet
+            glBegin(GL_POLYGON);//front
+            glVertex2f(1000.5,4000.0+i); //Traingle Bottom
+            glVertex2f(1300.5,4000.0+i); //Tri Bottom n
+            glVertex2f(1150,4300.0+i); //Tri Top
+            glEnd();
+
+            glColor3f(0.80,0.0,0.0);//bonnet
+            glBegin(GL_POLYGON);//front
+            glVertex2f(1000.5,3300.0+i); //Traingle Bottom
+            glVertex2f(1300.5,3300.0+i); //Tri Bottom n
+            glVertex2f(1150,3100.0+i); //Tri Top
+            glEnd();
+
+
+
+            /* payload end */
+            /* Fourth Stage start */
+            glColor3f(0.80,0,0);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,3100.0+i); //left bottom point
+            glVertex2f(1250.5,3100.0+i); //right bottom point
+            glVertex2f(1250.5,3300.0+i);//top right point
+            glVertex2f(1050.5,3300.0+i);//top left point
+
+            glEnd();
+            /* Fourth Stage End */
+
+            /* Third Stage start */
+            glColor3f(1,1,1);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,2500.0+i); //left bottom point
+            glVertex2f(1250.5,2500.0+i); //right bottom point
+            glVertex2f(1250.5,3100.0+i);//top right point
+            glVertex2f(1050.5,3100.0+i);//top left point
+
+            glEnd();
+            glColor3f(0.80,0,0);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,2300.0+i); //left bottom point
+            glVertex2f(1250.5,2300.0+i); //right bottom point
+            glVertex2f(1250.5,2500.0+i);//top right point
+            glVertex2f(1050.5,2500.0+i);//top left point
+
+            glEnd();
+            /* Third Stage End */
+
+            /* Second and First Stage Start */
+
+            glColor3f(1,1,1);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,1500.0+i); //left bottom point
+            glVertex2f(1250.5,1500.0+i); //right bottom point
+            glVertex2f(1250.5,2300.0+i);//top right point
+            glVertex2f(1050.5,2300.0+i);//top left point
+
+            glEnd();
+
+            glColor3f(0.80,0,0);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,1300.0+i); //left bottom point
+            glVertex2f(1250.5,1300.0+i); //right bottom point
+            glVertex2f(1250.5,1500.0+i);//top right point
+            glVertex2f(1050.5,1500.0+i);//top left point
+
+            glEnd();
+            // glColor3f(0.60,0.30,0);
+            // glColor3f(0.40,0.26,0.12);
+            glColor3f(0.60,0.0,0);
+            glBegin(GL_QUADS);//core
+            glVertex2f(1050.5,1150.0+i); //left bottom point
+            glVertex2f(1250.5,1150.0+i); //right bottom point
+            glVertex2f(1200.5,1300.0+i);//top right point
+            glVertex2f(1100.5,1300.0+i);//top left point
+
+            glEnd();
+
+            /*Fire Start*/
+            if((p%2)==0)
+                glColor3f(1.0,0.25,0.0);
+            else
+                glColor3f(1.0,0.816,0.0);
+
+            glBegin(GL_POLYGON);//outer fume
+            glVertex2f(1080.5,1150+i);
+            glVertex2f(1250.5,1150+i);
+
+            glVertex2f(1085.5,1150+i);
+            glVertex2f(1095.5,950+i);
+            glVertex2f(1105.5,1150+i);
+            glVertex2f(1115.5,900+i);
+            glVertex2f(1125.5,1150+i);
+            glVertex2f(1135.5,950+i);
+            glVertex2f(1145.5,1150+i);
+            glVertex2f(1155.5,900+i);
+            glVertex2f(1165.5,1150+i);
+            glVertex2f(1175.5,950+i);
+            glVertex2f(1185.5,1150+i);
+            glVertex2f(1195.5,900+i);
+            glVertex2f(1105.5,1150+i);
+            glVertex2f(1115.5,950+i);
+            glVertex2f(1125.5,1150+i);
+            glVertex2f(1135.5,900+i);
+            glVertex2f(1145.5,1150+i);
+            glVertex2f(1155.5,950+i);
+            glVertex2f(1165.5,1150+i);
+            glVertex2f(1175.5,900+i);
+            glVertex2f(1185.5,1150+i);
+            glVertex2f(1195.5,950+i);
+            glVertex2f(1205.5,1150+i);
+            glVertex2f(1215.5,900+i);
+            glVertex2f(1225.5,1150+i);
+            glVertex2f(1235.5,950+i);
+
+
+            glEnd();
+
+            if((p%2)==0)
+                glColor3f(1.0,0.816,0.0);
+            else
+                glColor3f(1.0,0.25,0.0);
+
+            glBegin(GL_POLYGON);//inner fume
+            glVertex2f(1080.5,1150+i);
+            glVertex2f(1250.5,1150+i);
+
+
+            glVertex2f(1090.5,1150+i);
+
+            glVertex2f(1110.5,1150+i);
+            glVertex2f(1120.5,750+i);
+            glVertex2f(1130.5,700+i);
+            glVertex2f(1140.5,1150+i);
+            glVertex2f(1150.5,750+i);
+            glVertex2f(1160.5,700+i);
+            glVertex2f(1170.5,1150+i);
+            glVertex2f(1180.5,750+i);
+            glVertex2f(1190.5,700+i);
+            glVertex2f(1200.5,1150+i);
+            glVertex2f(1210.5,750+i);
+            glVertex2f(1220.5,700+i);
+
+
+
+
+            glEnd();
+
+            /*Fire End*/
+
+
+            //Left roket booster
+            glColor3f(0.80,0,0);
+            glBegin(GL_TRIANGLES);
+            glVertex2f(940.5,2300.0+i);
+            glVertex2f(1045.5,2300.0+i);
+            glVertex2f(995.5,2400.0+i);
+            glEnd();
+            glColor3f(1,1,1);
+            glBegin(GL_POLYGON);
+            glVertex2f(940.5,1400.0+i);
+            glVertex2f(940.5,2300.0+i);
+            glVertex2f(1045.5,2300.0+i);
+            glVertex2f(1045.5,1400.0+i);
+            glEnd();
+
+
+
+            glColor3f(0.60,0.0,0.0);
+            glBegin(GL_QUADS);
+            glVertex2f(1040.5,1200.0+i);
+            glVertex2f(1030.5,1400.0+i);
+            glVertex2f(950.5,1400.0+i);
+            glVertex2f(920,1200.0+i);
+            glEnd();
+
+
+            /* FIRE START*/
+            if((p%2)==0)
+                glColor3f(1.0,0.816,0.0);
+            else
+                glColor3f(1.0,0.25,0.0);
+
+            //glColor3f(0.0,0.0,1.0);
+            glBegin(GL_POLYGON);
+            glVertex2f(930.0,1200);
+            glVertex2f(1020.0,1200);
+
+            glVertex2f(1000.0, 900);
+            glVertex2f(1010.0, 1000);
+            glVertex2f(990.0, 900);
+            glVertex2f(980.0, 1100);
+            glVertex2f(970.0, 1050);
+            glVertex2f(960.0, 1050);
+            glVertex2f(950.0, 1000);
+            glVertex2f(940.0, 1100);
+            glVertex2f(930.0, 1100);
+            glVertex2f(920.0, 900);
+            glVertex2f(910.0, 950);
+
+            glEnd();
+
+            if((p%2)==0)
+                glColor3f(1.0,0.25,0.0);
+            else
+                glColor3f(1.0,0.816,0.0);
+
+            glBegin(GL_POLYGON);
+            glVertex2f(930.0,1200);
+            glVertex2f(1020.0,1200);
+
+
+
+            glVertex2f(1015.0,950);
+            glVertex2f(1035.0,850);
+            glVertex2f(1010.0,900);
+            glVertex2f(1020.0,850);
+            glVertex2f(1000.0,950);
+            glVertex2f(900.0,850);
+            glVertex2f(935.0,960);
+            glVertex2f(925.0,880);
+            glVertex2f(940.0,800);
+            glVertex2f(960.0,980);
+            glVertex2f(910.0,800);
+            glEnd();
+            /* FIRE End*/
+
+
+            //right roket booster
+            glColor3f(0.80,0,0);
+            glBegin(GL_TRIANGLES);
+            glVertex2f(1252.5,2300.0+i);
+            glVertex2f(1360.5,2300.0+i);
+            glVertex2f(1306.5,2400.0+i);
+            glEnd();
+            glColor3f(1,1,1);
+            glBegin(GL_POLYGON);
+            glVertex2f(1252.5,1400.0+i);
+            glVertex2f(1252.5,2300.0+i);
+            glVertex2f(1360.5,2300.0+i);
+            glVertex2f(1360.5,1400.0+i);
+            glEnd();
+
+
+
+            glColor3f(0.60,0.0,0.0);
+            glBegin(GL_QUADS);
+            glVertex2f(1252.5,1200.0+i);
+            glVertex2f(1262.5,1400.0+i);
+            glVertex2f(1340.5,1400.0+i);
+            glVertex2f(1380,1200.0+i);
+            glEnd();
+
+            /* FIRE START*/
+            if((p%2)==0)
+                glColor3f(1.0,0.816,0.0);
+            else
+                glColor3f(1.0,0.25,0.0);
+
+            //glColor3f(0.0,0.0,1.0);
+            glBegin(GL_POLYGON);
+            glVertex2f(1252.0,1200);
+            glVertex2f(1360.0,1200);
+
+            glVertex2f(1350.0, 1000);
+            glVertex2f(1340.0, 1050);
+            glVertex2f(1330.0, 1000);
+            glVertex2f(1320.0, 1100);
+            glVertex2f(1310.0, 1050);
+            glVertex2f(1300.0, 1150);
+            glVertex2f(1290.0, 1000);
+            glVertex2f(1280.0, 1100);
+            glVertex2f(1270.0, 1100);
+            glVertex2f(1260.0, 1000);
+            glVertex2f(1250.0, 1050);
+
+            glEnd();
+
+            if((p%2)==0)
+                glColor3f(1.0,0.25,0.0);
+            else
+                glColor3f(1.0,0.816,0.0);
+
+            glBegin(GL_POLYGON);
+            glVertex2f(1252.0,1200);
+            glVertex2f(1360.0,1200);
+
+
+
+            glVertex2f(1355.0,950);
+            glVertex2f(1345.0,850);
+            glVertex2f(1335.0,900);
+            glVertex2f(1325.0,850);
+            glVertex2f(1305.0,950);
+            glVertex2f(1295.0,850);
+            glVertex2f(1285.0,960);
+            glVertex2f(1275.0,880);
+            glVertex2f(1265.0,800);
+            glVertex2f(1255.0,980);
+            glVertex2f(1255.0,800);
+            glEnd();
+            /* FIRE End*/
+            /* Second and First Stage end */
+
+
+
+            p=p+1;
+            for(j=0; j<=1000000; j++);
+            glutPostRedisplay();
+            glFlush();
+        }
+    }
+
+
+
+
+    void drawPlanet(unsigned int texture,float opacity)
+    {
+        //printf("drawBGTexture called\n");
+        glEnable(GL_TEXTURE_2D);
+        glColor4f(1, 1, 1,opacity);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+        glVertex3f(0, -500, 10);
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 1500, 10);
+        glTexCoord2f(0, 1);
+        glVertex3f(1000, 1500, 10);
+        glTexCoord2f(1, 1);
+        glVertex3f(1000,-500, 10);
+        glTexCoord2f(1, 0);
+        glEnd();
+        glFlush();
+        glDisable(GL_TEXTURE_2D);
+
+
+    }
+
+
+
+      void pslv_rocket_deprecated()
     {
         count++;
         count3++;
@@ -64,7 +463,7 @@ public:
             glVertex2f(267.5,220.0+i);//top right
             glVertex2f(267.5,180.0+i);//bottom right
             glEnd();
-            glColor3f(1.0,0.0,0.0);//bonnet
+            glColor3f(1.0,1.0,0.0);//bonnet
             glBegin(GL_POLYGON);//front
             glVertex2f(232.5,180.0+i); //Traingle Bottom
             glVertex2f(267.5,180.0+i); //Tri Bottom n

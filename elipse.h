@@ -22,7 +22,7 @@ public:
         glColor3fv(color);
         if (hollow)
         {
-            glPointSize(4);
+            glPointSize(3);
             glBegin(GL_POINTS);
         }
         else if (!hollow)
