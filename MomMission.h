@@ -6,6 +6,7 @@ class MomMission
 public:
     float i,j,count=0,count1=0,count3=0,flag=0,flag1=0,t=0,f=0,flag3=0;
     int p;
+    bool namePlateCalled = false;
 
 public:
     void displayText(int x,int y,float r,float g,float b,int font,char *string)
@@ -24,16 +25,8 @@ public:
     }
 
 
+    void namePlate(){
 
-    void pslv_rocket()
-    {
-        count++;
-        count3++;
-
-        for(i=0; i<=10; i++)
-        {
-
-        glPushMatrix();
 
             displayText(1130,2950,0,0,0,0,"P");
             displayText(1130,2840,0,0,0,0,"S");
@@ -46,7 +39,24 @@ public:
             displayText(1130,1850,0,0,0,0,"D");
             displayText(1140,1700,0,0,0,0,"I");
             displayText(1130,1550,0,0,0,0,"A");
-        glPopMatrix();
+            glFlush();
+
+    }
+    void pslv_rocket()
+    {
+        count++;
+        count3++;
+
+
+
+        for(i=0; i<=10; i++)
+        {
+
+
+            if(true){
+            namePlate();
+            namePlateCalled = true;
+            }
 
             glColor3f(1.0,0.5,0.0);
             glBegin(GL_QUADS);

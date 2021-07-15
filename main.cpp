@@ -471,6 +471,7 @@ bool stopRotation = false;
 bool animationStarts = false;
 bool showInfo = true;
 bool showMOM = false;
+
 void momAnimation(void)
 {
 
@@ -525,46 +526,68 @@ void momAnimation(void)
 
 
 }
+struct RevolutionPath r;
 
+int rv = 0;
+float rx = 1000;
+float ry = 0;
+void revolveAroundMars(int)
+{
+    if(rv == 360)
+    {
+        rv = 0;
+    }
+    Elipse elipse;
+    struct RevolutionPath  path = elipse.nextPoints(rv);
+    printf("Next X Y is %f \t %f \n",path.x,path.y);
+    printf("Next %d \n",rv);
+    if(path.x != 0 || path.y != 0)
+   {
+        rx = path.x;
+        ry = path.y;
+
+
+    }
+    rv++;
+    glutPostRedisplay();
+   // glutTimerFunc(1000,revolveAroundMars,18);
+
+}
 void msMangalyan()
 {
+
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-
-
-
     if(showMOM)
     {
-        glPushMatrix();
-       // glScalef(0.4,0.6,0.0);
-       // glTranslated(momTranslate_x,momTranslate_y,0);
-        //glRotated(pslvRotate_y,80,80,0);
-
         Elipse elipse;
         elipse.setColor(0.5,0.5,0.5);
-        elipse.draw(3100,3100,1000,1500,1,true,0,360);
+        elipse.draw(3100,3100,1000,1500,1,0,360);
+
+        glutTimerFunc(100,revolveAroundMars,18);
+        glPushMatrix();
+        // glScalef(0.4,0.6,0.0);
+        // glTranslated(momTranslate_x,momTranslate_y,0);
+        //glRotated(pslvRotate_y,80,80,0);
+
+        glTranslated(3050,3100,0);
+        glTranslated(rx,ry,0);
+        glColor3f(1.0,1.0,1.0);
+        glBegin(GL_QUADS);
+        glVertex2d(100,100);
+        glVertex2d(100,300);
+        glVertex2d(200,300);
+        glVertex2d(200,100);
+        glEnd();
+
         glPopMatrix();
 
-         glPushMatrix();
-       // glScalef(0.4,0.6,0.0);
-       // glTranslated(momTranslate_x,momTranslate_y,0);
-        //glRotated(pslvRotate_y,80,80,0);
-        glTranslated(momTranslate_x,momTranslate_y,0);
-        glColor3f(1.0,0.0,0.0);
-        glBegin(GL_QUADS);
-        glVertex2d(1000,500);
-        glVertex2d(1500,500);
-        glVertex2d(1500,1000);
-        glVertex2d(1000,1000);
-        glEnd();
-        glPopMatrix();
+
 
     }
     else
     {
-         glPushMatrix();
+        glPushMatrix();
         glScalef(0.4,0.6,0.0);
         glTranslated(momTranslate_x,momTranslate_y,0);
         glRotated(pslvRotate_y,80,80,0);
@@ -866,7 +889,8 @@ static void keyboardInput(unsigned char key, int x, int y)
         break;
 
     case ' ':
-        animationStarts = true;
+        if(!showMOM)
+            animationStarts = true;
         showInfo = false;
         break;
     }
