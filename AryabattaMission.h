@@ -76,14 +76,6 @@ public:
 
         glLoadIdentity();
 
-
-        // glRotatef(ab_entry_rotation_theta,0,1,0);
-        //glRotatef(ab_entry_rotation_theta,1,0,0);
-        // glRotatef(ab_entry_rotation_theta,0,0,1);
-
-
-
-
         glScalef(ab_entry_scale_x, ab_entry_scale_y,1);
         glTranslated(ab_entry_translate_x, ab_entry_translate_y,0);
 
