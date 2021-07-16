@@ -470,7 +470,7 @@ int mom_rotate_sleep_cnt = 0;
 bool stopRotation = false;
 bool animationStarts = false;
 bool showInfo = true;
-bool showMOM = false;
+bool showMOM = true;
 
 void momAnimation(void)
 {
@@ -567,7 +567,7 @@ void msMangalyan()
         elipse.setColor(0.5,0.5,0.5);
         elipse.draw(3100,3100,1000,1500,1,0,360);
 
-        glutTimerFunc(100,revolveAroundMars,18);
+        //glutTimerFunc(100,revolveAroundMars,18);
         glPushMatrix();
         // glScalef(0.4,0.6,0.0);q
         // glTranslated(momTranslate_x,momTranslate_y,0);
@@ -576,12 +576,7 @@ void msMangalyan()
         glTranslated(3050,3100,0);
         glTranslated(rx,ry,0);
         glColor3f(1.0,1.0,1.0);
-        glBegin(GL_QUADS);
-        glVertex2d(100,100);
-        glVertex2d(100,300);
-        glVertex2d(200,300);
-        glVertex2d(200,100);
-        glEnd();
+        momMission.mom_orbitor();
 
         glPopMatrix();
 
@@ -1113,21 +1108,13 @@ void init(int w, int h)
 {
 
     printf("Width and Hight : \t %d \t %d\n",w,h);
+
     glViewport(0,0,w,h);
 
     glMatrixMode(GL_PROJECTION);
     printf("top %f",(h/w));
 
     glLoadIdentity();
-    /* if(w<=h)
-     {
-
-         glOrtho(0, 5000, 0, 5000.0 * (GLfloat) h / (GLfloat) w, -500.0, 500.0);
-     }
-     else{
-         glOrtho(0, 5000.0 * (GLfloat) w / (GLfloat) h, 0, 5000.0, -500.0, 500.0);
-     }
-     */
 
     glOrtho(0, 5000, 0, 5000, 400, -500);
 
@@ -1213,6 +1200,7 @@ int main(int argc, char *argv[])
 
 
     glEnable(GL_DEPTH_TEST);
+
     //init();
     glutMainLoop();
     return EXIT_SUCCESS;

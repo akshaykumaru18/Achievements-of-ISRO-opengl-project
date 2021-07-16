@@ -25,21 +25,22 @@ public:
     }
 
 
-    void namePlate(){
+    void namePlate()
+    {
 
 
-            displayText(1130,2950,0,0,0,0,"P");
-            displayText(1130,2840,0,0,0,0,"S");
-            displayText(1130,2730,0,0,0,0,"L");
-            displayText(1130,2620,0,0,0,0,"V");
+        displayText(1130,2950,0,0,0,0,"P");
+        displayText(1130,2840,0,0,0,0,"S");
+        displayText(1130,2730,0,0,0,0,"L");
+        displayText(1130,2620,0,0,0,0,"V");
 
 
-            displayText(1140,2150,0,0,0,0,"I");
-            displayText(1130,2000,0,0,0,0,"N");
-            displayText(1130,1850,0,0,0,0,"D");
-            displayText(1140,1700,0,0,0,0,"I");
-            displayText(1130,1550,0,0,0,0,"A");
-            glFlush();
+        displayText(1140,2150,0,0,0,0,"I");
+        displayText(1130,2000,0,0,0,0,"N");
+        displayText(1130,1850,0,0,0,0,"D");
+        displayText(1140,1700,0,0,0,0,"I");
+        displayText(1130,1550,0,0,0,0,"A");
+        glFlush();
 
     }
     void pslv_rocket()
@@ -53,9 +54,10 @@ public:
         {
 
 
-            if(true){
-            namePlate();
-            namePlateCalled = true;
+            if(true)
+            {
+                namePlate();
+                namePlateCalled = true;
             }
 
             glColor3f(1.0,0.5,0.0);
@@ -405,6 +407,15 @@ public:
     }
 
 
+    void mom_orbitor()
+    {
+        glBegin(GL_QUADS);
+        glVertex2d(100,100);
+        glVertex2d(100,300);
+        glVertex2d(200,300);
+        glVertex2d(200,100);
+        glEnd();
+    }
 
 
     void drawPlanet(unsigned int texture,float opacity)
@@ -431,7 +442,7 @@ public:
 
 
 
-      void pslv_rocket_deprecated()
+    void pslv_rocket_deprecated()
     {
         count++;
         count3++;
