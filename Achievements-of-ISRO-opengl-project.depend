@@ -278,11 +278,8 @@
 	<stdio.h>
 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 1623520404 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\stb_image\stb_image.h
 =======
-=======
->>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 1626257702 source:c:\users\hp\cgv\achievements-of-isro-opengl-project\main.cpp
@@ -301,9 +298,6 @@
 
 1625989120 c:\users\hp\cgv\achievements-of-isro-opengl-project\stb_image\stb_image.h
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -331,23 +325,6 @@
 
 1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
 	<stddef.h>
-
-1626257318 c:\users\hp\cgv\achievements-of-isro-opengl-project\getimagepath.h
-	<GL/glut.h>
-
-1626257319 c:\users\hp\cgv\achievements-of-isro-opengl-project\elipse.h
-	<GL/glut.h>
-	<math.h>
-
-1626257318 c:\users\hp\cgv\achievements-of-isro-opengl-project\aryabattamission.h
-	"GetImagePath.h"
-	<GL/glut.h>
-	<stdio.h>
-
-1626257318 c:\users\hp\cgv\achievements-of-isro-opengl-project\slvmission.h
-
-1626257318 c:\users\hp\cgv\achievements-of-isro-opengl-project\quiz.h
-	<stdio.h>
 
 1626257318 c:\users\hp\cgv\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
