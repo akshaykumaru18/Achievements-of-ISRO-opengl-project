@@ -8,9 +8,15 @@
 		</Cursor>
 	</File>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<File name="GetImagePath.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="100" topLine="0" />
+=======
+	<File name="basic_transformation.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2562" topLine="39" />
+>>>>>>> Stashed changes
 =======
 	<File name="basic_transformation.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -26,7 +32,11 @@
 	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="475" zoom_1="0" zoom_2="0">
 		<Cursor>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			<Cursor1 position="12763" topLine="565" />
+=======
+			<Cursor1 position="28226" topLine="690" />
+>>>>>>> Stashed changes
 =======
 			<Cursor1 position="28226" topLine="690" />
 >>>>>>> Stashed changes
@@ -38,6 +48,7 @@
 			<Collapse line="736" />
 		</Folding>
 	</File>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 	<File name="Quiz.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -68,6 +79,10 @@
 	</File>
 	<File name="Quiz.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
+=======
+	<File name="Quiz.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+>>>>>>> Stashed changes
 =======
 	<File name="Quiz.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
