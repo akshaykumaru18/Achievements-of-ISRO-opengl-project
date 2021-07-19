@@ -427,9 +427,15 @@ void msFirstRocketLaunch()
 
     glScalef(5.0,8.0,0.0);
     glTranslated(slvTranslate_x,slvTranslate_y,0);
-    glRotated(slvrotate_y,1,1,0);
+
+   // glRotated(slvrotate_y,1,1,0);
     //slvMission.rocket_in_motion();
     slvMission.rocket_to_cam_pos();
+     glPopMatrix();
+   // glScalef(5.0,8.0,0.0);
+  // glTranslatef(2000,4800,0);
+  glPushMatrix();
+    slvMission.rohinisatellite();
     //glutIdleFunc(abSatelliteAnimation);
     //drawSatellitePremitive();
     glPopMatrix();
@@ -469,8 +475,8 @@ float momTranslate_x = 0;
 int mom_rotate_sleep_cnt = 0;
 bool stopRotation = false;
 bool animationStarts = false;
-bool showInfo = true;
-bool showMOM = true;
+bool showInfo = false;
+bool showMOM = false;
 
 void momAnimation(void)
 {
@@ -539,19 +545,27 @@ void revolveAroundMars(int)
     }
     Elipse elipse;
     struct RevolutionPath  path = elipse.nextPoints(rv);
-   printf("Next X Y is %f \t %f \n",path.x,path.y);
-    //printf("Next %d \n",rv);
 
+    //printf("Next %d \n",rv);
+ printf("Current X Y is %f \t %f \n",path.x,path.y);
     if(path.x != 0.0 && path.y != 0.0)
     {
         rx = path.x;
         ry = path.y;
     }
-    if(rx == 0.0 && ry == 0.0)
+//    if(rx == 0 && ry == 0)
+//        {
+//
+//           printf("Next X Y is zero %f \t %f \n",rx,ry);
+//
+//        }
+    if(path.x == 0 && path.y == 0)
         {
            printf("Next X Y is zero %f \t %f \n",rx,ry);
+
         }
     rv++;
+
     glutPostRedisplay();
    // glutTimerFunc(1000,revolveAroundMars,18);
 
@@ -567,7 +581,8 @@ void msMangalyan()
         elipse.setColor(0.5,0.5,0.5);
         elipse.draw(3100,3100,1000,1500,1,0,360);
 
-        //glutTimerFunc(100,revolveAroundMars,18);
+        glutTimerFunc(100,revolveAroundMars,18);
+    //    glutIdleFunc();
         glPushMatrix();
         // glScalef(0.4,0.6,0.0);q
         // glTranslated(momTranslate_x,momTranslate_y,0);

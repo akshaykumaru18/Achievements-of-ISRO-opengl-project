@@ -1,5 +1,6 @@
 #ifndef MOMMISSION_H_INCLUDED
 #define MOMMISSION_H_INCLUDED
+#include "elipse.h"
 
 class MomMission
 {
@@ -409,12 +410,81 @@ public:
 
     void mom_orbitor()
     {
+        glColor3f(1,1,1);
+        glBegin(GL_QUADS);
+        glVertex2d(130,150);
+        glVertex2d(120,150);
+        glVertex2d(130,120);
+        glVertex2d(120,120);
+        glEnd();
+        glColor3f(0.5,0.5,0.5);
+        glBegin(GL_POLYGON);
+        glVertex2d(340,630);
+        glVertex2d(320,450);
+        glVertex2d(380,450);
+        glEnd();
+
+        glColor3f(0.5,0.5,0.5);
+        glBegin(GL_POLYGON);
+        glVertex2d(250,520);
+        glVertex2d(170,450);
+        glVertex2d(320,450);
+        glEnd();
+
+        glColor3f(0.7,0.7,0.7);
+        glBegin(GL_QUADS);
+        glVertex2d(200,200);
+        glVertex2d(200,350);
+        glVertex2d(300,350);
+        glVertex2d(300,200);
+        glEnd();
+
+        glColor3f(0.6,0.6,0.6);
+        glBegin(GL_QUADS);
+        glVertex2d(150,150);
+        glVertex2d(150,400);
+        glVertex2d(350,400);
+        glVertex2d(350,150);
+        glEnd();
+
+        glColor3f(0.5,0.5,0.5);
         glBegin(GL_QUADS);
         glVertex2d(100,100);
-        glVertex2d(100,300);
-        glVertex2d(200,300);
-        glVertex2d(200,100);
+        glVertex2d(100,450);
+        glVertex2d(400,450);
+        glVertex2d(400,100);
         glEnd();
+        glColor3f(1,1,1);
+        glBegin(GL_LINES);
+        glVertex2d(400,275);
+        glVertex2d(420,275);
+        glEnd();
+        glColor3f(1,1,1);
+        glBegin(GL_LINES);
+        glVertex2d(100,275);
+        glVertex2d(60,275);
+        glEnd();
+        //solar panel
+        glColor3f(0,0.3,1);
+        glBegin(GL_QUADS);
+        glVertex2d(-10,650);
+        glVertex2d(-90,60);
+        glVertex2d(40,60);
+        glVertex2d(120,650);
+        glEnd();
+
+//         glColor3f(1,1,1);
+//        glBegin(GL_POINTS);
+//        for(int i=0;i<1000;++i)
+//        {
+//            glVertex3f(cos(2*3.141*i/1000),sin(2*3.141*i/1000),0);
+//        }
+//        glEnd();
+        glColor3f(1,1,1);
+        Elipse elipse;
+         elipse.draw1(500,275,80,255,1,0,360);
+
+
     }
 
 

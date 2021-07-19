@@ -21,8 +21,12 @@ public:
         color[1] = g;
         color[2] = b;
     }
-    void draw(int xCenter, int yCenter, int Rx, int Ry, int depthIndex, bool hollow, int startAngle, int stopAngle)
+
+
+    void draw1(int xCenter, int yCenter, int Rx, int Ry, int depthIndex, int startAngle, int stopAngle)
     {
+        float x,y;
+        bool hollow = false;
         glPushMatrix();
         glTranslatef(xCenter, yCenter, 0);
         glColor3fv(color);
@@ -32,15 +36,24 @@ public:
             glBegin(GL_POINTS);
         }
         else if (!hollow)
+            glColor3f(1,1,1);
             glBegin(GL_POLYGON);
         for (float i = startAngle; i <= stopAngle; i++)
         {
-            float x = Rx * cos((i * 3.142) / 180);
-            float y = Ry * sin((i * 3.142) / 180);
-            glVertex3f(x, y, depthIndex);
+
+             x = Rx * cos((i * 3.142) / 180);
+             y = Ry * sin((i * 3.142) / 180);
+        //printf("Revolution Path in loop : %f \t %f\n",x,y);
+             struct RevolutionPath r = {x,y};
+             revolution[(int)i] = r;
+             glVertex3f(x, y, depthIndex);
+             // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
         }
+
         glEnd();
         glPopMatrix();
+
+
     }
 
     void draw(int xCenter, int yCenter, int Rx, int Ry, int depthIndex, int startAngle, int stopAngle)
@@ -56,6 +69,7 @@ public:
             glBegin(GL_POINTS);
         }
         else if (!hollow)
+
             glBegin(GL_POLYGON);
         for (float i = startAngle; i <= stopAngle; i++)
         {
@@ -66,8 +80,9 @@ public:
              struct RevolutionPath r = {x,y};
              revolution[(int)i] = r;
              glVertex3f(x, y, depthIndex);
+             // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
         }
-       // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
+
         glEnd();
         glPopMatrix();
 
@@ -77,27 +92,7 @@ public:
     struct RevolutionPath nextPoints(int i){
         return revolution[i];
     };
-    void draw(int xCenter, int yCenter, int Rx, int Ry, int depthIndex, bool hollow, int startAngle, int stopAngle, int lw)
-    {
-        glPushMatrix();
-        glTranslatef(xCenter, yCenter, 0);
-        glColor3fv(color);
-        if (hollow)
-        {
-            glPointSize(lw);
-            glBegin(GL_POINTS);
-        }
-        else if (!hollow)
-            glBegin(GL_POLYGON);
-        for (float i = startAngle; i <= stopAngle; i++)
-        {
-            float x = Rx * cos((i * 3.142) / 180);
-            float y = Ry * sin((i * 3.142) / 180);
-            glVertex3f(x, y, depthIndex);
-        }
-        glEnd();
-        glPopMatrix();
-    }
+
 };
 
 #endif // ELIPSE_H
