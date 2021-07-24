@@ -27,12 +27,14 @@ void showQuizResult(bool result);
 
 static int window, returnMenu,value=0;
 
-static int activeWindow = 1;
+static int activeWindow = 0;
 
 unsigned int introBG;
 unsigned int nightBG;
 unsigned int earthT;
 unsigned int marsT;
+unsigned int goldFoil;
+unsigned int momBulb;
 
 //Aryabhata Mission
 unsigned int abimg1;
@@ -303,11 +305,6 @@ void msAryabattaSatellite()
 }
 
 
-
-
-
-
-
 void abSatelliteAnimation(void)
 {
 
@@ -408,7 +405,8 @@ void msFirstRocketLaunch()
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
+    if(quiz.showAnswer)
+        showQuizResult(quiz.result);
 
     /* Title Start */
     glColor3f(1, 1, 1);
@@ -428,13 +426,13 @@ void msFirstRocketLaunch()
     glScalef(5.0,8.0,0.0);
     glTranslated(slvTranslate_x,slvTranslate_y,0);
 
-   // glRotated(slvrotate_y,1,1,0);
+    // glRotated(slvrotate_y,1,1,0);
     //slvMission.rocket_in_motion();
     slvMission.rocket_to_cam_pos();
-     glPopMatrix();
-   // glScalef(5.0,8.0,0.0);
-  // glTranslatef(2000,4800,0);
-  glPushMatrix();
+    glPopMatrix();
+    // glScalef(5.0,8.0,0.0);
+    // glTranslatef(2000,4800,0);
+    glPushMatrix();
     slvMission.rohinisatellite();
     //glutIdleFunc(abSatelliteAnimation);
     //drawSatellitePremitive();
@@ -453,6 +451,18 @@ void msFirstRocketLaunch()
     displayText(2800,3200,1.0,1.0,1.0,1,"Launch Vehicle : \t SLV-3-E2");
     displayText(2800,3000,1.0,1.0,1.0,1,"Launch site : \t Satish Dhawan Space centre, Sriharikota");
     glFlush();
+
+
+
+    struct QuizFormat q = quiz.readQuiz(activeWindow);
+    // printf("Active question is %s",q.question);
+    //Quix section
+    displayText(2800,1300,1.0,1.0,1.0,1, q.question);
+    displayText(2800,1000,1.0,1.0,1.0,1,q.choices[0]);
+    displayText(2800,800,1.0,1.0,1.0,1,q.choices[1]);
+    displayText(2800,600,1.0,1.0,1.0,1,q.choices[2]);
+    displayText(2800,400,1.0,1.0,1.0,1,q.choices[3]);
+
     arbMission.drawBGTexture(nightBG);
 
     glColor3f(0, 0, 0);
@@ -475,7 +485,7 @@ float momTranslate_x = 0;
 int mom_rotate_sleep_cnt = 0;
 bool stopRotation = false;
 bool animationStarts = false;
-bool showInfo = false;
+bool showInfo = true;
 bool showMOM = false;
 
 void momAnimation(void)
@@ -537,37 +547,62 @@ struct RevolutionPath r;
 int rv = 0;
 float rx = 1000;
 float ry = 0;
+
+int Rx = 1300;
+int Ry = 1800;
 void revolveAroundMars(int)
 {
-    if(rv == 355)
+    if(rv == 360)
     {
         rv = 0;
     }
-    Elipse elipse;
-    struct RevolutionPath  path = elipse.nextPoints(rv);
 
-    //printf("Next %d \n",rv);
- printf("Current X Y is %f \t %f \n",path.x,path.y);
-    if(path.x != 0.0 && path.y != 0.0)
-    {
-        rx = path.x;
-        ry = path.y;
-    }
-//    if(rx == 0 && ry == 0)
-//        {
-//
-//           printf("Next X Y is zero %f \t %f \n",rx,ry);
-//
-//        }
-    if(path.x == 0 && path.y == 0)
-        {
-           printf("Next X Y is zero %f \t %f \n",rx,ry);
 
-        }
+    rx = Rx * cos((rv * 3.142) / 180);
+    ry = Ry * sin((rv * 3.142) / 180);
     rv++;
-
     glutPostRedisplay();
-   // glutTimerFunc(1000,revolveAroundMars,18);
+
+
+
+
+    // glutTimerFunc(1000,revolveAroundMars,18);
+
+}
+
+void momMenu(int n)
+{
+    if(n==0)
+    {
+        showInfo = true;
+        showMOM = false;
+        animationStarts = false;
+        momTranslate_x = 0;
+        momTranslate_y = 0;
+        pslvRotate_y = 0;
+    }
+
+    if(n==1)
+    {
+        momTranslate_x = 0;
+        momTranslate_y = 0;
+        animationStarts = true;
+        showInfo = false;
+    }
+    if(n==2)
+    {
+        exit(0);
+    }
+    glutPostRedisplay();
+}
+void createMomMenu()
+{
+    returnMenu = glutCreateMenu(momMenu);
+    glutAddMenuEntry("Show Information",0);
+    glutAddMenuEntry("Start Animation",1);
+
+    glutAddMenuEntry("Exit",2);
+    glutAttachMenu(GLUT_LEFT_BUTTON);
 
 }
 void msMangalyan()
@@ -575,23 +610,24 @@ void msMangalyan()
 
     // printf("msAryabattaSatellite function called\n");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
     if(showMOM)
     {
         Elipse elipse;
         elipse.setColor(0.5,0.5,0.5);
-        elipse.draw(3100,3100,1000,1500,1,0,360);
+        elipse.draw(3300,2500,Rx,Ry,1,0,360);
 
         glutTimerFunc(100,revolveAroundMars,18);
-    //    glutIdleFunc();
+        //    glutIdleFunc();
         glPushMatrix();
-        // glScalef(0.4,0.6,0.0);q
-        // glTranslated(momTranslate_x,momTranslate_y,0);
-        //glRotated(pslvRotate_y,80,80,0);
 
-        glTranslated(3050,3100,0);
+
+
+        glTranslated(3100,2400,0);
         glTranslated(rx,ry,0);
         glColor3f(1.0,1.0,1.0);
-        momMission.mom_orbitor();
+        momMission.mom_orbitor(goldFoil,momBulb);
 
         glPopMatrix();
 
@@ -600,17 +636,45 @@ void msMangalyan()
     }
     else
     {
-        glPushMatrix();
-        glScalef(0.4,0.6,0.0);
-        glTranslated(momTranslate_x,momTranslate_y,0);
-        glRotated(pslvRotate_y,80,80,0);
-        momMission.pslv_rocket();
-        glPopMatrix();
+        if(!animationStarts)
+        {
+            glPushMatrix();
+            glScalef(0.6,0.8,0.0);
+            glTranslated(0,0,0);
+            glRotated(pslvRotate_y,80,80,0);
+            momMission.pslv_rocket();
+            glPopMatrix();
+
+            glPushMatrix();
+
+
+            glScalef(1.4,1.8,0.0);
+            glTranslated(1100,1100,0);
+
+            glColor3f(1.0,1.0,1.0);
+            momMission.mom_orbitor(goldFoil,momBulb);
+
+            glPopMatrix();
+        }
+        else
+        {
+            glPushMatrix();
+            glScalef(0.4,0.6,0.0);
+            glTranslated(momTranslate_x,momTranslate_y,0);
+            glRotated(pslvRotate_y,80,80,0);
+            momMission.pslv_rocket();
+            glPopMatrix();
+        }
+
     }
 
 
     if(showInfo)
     {
+
+
+        if(quiz.showAnswer)
+            showQuizResult(quiz.result);
 
         /* Title Start */
         glColor3f(1, 1, 1);
@@ -637,13 +701,22 @@ void msMangalyan()
         displayText(2800,3000,1.0,1.0,1.0,1,"Launch Vehicle:PSLV-C25");
         displayText(2800,2800,1.0,1.0,1.0,1,"Launch site: Satish Dhawan Space centre, Sriharikota");
 
+        struct QuizFormat q = quiz.readQuiz(activeWindow);
+        // printf("Active question is %s",q.question);
+        //Quix section
+        displayText(2800,1300,1.0,1.0,1.0,1, q.question);
+        displayText(2800,1000,1.0,1.0,1.0,1,q.choices[0]);
+        displayText(2800,800,1.0,1.0,1.0,1,q.choices[1]);
+        displayText(2800,600,1.0,1.0,1.0,1,q.choices[2]);
+        displayText(2800,400,1.0,1.0,1.0,1,q.choices[3]);
+
     }
 
 
     glPushMatrix();
 
-    glScalef(0.9,0.9,0.0);
-    glTranslated(3000,3000,0);
+    glScalef(0.7,0.8,0.0);
+    glTranslated(4100,2800,0);
 
     momMission.drawPlanet(marsT,0.5);
     glPopMatrix();
@@ -710,20 +783,43 @@ void ms5()
     glutSwapBuffers();
 }
 
-void changeWindow(bool next)
+void changeWindow()
 {
 
     switch(activeWindow)
     {
+    case 0:
+        glutDisplayFunc(displayMenuWindow);
+        break;
     case 1:
+        quiz.showAnswer = false;
+
+        arbMission.ab_entry_translate_x = 0;
+        arbMission.ab_entry_translate_y = 0;
+        arbMission.ab_entry_scale_x = 0.0;
+        arbMission.ab_entry_scale_y = 0.0;
+        arbMission.entry_anm_completed = false;
+        activeWindow = 1;
+        loadABMissionImages();
+        glutIdleFunc(abSatelliteAnimation);
+
+        glutDisplayFunc(msAryabattaSatellite);
         break;
     case 2:
-        glutDisplayFunc(displayMenuWindow);
+        quiz.showAnswer = false;
+        glutIdleFunc(slvAnimation);
+        glutDisplayFunc(msFirstRocketLaunch);
 
         break;
     case 3:
+        createMomMenu();
+        quiz.showAnswer = false;
+        glutIdleFunc(momAnimation);
+        glutDisplayFunc(msMangalyan);
         break;
     case 4:
+        quiz.showAnswer = false;
+        glutDisplayFunc(ms104SatelliteLaunch);
         break;
     case 5:
         break;
@@ -732,14 +828,7 @@ void changeWindow(bool next)
     case 7:
         break;
     }
-    if(next)
-    {
-        activeWindow++;
-    }
-    else
-    {
-        activeWindow--;
-    }
+
 
 }
 
@@ -821,6 +910,7 @@ void showQuizResult(bool qr)
 
 static void keyboardInput(unsigned char key, int x, int y)
 {
+    printf("Active window is %d",activeWindow);
     bool result;
     switch (key)
     {
@@ -838,6 +928,7 @@ static void keyboardInput(unsigned char key, int x, int y)
     case 'S':
     case 's':
     case '1':
+        /*
         arbMission.ab_entry_translate_x = 0;
         arbMission.ab_entry_translate_y = 0;
         arbMission.ab_entry_scale_x = 0.0;
@@ -848,21 +939,26 @@ static void keyboardInput(unsigned char key, int x, int y)
         glutIdleFunc(abSatelliteAnimation);
 
         glutDisplayFunc(msAryabattaSatellite);
+        */
+
+        activeWindow = 1;
+        changeWindow();
 
         glutPostRedisplay();
         break;
     case '2':
-        glutIdleFunc(slvAnimation);
-        glutDisplayFunc(msFirstRocketLaunch);
+        activeWindow = 2;
+        changeWindow();
         glutPostRedisplay();
         break;
     case '3':
-        glutIdleFunc(momAnimation);
-        glutDisplayFunc(msMangalyan);
+        activeWindow = 3;
+        changeWindow();
         glutPostRedisplay();
         break;
     case '4':
-        glutDisplayFunc(ms104SatelliteLaunch);
+        activeWindow = 4;
+        changeWindow();
         glutPostRedisplay();
         break;
     case '5':
@@ -1106,6 +1202,62 @@ void loadPlanets(void)
         std::cout << "Failed to load Mars" << std::endl;
     }
     stbi_image_free(data);
+
+
+
+        /* Gold foil loading */
+    glGenTextures(1,&goldFoil);
+    glBindTexture(GL_TEXTURE_2D,goldFoil);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\gold-wrap.psd";
+    path = getImagePath.getPath(&path,true);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading gold wrap" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load gold wrap" << std::endl;
+    }
+    stbi_image_free(data);
+
+
+
+        /* Mom Bulb loading */
+    glGenTextures(1,&momBulb);
+    glBindTexture(GL_TEXTURE_2D,momBulb);
+
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    path = "\\images\\psds\\mom-bulb.psd";
+    path = getImagePath.getPath(&path,true);
+    //printf("\nAB image 1 Path is %s\n",path);
+    data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    if(data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        std::cout << "done loading mom bulb" << std::endl;
+    }
+    else
+    {
+        std::cout << "Failed to load mom bulb" << std::endl;
+    }
+    stbi_image_free(data);
 }
 void  mouse(int btn, int state, int x, int y)
 {
@@ -1156,24 +1308,22 @@ void menu(int n)
         value = n;
         if(value == 1)
         {
-            glutDisplayFunc(msAryabattaSatellite);
+
+            activeWindow--;
+            changeWindow();
+
         }
         else if(value == 2)
         {
-            glutDisplayFunc(msFirstRocketLaunch);
+            activeWindow++;
+            changeWindow();
         }
         else if(value == 3)
         {
-            glutDisplayFunc(msMangalyan);
+            glutDisplayFunc(displayMenuWindow);
         }
-        else if(value == 4)
-        {
-            glutDisplayFunc(msMangalyan);
-        }
-        else if(value == 5)
-        {
-            glutDisplayFunc(ms104SatelliteLaunch);
-        }
+
+
     }
 
 

@@ -26,6 +26,8 @@ public:
     }
 
 
+
+
     void namePlate()
     {
 
@@ -408,7 +410,7 @@ public:
     }
 
 
-    void mom_orbitor()
+    void mom_orbitor(unsigned int texture,unsigned int bulb)
     {
         glColor3f(1,1,1);
         glBegin(GL_QUADS);
@@ -417,27 +419,86 @@ public:
         glVertex2d(130,120);
         glVertex2d(120,120);
         glEnd();
-        glColor3f(0.5,0.5,0.5);
+        glColor3f(1,1,0.0);
         glBegin(GL_POLYGON);
-        glVertex2d(340,630);
-        glVertex2d(320,450);
+        glVertex2d(340,450);
+        glVertex2d(350,630);
+        glVertex2d(370,630);
+
         glVertex2d(380,450);
         glEnd();
 
-        glColor3f(0.5,0.5,0.5);
-        glBegin(GL_POLYGON);
-        glVertex2d(250,520);
-        glVertex2d(170,450);
-        glVertex2d(320,450);
-        glEnd();
 
-        glColor3f(0.7,0.7,0.7);
+
+        /* glColor3f(0.5,0.5,0.5);
+         glBegin(GL_POLYGON);
+         glVertex2d(250,520);
+         glVertex2d(170,450);
+         glVertex2d(320,450);
+         glEnd(); */
+
+        /* glColor3f(1,1,0);
+         glBegin(GL_QUADS);
+         glVertex2d(100,450);
+         glVertex2d(-15,520);
+         glVertex2d(250,520);
+         glVertex2d(400,450);
+         glEnd(); */
+        /*Texture */
+        glEnable(GL_TEXTURE_2D);
+        glColor3f(1, 1, 1);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+        glVertex2d(100,450);
+        glTexCoord2f(0, 0);
+        glVertex2d(-15,520);
+        glTexCoord2f(0, 1);
+        glVertex2d(250,520);
+        glTexCoord2f(1, 1);
+        glVertex2d(400,450);
+        glTexCoord2f(1, 0);
+        glEnd();
+        glFlush();
+        glDisable(GL_TEXTURE_2D);
+        /*Texture */
+
+
+        /* glColor3f(1,1,0);
+         glBegin(GL_QUADS);
+         glVertex2d(-15,230);
+         glVertex2d(-15,520);
+         glVertex2d(100,450);
+         glVertex2d(100,100);
+         glEnd(); */
+
+        /*Texture */
+        glEnable(GL_TEXTURE_2D);
+        glColor3f(1, 1, 1);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glBegin(GL_QUADS);
+        glVertex2d(-15,230);
+        glTexCoord2f(0, 0);
+        glVertex2d(-15,520);
+        glTexCoord2f(0, 1);
+        glVertex2d(100,450);
+        glTexCoord2f(1, 1);
+        glVertex2d(100,100);
+        glTexCoord2f(1, 0);
+        glEnd();
+        glFlush();
+        glDisable(GL_TEXTURE_2D);
+        /*Texture */
+
+
+        /*
+        glColor3f(1,1,0);
         glBegin(GL_QUADS);
         glVertex2d(200,200);
         glVertex2d(200,350);
         glVertex2d(300,350);
         glVertex2d(300,200);
         glEnd();
+
 
         glColor3f(0.6,0.6,0.6);
         glBegin(GL_QUADS);
@@ -446,14 +507,35 @@ public:
         glVertex2d(350,400);
         glVertex2d(350,150);
         glEnd();
+        */
+        /*  glColor3f(1,1,0);
+         glBegin(GL_QUADS);
+         glVertex2d(100,100);
+         glVertex2d(100,450);
+         glVertex2d(400,450);
+         glVertex2d(400,100);
+         glEnd();
+         */
 
-        glColor3f(0.5,0.5,0.5);
+        /*Texture */
+        glEnable(GL_TEXTURE_2D);
+        glColor3f(1, 1, 1);
+        glBindTexture(GL_TEXTURE_2D, texture);
         glBegin(GL_QUADS);
         glVertex2d(100,100);
+        glTexCoord2f(0, 0);
         glVertex2d(100,450);
+        glTexCoord2f(0, 1);
         glVertex2d(400,450);
+        glTexCoord2f(1, 1);
         glVertex2d(400,100);
+        glTexCoord2f(1, 0);
         glEnd();
+        glFlush();
+        glDisable(GL_TEXTURE_2D);
+        /*Texture */
+
+
         glColor3f(1,1,1);
         glBegin(GL_LINES);
         glVertex2d(400,275);
@@ -464,14 +546,120 @@ public:
         glVertex2d(100,275);
         glVertex2d(60,275);
         glEnd();
+
+
         //solar panel
+        //1st panel
+        drawLines(-190,450,-30,450);
+        drawLines(-190,450,-160,650);
+
+        drawLines(-160,450,-140,650);
+        drawLines(-130,450,-110,650);
+        drawLines(-100,450,-80,650);
+        drawLines(-70,450,-50,650);
+
+
+
+        drawLines(-160,630,-10,630);
+        drawLines(-160,600,-10,600);
+        drawLines(-175,570,-15,570);
+        drawLines(-175,540,-15,540);
+        drawLines(-175,510,-15,510);
+        drawLines(-190,490,-15,490);
+        drawLines(-190,460,-15,460);
+
+
+
+        drawLines(-30,450,-10,650);
+        drawLines(-160,650,-10,650);
+
         glColor3f(0,0.3,1);
         glBegin(GL_QUADS);
+        glVertex2d(-160,650);
+        glVertex2d(-190,450);
+        glVertex2d(-30,450);
         glVertex2d(-10,650);
-        glVertex2d(-90,60);
-        glVertex2d(40,60);
-        glVertex2d(120,650);
         glEnd();
+
+
+        //2nd panel
+
+        drawLines(-200,250,-50,250);
+        drawLines(-200,250,-180,430);
+
+
+        drawLines(-200,250,-180,430);
+        drawLines(-160,250,-130,430);
+        drawLines(-140,250,-100,430);
+        drawLines(-120,250,-70,430);
+        drawLines(-90,250,-40,430);
+
+
+
+        drawLines(-180,430,-30,430);
+        drawLines(-180,400,-30,400);
+        drawLines(-190,370,-40,370);
+        drawLines(-190,340,-40,340);
+        drawLines(-190,310,-40,310);
+        drawLines(-190,280,-40,280);
+        drawLines(-190,250,-40,250);
+
+
+
+        drawLines(-50,250,-30,430);
+        drawLines(-180,430,-30,430);
+
+
+        glColor3f(0,0.3,1);
+        glBegin(GL_QUADS);
+        glVertex2d(-180,430);
+        glVertex2d(-200,250);
+        glVertex2d(-50,250);
+        glVertex2d(-30,430);
+        glEnd();
+
+
+
+
+        //3rd panel
+
+        drawLines(-200,40,-60,40);
+        drawLines(-200,40,-190,230);
+
+
+        drawLines(-180,40,-170,230);
+        drawLines(-160,40,-150,230);
+        drawLines(-140,40,-130,230);
+        drawLines(-120,40,-110,230);
+        drawLines(-100,40,-90,230);
+        drawLines(-80,40,-70,230);
+
+
+        drawLines(-190,200,-50,200);
+        drawLines(-190,170,-50,170);
+        drawLines(-190,130,-50,130);
+        drawLines(-190,90,-50,90);
+
+
+
+        drawLines(-60,40,-50,230);
+        drawLines(-190,230,-50,230);
+
+
+        glColor3f(0,0.3,1);
+        glBegin(GL_QUADS);
+        glVertex2d(-190,230);
+        glVertex2d(-200,40);
+        glVertex2d(-60,40);
+        glVertex2d(-50,230);
+        glEnd();
+
+
+
+
+        /* solar panel end */
+
+
 
 //         glColor3f(1,1,1);
 //        glBegin(GL_POINTS);
@@ -482,12 +670,23 @@ public:
 //        glEnd();
         glColor3f(1,1,1);
         Elipse elipse;
-         elipse.draw1(500,275,80,255,1,0,360);
+        elipse.setColor(0.6,0.6,0.6);
+        elipse.draw1(530,275,100,255,1,0,360);
 
 
     }
 
-
+    void drawLines(int x1,int y1,int x2,int y2)
+    {
+        glLineWidth(1);
+        glColor4f(1, 1, 0,1);
+        glBegin(GL_LINES);
+        glVertex2f(x1,y1);
+        glVertex2f(x2,y2);
+        glEnd();
+        glFlush();
+        glutPostRedisplay();
+    }
     void drawPlanet(unsigned int texture,float opacity)
     {
         //printf("drawBGTexture called\n");

@@ -36,18 +36,18 @@ public:
             glBegin(GL_POINTS);
         }
         else if (!hollow)
-            glColor3f(1,1,1);
-            glBegin(GL_POLYGON);
+            glColor3f(color[0],color[1],color[2]);
+        glBegin(GL_POLYGON);
         for (float i = startAngle; i <= stopAngle; i++)
         {
 
-             x = Rx * cos((i * 3.142) / 180);
-             y = Ry * sin((i * 3.142) / 180);
-        //printf("Revolution Path in loop : %f \t %f\n",x,y);
-             struct RevolutionPath r = {x,y};
-             revolution[(int)i] = r;
-             glVertex3f(x, y, depthIndex);
-             // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
+            x = Rx * cos((i * 3.142) / 180);
+            y = Ry * sin((i * 3.142) / 180);
+            //printf("Revolution Path in loop : %f \t %f\n",x,y);
+            struct RevolutionPath r = {x,y};
+            revolution[(int)i] = r;
+            glVertex3f(x, y, depthIndex);
+            // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
         }
 
         glEnd();
@@ -74,13 +74,14 @@ public:
         for (float i = startAngle; i <= stopAngle; i++)
         {
 
-             x = Rx * cos((i * 3.142) / 180);
-             y = Ry * sin((i * 3.142) / 180);
-        //printf("Revolution Path in loop : %f \t %f\n",x,y);
-             struct RevolutionPath r = {x,y};
-             revolution[(int)i] = r;
-             glVertex3f(x, y, depthIndex);
-             // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
+            x = Rx * cos((i * 3.142) / 180);
+            y = Ry * sin((i * 3.142) / 180);
+            // printf("Revolution Path in loop : %f \t %f\n",x,y);
+            struct RevolutionPath r = {x,y};
+            revolution[(int)i] = r;
+
+            glVertex3f(x, y, depthIndex);
+            // printf("Revolution Path : %f \t %f\n",revolution[0].x,revolution[0].y);
         }
 
         glEnd();
@@ -89,7 +90,10 @@ public:
 
     }
 
-    struct RevolutionPath nextPoints(int i){
+    struct RevolutionPath nextPoints(int i)
+    {
+
+        printf("Revolution Path in loop : %d %f \t %f\n",i,revolution[i].x,revolution[i].y);
         return revolution[i];
     };
 
