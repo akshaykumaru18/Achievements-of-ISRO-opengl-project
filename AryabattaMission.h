@@ -425,14 +425,14 @@ public:
     }
 
     void drawLines(int x1,int y1,int x2,int y2)
-{
-    glColor4f(1, 1, 0,1);
-    glBegin(GL_LINES);
-    glVertex2f(x1,y1);
-    glVertex2f(x2,y2);
-    glEnd();
-    glFlush();
-}
+    {
+        glColor4f(1, 1, 0,1);
+        glBegin(GL_LINES);
+        glVertex2f(x1,y1);
+        glVertex2f(x2,y2);
+        glEnd();
+        glFlush();
+    }
 
 
 

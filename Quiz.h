@@ -20,7 +20,11 @@ public:
     void loadQuiz()
     {
         struct QuizFormat q1 = {"Where did rocket launched?",'a',{"a) INDIA","b) Australia","C) RUSSIA","D) SRI LANKA"}};
+        struct QuizFormat q2 = {"India's first indigenous sounding rocket?",'b',{"a) SLV-3","b) RH-75","C) PSLV","D) GSLV Mk III"}};
+        struct QuizFormat q3 = {"Who was the Project Director MOM Mission?",'b',{"a) INDIA","b) V Kesava Raju","C) V Koteswara Rao","D) K Sivan"}};
         questions[0] = q1;
+        questions[1] = q2;
+        questions[2] = q3;
 
 
 

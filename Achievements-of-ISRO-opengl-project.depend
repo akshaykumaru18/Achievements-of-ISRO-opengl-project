@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1626372358 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1627113650 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -248,22 +248,22 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1626281191 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
+1626713378 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\getimagepath.h
 	<GL/glut.h>
 
-1626370392 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\elipse.h
+1627109973 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\elipse.h
 	<GL/glut.h>
 	<math.h>
 
 1341006774 c:\program files (x86)\codeblocks\mingw\include\math.h
 	<_mingw.h>
 
-1626331173 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
+1627115532 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\aryabattamission.h
 	"GetImagePath.h"
 	<GL/glut.h>
 	<stdio.h>
 
-1626283037 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
+1626713235 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\slvmission.h
 	<GL/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
@@ -271,9 +271,10 @@
 	<math.h>
 	<string.h>
 
-1626372111 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
+1627119632 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
+	"elipse.h"
 
-1626113467 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
+1627103974 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
 1623520404 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\stb_image\stb_image.h
