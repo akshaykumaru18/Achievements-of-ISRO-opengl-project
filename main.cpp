@@ -1463,7 +1463,6 @@ int main(int argc, char *argv[])
 
     glutReshapeFunc(init);
 
-
     glEnable(GL_DEPTH_TEST);
 
     //init();
