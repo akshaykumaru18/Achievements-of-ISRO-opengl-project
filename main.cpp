@@ -647,9 +647,11 @@ void momMenu(int n)
         showInfo = true;
         showMOM = false;
         animationStarts = false;
+        stopRotation = true;
         momTranslate_x = 0;
         momTranslate_y = 0;
-        //pslvRotate_y = 0;
+        pslvRotate_y = 0;
+
     }
 
     if(n==1)
@@ -657,6 +659,7 @@ void momMenu(int n)
         momTranslate_x = 0;
         momTranslate_y = 0;
         animationStarts = true;
+        stopRotation = false;
         showInfo = false;
     }
     if(n==2)
@@ -1101,6 +1104,7 @@ void loadIntroScene(void)
 
     GetImagePath getImagePath;
     char *path = "\\final-intro.psd";
+
     path = getImagePath.getPath(&path,false);
     printf("\nPath is %s\n",path);
     unsigned char *data = stbi_load(path, &width, &height, &channels, STBI_rgb_alpha);
@@ -1462,7 +1466,6 @@ int main(int argc, char *argv[])
     glutMouseFunc(mouse);
 
     glutReshapeFunc(init);
-
 
     glEnable(GL_DEPTH_TEST);
 

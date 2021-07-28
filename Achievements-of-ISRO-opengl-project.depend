@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1627125226 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
+1627369780 source:c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\main.cpp
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -274,7 +274,7 @@
 1627119632 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\mommission.h
 	"elipse.h"
 
-1627103974 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
+1627282031 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\quiz.h
 	<stdio.h>
 
 1623520404 c:\users\akshay kumar u\cgv project\achievements-of-isro-opengl-project\stb_image\stb_image.h
