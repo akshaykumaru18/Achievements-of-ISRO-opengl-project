@@ -650,7 +650,7 @@ void momMenu(int n)
         stopRotation = true;
         momTranslate_x = 0;
         momTranslate_y = 0;
-        pslvRotate_y = 0;
+
 
     }
 
