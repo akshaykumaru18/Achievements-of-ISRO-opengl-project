@@ -668,6 +668,57 @@ void momMenu(int n)
     }
     glutPostRedisplay();
 }
+void quizMenuary(int n)
+{
+    char select;
+    if(n==0)
+        select='a';
+    else if(n==1)
+        select='b';
+    else if (n==2)
+        select='c';
+    else
+        select='d';
+    printf(" value of selected is %c\n",select);
+     bool result;
+    result = quiz.validateQuiz(activeWindow,select);
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+}
+
+void quizMenuroh(int n)
+{
+    char select;
+    if(n==0)
+        select='a';
+    else if(n==1)
+        select='b';
+    else if (n==2)
+        select='c';
+    else
+        select='d';
+     bool result;
+    result = quiz.validateQuiz(activeWindow,select);
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+}
+
+void quizMenumom(int n)
+{
+    char select;
+    if(n==0)
+        select='a';
+    else if(n==1)
+        select='b';
+    else if (n==2)
+        select='c';
+    else
+        select='d';
+     bool result;
+    result = quiz.validateQuiz(activeWindow,select);
+        printf("Result is %d\n", result);
+        showQuizResult(result);
+}
 void createMomMenu()
 {
     returnMenu = glutCreateMenu(momMenu);
@@ -676,6 +727,23 @@ void createMomMenu()
 
     glutAddMenuEntry("Exit",2);
     glutAttachMenu(GLUT_LEFT_BUTTON);
+
+}
+void createquizmenu(int window)
+{
+    //if(window==1)
+        returnMenu = glutCreateMenu(quizMenuary);
+    //else if(window==2)
+     //   returnMenu = glutCreateMenu(quizMenuroh);
+   // else
+       // returnMenu = glutCreateMenu(quizMenumom);
+
+    glutAddMenuEntry("A",0);
+    glutAddMenuEntry("B",1);
+
+    glutAddMenuEntry("C",2);
+    glutAddMenuEntry("D",3);
+    glutAttachMenu(GLUT_MIDDLE_BUTTON);
 
 }
 void msMangalyan()
@@ -868,7 +936,7 @@ void changeWindow()
         break;
     case 1:
         quiz.showAnswer = false;
-
+        createquizmenu(activeWindow);
         arbMission.ab_entry_translate_x = 0;
         arbMission.ab_entry_translate_y = 0;
         arbMission.ab_entry_scale_x = 0.0;
@@ -881,12 +949,14 @@ void changeWindow()
         glutDisplayFunc(msAryabattaSatellite);
         break;
     case 2:
+        createquizmenu(activeWindow);
         quiz.showAnswer = false;
         glutIdleFunc(slvAnimation);
         glutDisplayFunc(msFirstRocketLaunch);
 
         break;
     case 3:
+        createquizmenu(activeWindow);
         createMomMenu();
 
         quiz.showAnswer = false;
