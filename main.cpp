@@ -562,6 +562,7 @@ bool showMOM = false;
 void momAnimation(void)
 {
 
+    printf("Stop stopRotation value %d\n",stopRotation);
 
     if(animationStarts)
     {
@@ -648,20 +649,25 @@ void momMenu(int n)
         showInfo = true;
         showMOM = false;
         animationStarts = false;
-        stopRotation = true;
+        float pslvRotate_y = 0;
         momTranslate_x = 0;
         momTranslate_y = 0;
-
+        stopRotation = true;
 
     }
 
     if(n==1)
     {
+        float pslvRotate_y = 0;
+        int mom_rotate_sleep_cnt = 0;
+        showInfo = false;
         momTranslate_x = 0;
         momTranslate_y = 0;
         animationStarts = true;
         stopRotation = false;
-        showInfo = false;
+        glutPostRedisplay();
+
+
     }
     if(n==2)
     {
