@@ -300,8 +300,9 @@ void msAryabattaSatellite()
     displayText(2800,4200,1.0,1.0,1.0,1,"Weight : 360 kg");
     displayText(2800,4000,1.0,1.0,1.0,1,"Mission Life : 6 months(nominal), Spacecraft mainframe");
     displayText(2800,3800,1.0,1.0,1.0,1,"                       active till March,1981");
-    displayText(2800,3600,1.0,1.0,1.0,1,"Description : 6 months(nominal), Spacecraft mainframe");
-    displayText(2800,3400,1.0,1.0,1.0,1,"                       active till March,1981");
+    displayText(2800,3600,1.0,1.0,1.0,1,"Description : Aryabhata was built by the Indian Space ");
+    displayText(2800,3400,1.0,1.0,1.0,1,"Research Organization (ISRO) to conduct experiments in ");
+    displayText(2800,3200,1.0,1.0,1.0,1,"X-ray astronomy, aeronomics, and solar physics.");
 
 
 
